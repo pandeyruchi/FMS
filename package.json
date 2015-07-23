@@ -1,0 +1,21 @@
+{
+  "name": "plumber-webclient",
+  "version": "1.0.0",
+  "description": "This is a web client for Peninsula Plumber app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ruchipandey@bitbucket.org/peninsulapumber/plumber-webclient.git"
+  },
+  "keywords": [
+    "Peninsula"
+  ],
+  "author": "Ruchi Pandey <ruchi.pandey@synerzip.com>",
+  "homepage": "https://bitbucket.org/peninsulapumber/plumber-webclient#readme",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}
