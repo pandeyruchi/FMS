@@ -3,7 +3,7 @@
  */
 
 var app = angular.module('peninsula', [
-    'ui.router'
+    'ui.router','ngMessages'
 ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
         .otherwise('/login');
