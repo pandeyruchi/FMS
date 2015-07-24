@@ -1,7 +1,7 @@
 angular.module('peninsula').controller('signupCtrl', function ($scope, $http,$location,host) {
 
     $scope.user = {
-        firstname: "firstname"
+        //firstname: "firstname"
     }
 
     $scope.signup = function () {
