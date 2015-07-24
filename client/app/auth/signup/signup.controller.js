@@ -1,14 +1,16 @@
 angular.module('peninsula').controller('signupCtrl', function ($scope, $http,$location,host) {
 
     $scope.user = {
-        firstname: "firstname"
+        
     }
 
     $scope.signup = function () {
-        var res = $http.post(host+'/api/signup', $scope.user);
+       var pwd = btoa($scope.user.password);
+       $scope.user.password = pwd;
+	 var res = $http.post(host+'/api/signup', $scope.user);
         res.success(function (data) {
             console.log(data);
-            if (!!data.Error) {
+            if (!!data.error) {
                 alert(data.Message);
             }
             else {

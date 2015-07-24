@@ -4,6 +4,8 @@
 
 angular.module('peninsula').controller('loginCtrl', function ($scope, $http, $location, host) {
     $scope.login = function (user) {
+        var pwd = btoa(user.password);
+        user.password =pwd;  
         var res = $http.post(host + '/api/login', user);
         res.success(function (data) {
             console.log(data);
