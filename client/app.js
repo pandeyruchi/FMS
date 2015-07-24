@@ -3,10 +3,11 @@
  */
 
 var app = angular.module('peninsula', [
-    'ui.router','ngMessages'
+    'ui.router'
 ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-        .otherwise('/login');
+        .otherwise('/signup');
 
     $locationProvider.html5Mode(true);
 });
+app.constant('host',"http://localhost:3600");
