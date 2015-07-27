@@ -1,0 +1,88 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container-fluid">
+    <div class="row"
+         ng-style="{'background-image':'url(assets/images/peninsula.jpg)','margin-top':'-25px','background-size':'100% auto','height':'700px'}">
+        <div class="col-md-4 col-md-offset-4" style="background-color:white;margin-top: 30px;border:1px solid black">
+            <h3 style="color:#008855">Customer Request </h3>
+
+            <form class="form" name="form" ng-submit="custreq()"  novalidate>
+                <div class="form-group" ng-class="{ 'has-success': form.customerName.$valid && form.customerName.$dirty,
+                                            'has-error': form.customerName.$invalid && form.customerName.$dirty }">
+                    <label> Customer name </label>
+                    <input type="text" name="customerName" class="form-control" ng-model="user.customerName" required>
+
+                    <p class="help-block" ng-show="form.customerName.$error.required && form.customerName.$dirty">
+                        Please enter customer name
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
+                                            'has-error': form.address.$invalid && form.address.$dirty }">
+                    <label> Address</label>
+                    <textarea rows="4" ng-change="computeCoordinates()" class="form-control" name="address" ng-model="user.address" required></textarea>
+
+
+                    <p class="help-block" ng-show="form.address.$error.required && form.address.$dirty">
+                        Please enter address
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.locality.$valid && form.locality.$dirty,
+                                            'has-error': form.locality.$invalid && form.locality.$dirty }">
+                    <label> Locality </label>
+                    <input type="text" name="locality"  class="form-control" ng-model="user.locality" required>
+
+                    <p class="help-block" ng-show="form.locality.$error.required && form.locality.$dirty">
+                        Please enter locality
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
+                                            'has-error': form.contact.$invalid && form.contact.$dirty }">
+                    <label>Contact number</label>
+
+                    <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
+                           ng-pattern="/^[+]?[0-9]{10,13}$/">
+
+                    <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty ">
+                        Invalid contact number!
+                    </p>
+
+                    <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty">
+                        Contact number required!
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.desc.$valid && form.desc.$dirty,
+                                            'has-error': form.desc.$invalid && form.desc.$dirty }">
+                    <label> Description </label>
+                    <textarea rows="4" class="form-control" name="desc" ng-model="user.description" required></textarea>
+
+
+                    <p class="help-block" ng-show="form.desc.$error.required && form.desc.$dirty">
+                        Please enter an issue
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label>Urgent</label>
+                    <input type="radio" name="yes" ng-model="user.urgentFlag" value="true" checked>Yes
+                    <input type="radio" name="no" ng-model="user.urgentFlag" value="false">No
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit"
+                            ng-disabled="form.user.$dirty && form.user.$invalid ||
+                         form.password.$dirty && form.password.$invalid" class="btn btn-primary"
+                            >Submit
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="row" style="text-align: center">
+        <img src="assets/images/updated.png">
+    </div>
+</div>

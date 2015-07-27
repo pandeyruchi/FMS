@@ -18,4 +18,4 @@ angular.module('peninsula').directive('compareTo', function () {
             });
         }
     };
-})
+});
