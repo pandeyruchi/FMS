@@ -9,7 +9,7 @@ angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http
 
     //$scope.customers = [{"customerName" : "Anjali" ,"description":"change pipeline"},{"customerName" : "Chhaya","description":"attach pipeline" },{"customerName" : "Ruchi" ,"description":"repair pipeline"}];
 
-    $http.get("http://172.25.36.44:3600/api/getAllCustomerReq").then(function (result) {
+    $http.get("http://52.24.8.32:3600/api/getAllCustomerReq").then(function (result) {
         console.log(result);
         var data = result.data;
         var arrayLength = data.length;
