@@ -57,21 +57,6 @@
                     </p>
                 </div>
 
-                <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
-                                            'has-error': form.contact.$invalid && form.contact.$dirty }">
-                    <label>Phone</label>
-
-                    <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
-                           ng-pattern="/^[+]?[0-9]{10,13}$/">
-
-                    <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty ">
-                        Invalid contact number!
-                    </p>
-
-                    <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty">
-                        Contact number required!
-                    </p>
-                </div>
                 <div class="form-group" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
                                             'has-error': form.firstname.$invalid && form.firstname.$dirty }">
                     <label>First Name</label>
@@ -92,6 +77,23 @@
                     </p>
                 </div>
                 <div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
+                                            'has-error': form.contact.$invalid && form.contact.$dirty }">
+                    <label>Phone</label>
+
+                    <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
+                           ng-pattern="/^[+]?[0-9]{10,13}$/">
+
+                    <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty ">
+                        Invalid contact number!
+                    </p>
+
+                    <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty">
+                        Contact number required!
+                    </p>
+                </div>
+
                     <button class="btn btn-primary  btn-login" type="submit">
                         Sign up
                     </button>

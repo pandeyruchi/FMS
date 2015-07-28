@@ -7,6 +7,11 @@ var app = angular.module('peninsula', [
 ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
         .otherwise('/signup');
+    $urlRouterProvider
+        .otherwise('/custreq');
+    $urlRouterProvider
+        .otherwise('/jobdDetails');
+
 
     $locationProvider.html5Mode(true);
 });
