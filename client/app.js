@@ -9,8 +9,10 @@ var app = angular.module('peninsula', [
         .otherwise('/signup');
     $urlRouterProvider
         .otherwise('/custreq');
+    $urlRouterProvider
+        .otherwise('/jobdDetails');
 
 
     $locationProvider.html5Mode(true);
 });
-app.constant('host',"http://172.25.36.44:3600");
+app.constant('host',"http://52.24.8.32");
