@@ -41,29 +41,7 @@
                 </select>
 
                 <br><br><br>
-               <!-- <div class="list-group">
-                    <a href="https://www.google.co.in/?gfe_rd=cr&ei=Lja3VfL2MLHv8wews4DgCg&gws_rd=ssl" class="list-group-item info">
-                        <h4 class="list-group-item-heading">Plumber 1</h4>
-                        <span class="badge"> > </span>
-                        <p class="list-group-item-text">Change pipeline</p>
 
-                    </a>
-                    <a href="#" class="list-group-item info">
-                        <h4 class="list-group-item-heading" ng-model-options="">Plumber 2</h4>
-                        <span class="badge"> > </span>
-                        <p class="list-group-item-text">Attach pipeline</p>
-                    </a>
-                    <a href="#" class="list-group-item info">
-                        <h4 class="list-group-item-heading">Plumber 3</h4>
-                        <span class="badge"> > </span>
-                        <p class="list-group-item-text">Check leakage</p>
-                    </a>
-                    <a href="#" class="list-group-item info">
-                        <h4 class="list-group-item-heading">Plumber 4</h4>
-                        <span class="badge"> > </span>
-                        <p class="list-group-item-text">Repair pipeline</p>
-                    </a>
-                </div>-->
 
             <div>
                 <table class="table table-bordered">
@@ -72,7 +50,7 @@
                             Details
                         </td>
                     </tr>
-                    <tr ng-model="customers" ng-repeat= "customer in customers">
+                    <tr ng-model="customers" ng-click="showMap(customer.customerId,customer.address)" ng-repeat= "customer in customers">
                         <td>Customer name : {{customer.customerName}}<br>Description : {{customer.description}}</td>
 
                     </tr>
