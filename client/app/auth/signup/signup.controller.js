@@ -2,7 +2,7 @@ angular.module('peninsula').controller('signupCtrl', function ($scope, $http,$lo
 
     $scope.user = {
         
-    }
+    };
 
     $scope.signup = function () {
        var pwd = btoa($scope.user.password);

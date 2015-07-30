@@ -5,15 +5,18 @@
 angular.module('peninsula').controller('loginCtrl', function ($scope, $http, $location, host) {
     $scope.login = function (user) {
         var pwd = btoa(user.password);
-        user.password =pwd;  
+
+        user.password =pwd;
+        user.device="web";
         var res = $http.post(host + '/api/login', user);
+
         res.success(function (data) {
             console.log(data);
             if (data.error) {
                 alert('login un-successful');
             }
             else {
-                $location.url('/main')
+                $location.url("/main");
             }
         });
 

@@ -7,34 +7,16 @@ angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http
     $scope.customers=[];
 
 
-    //$scope.customers = [{"customerName" : "Anjali" ,"description":"change pipeline"},{"customerName" : "Chhaya","description":"attach pipeline" },{"customerName" : "Ruchi" ,"description":"repair pipeline"}];
+    $scope.showMap = function(customerId, address){
+        $location.url("/showMap?:"+address);
+    }
 
-    $http.get("http://52.24.8.32:3600/api/getAllCustomerReq").then(function (result) {
+    $http.get(host+'/api/getAllCustomerReq').then(function (result) {
         console.log(result);
         var data = result.data;
-        var arrayLength = data.length;
-        for (var i = 0; i < arrayLength; i++) {
-            var stauslist = {};
-            u = data[i];
-            stauslist.customerId = u.customerId;
-            stauslist.customerName = u.customerName;
-            stauslist.description = u.description;
-            stauslist.status = u.status;
-            stausarray.push(stauslist);
-        }
-
-        customerPush();
+        data.forEach(function(u){
+            $scope.customers.push(u);
+        });
     });
-
-
-    var customerAdd = function (info) {
-        $scope.customers.push(info);
-    };
-
-    function customerPush() {
-        for (i = 0; i < stausarray.length; i++) {
-            customerAdd(stausarray[i]);
-        }
-    }
 });
 
