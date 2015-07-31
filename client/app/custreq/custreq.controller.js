@@ -22,9 +22,9 @@ angular.module('peninsula').controller('custreqCtrl', function ($scope, $http, $
     $scope.user = {};
 
     $scope.custreq = function () {
-        //computeCoordinates($scope.user);
-        //$scope.user.latitude = user.latitude;
-        //$scope.user.longitude = user.longitude;
+        computeCoordinates($scope.user);
+        // $scope.user.latitude = user.latitude;
+        // $scope.user.longitude = user.longitude;
         var res = $http.post(host + '/api/customerRequest ', $scope.user);
         res.success(function (data) {
             console.log(data);
