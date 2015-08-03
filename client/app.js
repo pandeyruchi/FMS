@@ -17,5 +17,5 @@ var app = angular.module('peninsula', [
 
     $locationProvider.html5Mode(true);
 });
-app.constant('host',"http://52.24.8.32:3600");
+app.constant('host',"http://54.68.120.146:3600");
 //app.constant('host',"http://172.25.36.44:3600");
