@@ -17,7 +17,6 @@
                </li>
                <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
              </ul>-->
-
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/custreq')}" ><a style="color: rgb(240,99,99)" href="/custreq">Customer Request</a></li>
                 <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/jobDetails')}"><a style="color: rgb(240,99,99)" href="/jobDetails" >Job Details</a></li>
@@ -26,181 +25,55 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="col-md-4 col-md-offset-4" id="map"></div>
-</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-
-<!DOCTYPE html>
-<html ng-app="mapsApp">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Field Performance Tracker</title>
-    <link rel="stylesheet" href="gmap2.css">
-    <link rel="stylesheet" href="Scripts/css/bootstrap.css">
-    <link rel="stylesheet" href="Scripts/css/bootstrap-theme.css">
-    <script src="Scripts/angular.js"></script>
-    <script src="Scripts/jquery-2.1.4.js"></script>
-    <script src="Scripts/bootstrap.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
-</head>
-<body ng-app="mapsApp">
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+<div class="row">
+    <div class="col-md-1">
+        <div></div>
+    </div>
+    <div class="col-md-7">
+        <div id="map"></div>
+    </div>
+    <div class="col-md-4" >
+        <br>
+        <div class="row" style="margin-right: 40px">
+            <table class="table table-bordered">
+                <tr  class="text-center" style="background-color: #449d44">
+                    <td>
+                        Plumbers in Range
+                    </td>
+                </tr>
+               <!-- <tr ng-model="iname" ng-repeat="inam in iname" ng-click="callInner(inam)">
+                    <td><input type="checkbox" name="myTextEditBox" ng-model="isChecked" > {{inam.firstName}}</td>
+                </tr>-->
+                <tr ng-model="iname" ng-repeat="inam in iname" >
+                    <td><input type="checkbox" name="myTextEditBox" ng-model="isChecked" ng-checked="Inner(inam)"> {{inam.firstName}}</td>
+                </tr>
+            </table>
+            <br><br><br><br><br>
+        </div>
+        <div class="row" style="margin-right: 40px">
+            <table class="table">
+                <tr  class="text-center" style="background-color: #d58512">
+                    <td>
+                        Plumbers Out of Range
+                    </td>
+                </tr>
+                <tr ng-model="oname" ng-repeat="onam in oname" >
+                    <td><input type="checkbox" name="myTextEditBox" ng-model="isChecked" ng-change="Outer(onam)"> {{onam.firstName}}</td>
+                </tr>
+            </table>
+            <hr>
+            Plumber Id: {{plumberid}}
+            <hr>
+            Name: {{firstname}}
+        </div>
+        <div class="row" style="margin-left: 230px">
+            <button class="btn btn-primary" type="submit" ng-click="assignJob()">Next
             </button>
-            <a class="navbar-brand" href="#">Field Performance Tracker</a>
-
         </div>
-    </div>
-</nav>
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <div ng-controller="MapCtrl">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6"></div>
-                <div class="col-md-3"></div>
-            </div>
-            <br/>
 
-            <div class="row">
-                <form>
-                    <div class="col-md-3">
-                        <button type="button" class="btn btn-danger " style="margin-bottom: -174px; margin-left: 85px"
-                                ng-click="refresh();">
-                            Refresh
-                        </button>
-                    </div>
-                    <div class="col-md-6" id="map"></div>
-                    <div class="col-md-3"></div>
-                </form>
-
-            </div>
-            <div class="row">
-
-            </div>
-        </div>
     </div>
 </div>
 
 
-<script>
-    var sampleApp = angular.module('mapsApp', []);
-    var cities = [];
-    sampleApp.controller('MapCtrl', function ($scope, $http) {
-
-        $scope.cities = [];
-        $scope.refresh = function () {
-            refresh();
-        };
-        refresh();
-        function refresh() {
-            if (setmarker === true) {
-                infowindow.close();
-            }
-            $http.get("http://172.25.36.44:8080/getData").then(function (result) {
-
-                var data = result.data;
-                data.forEach(function (u) {
-                    var city = {};
-                    city.lat = u.latitude;
-                    city.long = u.longitude;
-                    city.address = u.address;
-                    cities.push(city);
-                });
-                getMarker();
-            });
-        }
-
-
-        function getMarker() {
-            for (i = 0; i < cities.length; i++) {
-                createMarker(cities[i]);
-            }
-        }
-
-        var mapOptions = {
-            zoom: 15,
-            //center: new google.maps.LatLng(25,80),
-            center: new google.maps.LatLng(18.514036, 73.858676),
-            mapTypeId: google.maps.MapTypeId.TERRAIN
-        };
-
-        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        $scope.markers = [];
-
-        var infoWindow = new google.maps.InfoWindow();
-        var setmarker = false;
-        var activeMarker = {};
-        var createMarker = function (info) {
-            var marker = new google.maps.Marker({
-                map: $scope.map,
-                position: new google.maps.LatLng(info.lat, info.long, info.address),
-                title: info.address,
-                //center: new google.maps.LatLng(18.514036, 73.858676),
-                zoom: 18,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/blue.png'
-            });
-
-            marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-
-
-            var latLng = marker.getPosition(); // returns LatLng object
-            $scope.map.setCenter(latLng);
-
-
-            google.maps.event.addListener(marker, 'click', function () {
-                infoWindow.setContent('<h4>' + marker.title + '</h4>' + "Lat :" + marker.position.A + "   Lng :" + marker.position.F);
-                infoWindow.open($scope.map, marker);
-                setmarker = true;
-                activeMarker = marker;
-            });
-
-            $scope.markers.push(marker);
-        };
-
-        $scope.openInfoWindow = function (e, selectedMarker) {
-            e.preventDefault();
-            google.maps.event.trigger(selectedMarker, 'click');
-        }
-    });
-
-</script>
-</body>
-</html>
--->

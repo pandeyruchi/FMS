@@ -2,13 +2,13 @@
  * Created by ruchyp on 7/22/2015.
  */
 
-angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http, $location, host) {
+angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http, $location, host,$state) {
     var stausarray = [];
     $scope.customers=[];
 
 
     $scope.showMap = function(customerId, address){
-        $location.url("/showMap?:"+address);
+        $state.go("showMap",{customerId:customerId,address:address});
     }
 
     $http.get(host+'/api/getAllCustomerReq').then(function (result) {
