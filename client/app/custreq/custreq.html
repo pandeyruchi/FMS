@@ -1,8 +1,6 @@
 <!--<div ng-include="'components/navbar/navbar.html'"></div>-->
 
 
-
-
 <div class="navbar navbar-custom navbar-static-top" style="color:#000066" ng-controller="NavbarCtrl">
     <div class="container">
         <div class="navbar-header">
@@ -23,19 +21,18 @@
              </ul>-->
 
             <ul class="nav navbar-nav navbar-right">
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/custreq')}" ><a style="color: rgb(240,99,99)" href="/custreq">Customer Request</a></li>
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/jobDetails')}"><a style="color: rgb(240,99,99)" href="/jobDetails" >Job Details</a></li>
-                <li ng-class="{active: isActive('/logout')}"><a style="color: rgb(240,99,99)" href="" ui-sref="login">Logout</a></li>
+                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/custreq')}"><a style="color: rgb(240,99,99)"
+                                                                                        href="/custreq">Customer
+                    Request</a></li>
+                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/jobDetails')}"><a style="color: rgb(240,99,99)"
+                                                                                           href="/jobDetails">Job
+                    Details</a></li>
+                <li ng-class="{active: isActive('/logout')}"><a style="color: rgb(240,99,99)" href="" ui-sref="login">Logout</a>
+                </li>
             </ul>
         </div>
     </div>
 </div>
-
-
-
-
-
-
 
 
 <div class="container-fluid">
@@ -44,7 +41,7 @@
         <div class="col-md-4 col-md-offset-4" style="background-color:white;margin-top: 30px;border:1px solid black">
             <h3 style="color:#008855">Customer Request </h3>
 
-            <form class="form" name="form" ng-submit="custreq()"  novalidate>
+            <form class="form" name="form" ng-submit="custreq()" novalidate>
                 <div class="form-group" ng-class="{ 'has-success': form.customerName.$valid && form.customerName.$dirty,
                                             'has-error': form.customerName.$invalid && form.customerName.$dirty }">
                     <label> Customer name </label>
@@ -58,7 +55,8 @@
                 <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
                                             'has-error': form.address.$invalid && form.address.$dirty }">
                     <label> Address</label>
-                    <textarea rows="4" ng-change="computeCoordinates()" class="form-control" name="address" ng-model="user.address" required></textarea>
+                    <textarea rows="4" ng-change="computeCoordinates()" class="form-control" name="address"
+                              ng-model="user.address" required></textarea>
 
 
                     <p class="help-block" ng-show="form.address.$error.required && form.address.$dirty">
@@ -69,7 +67,7 @@
                 <div class="form-group" ng-class="{ 'has-success': form.locality.$valid && form.locality.$dirty,
                                             'has-error': form.locality.$invalid && form.locality.$dirty }">
                     <label> Locality </label>
-                    <input type="text" name="locality"  class="form-control" ng-model="user.locality" required>
+                    <input type="text" name="locality" class="form-control" ng-model="user.locality" required>
 
                     <p class="help-block" ng-show="form.locality.$error.required && form.locality.$dirty">
                         Please enter locality
@@ -81,7 +79,7 @@
                     <label>Contact number</label>
 
                     <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
-                           ng-pattern= "/^[+]?[0-9]{10,13}$/">
+                           ng-pattern="/^[+]?[0-9]{10,13}$/">
 
                     <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty ">
                         Invalid contact number!
@@ -105,8 +103,8 @@
 
                 <div class="form-group">
                     <label>Urgent</label>
-                    <input type="radio" name="yes" ng-model="user.urgentFlag" value="true" checked>Yes
-                    <input type="radio"  name="no" ng-model="user.urgentFlag" value="false">No
+                    <input type="radio" style="margin-left: 5px" name="yes" ng-model="user.urgentFlag" value="true"/>Yes
+                    <input type="radio" style="margin-left: 5px" name="no" ng-model="user.urgentFlag" checked="checked"/>No
                 </div>
 
                 <div class="form-group">
