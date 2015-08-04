@@ -6,13 +6,6 @@ var app = angular.module('peninsula', [
     'ui.router'
 ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-        .otherwise('/signup');
-    $urlRouterProvider
-        .otherwise('/custreq');
-    $urlRouterProvider
-        .otherwise('/jobDetails');
-
-    $urlRouterProvider
         .otherwise('/login');
 
     $locationProvider.html5Mode(true);
