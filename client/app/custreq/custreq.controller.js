@@ -11,8 +11,8 @@ angular.module('peninsula').controller('custreqCtrl', function ($scope, $http, $
         geocoder.geocode({"address": $scope.user.address}, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
                 var location = results[0].geometry.location;
-               $scope.user.latitude = location.A;
-                $scope.user.longitude = location.F;
+               $scope.user.latitude = location.G;
+                $scope.user.longitude = location.K;
             }
         });
     }
@@ -22,9 +22,7 @@ angular.module('peninsula').controller('custreqCtrl', function ($scope, $http, $
     $scope.user = {};
 
     $scope.custreq = function () {
-        computeCoordinates($scope.user);
-        // $scope.user.latitude = user.latitude;
-        // $scope.user.longitude = user.longitude;
+
         var res = $http.post(host + '/api/customerRequest ', $scope.user);
         res.success(function (data) {
             console.log(data);

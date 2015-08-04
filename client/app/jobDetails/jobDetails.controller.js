@@ -9,7 +9,7 @@ angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http
 
     $scope.showMap = function(customerId, address){
         $state.go("showMap",{customerId:customerId,address:address});
-    }
+    };
 
     $http.get(host+'/api/getAllCustomerReq').then(function (result) {
         console.log(result);

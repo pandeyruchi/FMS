@@ -1,10 +1,11 @@
 /**
  * Created by synerzip on 29/7/15.
  */
-angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile) {
+angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile,$state) {
     var plumberName = "";
-    var plumbers = [];
+    var plumbers = []; var jobList = [];
     var list = [];
+    var list2 = [];
     $scope.iname = [];
     $scope.oname = [];
     var customerId = $stateParams.customerId;
@@ -131,8 +132,29 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
     }
 
+
+
+
+
+   function checkExistingPlumbers(){
+       $http.get(host + '/api/assignJobList').then(function (result) {
+           var data = result.data;
+           data.forEach(function (info) {
+               jobList.push(info);
+               console.log("inside function");
+           });
+       });
+
+   }
+
+
+
+
+
     function refresh() {
+        checkExistingPlumbers();
         getCentre();
+
         $http.get(host + '/api/getLocation').then(function (result) {
 
             var data = result.data;
@@ -165,23 +187,28 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         var distance = compute(newCenter.lat, newCenter.long, info.lat, info.long, 'K')
         if (distance < 1) {
             marker.icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
-            var concat = info.plumberId + " " + info.firstName + " " + info.lastName;
-            var user = {};
-            user.plumberId = info.plumberId;
-            user.firstName = info.firstName;
-            user.lastName = info.lastName;
-            user.userName = info.userName;
-            $scope.iname.push(user);
+            $scope.iname.push(info);
+            $scope.info =info;
+            for(var i=0; i<jobList.length; i++)
+            {
+                if(jobList[i].customerReqId === customerId && jobList[i].plumberId === info.plumberId.toString())
+                {
+
+                    $scope.info.isInnerChecked = true;
+                }
+            }
         }
         else {
             marker.icon = 'http://maps.google.com/mapfiles/ms/icons/red.png';
-            //var concat = info.plumberId + " " + info.firstName + " " + info.lastName;
-            var user2 = {};
-            user2.plumberId = info.plumberId;
-            user2.firstName = info.firstName;
-            user2.lastName = info.lastName;
-            user2.userName = info.userName;
-            $scope.oname.push(user2);
+            $scope.oname.push(info);
+            $scope.info =info;
+            for(var i=0; i<jobList.length; i++)
+            {
+                if(jobList[i].customerReqId === customerId && jobList[i].plumberId === info.plumberId.toString())
+                {
+                    $scope.info.isChecked = true;
+                }
+            }
         }
 
         marker.content = '<div class="infoWindowContent">' + info.plumberId + '</div>';
@@ -205,33 +232,8 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         $scope.markers.push(marker);
     };
 
-    $scope.callOuter = function (onam) {
 
-        if ($scope.isChecked) {
-            alert("CheckBox is checked.");
-            $scope.isChecked = false;
-            console.log("Plumber Info: " + onam.plumberId + " : " + onam.firstName);
-            $scope.plumberid = onam.plumberId;
-            $scope.firstname = onam.firstName;
-        } else {
-            alert("CheckBox is not checked.");
-        }
-    };
-
-    $scope.callInner = function (inum) {
-        if ($scope.isChecked) {
-            alert("CheckBox is checked.");
-            $scope.isChecked = false;
-            console.log("Plumber Info: " + inum.plumberId + " : " + inum.firstName);
-            $scope.plumberid = inum.plumberId;
-            $scope.firstname = inum.firstName;
-        } else {
-            alert("CheckBox is not checked.");
-        }
-
-    };
-
-    $scope.Outer = function (onum) {
+    $scope.outer = function (onum) {
         console.log("ng-checked");
         var contain = false;
 
@@ -255,13 +257,12 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
 
     };
 
-
-    $scope.Inner = function (inum) {
+    $scope.inner = function (inum) {
         console.log("ng-checked");
         var contain = false;
 
-        for (var i = 0; i < list.length; i++) {
-            if (list[i] === inum.plumberId) {
+        for (var i = 0; i < list2.length; i++) {
+            if (list2[i] === inum.plumberId) {
                 contain = true;
             }
         }
@@ -269,15 +270,14 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         if (!!contain) {
             var index = plumbers.indexOf(inum.plumberId);
             plumbers.splice(index, 1);
-            var index1 = list.indexOf(inum.plumberId);
-            list.splice(index1, 1);
+            var index1 = list2.indexOf(inum.plumberId);
+            list2.splice(index1, 1);
             console.log('Invalid');
         }
         else {
-            list.push(inum.plumberId)
+            list2.push(inum.plumberId);
             plumbers.push(inum.plumberId);
         }
-
     };
 
 
@@ -302,13 +302,14 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                     alert(data.Message);
                 }
                 else {
-                    $location.url("/main");
+                    alert("Data submitted successfully!")
+                    $state.go("finalJobDescription",{customerReqId:customerService.customerReqId,plumberId:customerService.plumberId});
                 }
             });
             res.error(function (err) {
                 console.log(err);
                 alert("Error");
-            })
+            });
         });
 
     }

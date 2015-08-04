@@ -27,31 +27,26 @@
 </div>
 
 <div class="row">
-    <div class="col-md-1">
-        <div></div>
-    </div>
-    <div class="col-md-7">
+
+    <div class="col-md-10 col-lg-8">
         <div id="map"></div>
     </div>
-    <div class="col-md-4" >
+    <div class="col-md-2 col-lg-4" >
         <br>
-        <div class="row" style="margin-right: 40px">
-            <table class="table table-bordered">
+        <div class="row">
+            <table class="table table-bordered table-responsive">
                 <tr  class="text-center" style="background-color: #449d44">
                     <td>
                         Plumbers in Range
                     </td>
                 </tr>
-               <!-- <tr ng-model="iname" ng-repeat="inam in iname" ng-click="callInner(inam)">
-                    <td><input type="checkbox" name="myTextEditBox" ng-model="isChecked" > {{inam.firstName}}</td>
-                </tr>-->
                 <tr ng-model="iname" ng-repeat="inam in iname" >
-                    <td><input type="checkbox" name="myTextEditBox" ng-model="isChecked" ng-checked="Inner(inam)"> {{inam.firstName}}</td>
+                    <td><input type="checkbox" ng-model="info.isInnerChecked" ng-change="inner(inam)"> {{inam.firstName}}</td>
                 </tr>
             </table>
             <br><br><br><br><br>
         </div>
-        <div class="row" style="margin-right: 40px">
+        <div class="row">
             <table class="table">
                 <tr  class="text-center" style="background-color: #d58512">
                     <td>
@@ -59,13 +54,10 @@
                     </td>
                 </tr>
                 <tr ng-model="oname" ng-repeat="onam in oname" >
-                    <td><input type="checkbox" name="myTextEditBox" ng-model="isChecked" ng-change="Outer(onam)"> {{onam.firstName}}</td>
+                    <td><input type="checkbox" ng-model="isChecked" ng-change="outer(onam)"> {{onam.firstName}}</td>
                 </tr>
             </table>
-            <hr>
-            Plumber Id: {{plumberid}}
-            <hr>
-            Name: {{firstname}}
+
         </div>
         <div class="row" style="margin-left: 230px">
             <button class="btn btn-primary" type="submit" ng-click="assignJob()">Next
