@@ -3,7 +3,7 @@
  */
 angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile, $state, $interval) {
     var plumberName = "";
-    var jobList = [];
+    var jobList = {};
     $scope.iname = [];
     $scope.oname = [];
     var customerId = $stateParams.customerId;
@@ -92,7 +92,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
             var data = result.data;
             data.forEach(function (info) {
                 if (info.customerReqId === customerId) {
-                    jobList.push(info);
+                    jobList[info.plumberId] = info;
                     console.log("inside function");
                 }
             });
@@ -111,10 +111,8 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
 
         var distance = compute(newCenter.lat, newCenter.long, plumber.latitude, plumber.longitude, 'K');
-        for (var i = 0; i < jobList.length; i++) {
-            if (jobList[i].plumberId === plumber.plumberId.toString()) {
-                plumber.isAssigned = true;
-            }
+        if (!!jobList[plumber.plumberId.toString()]) {
+            plumber.isAssigned = true;
         }
         if (distance < 1) {
             marker.icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
@@ -185,8 +183,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
     }
 
-    ///This method creates map with default lat and lng.
-    createNewMap(18.518920, 73.860736);
+
     ///This method checks for the existing plumber, calculates centre based on address and populate IN-OUT tables
     refresh();
     ///This sets refresh interval in milliseconds

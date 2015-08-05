@@ -1,53 +1,26 @@
-<nav class="navbar navbar-custom navbar-static-top" style="color:#000066" ng-controller="NavbarCtrl">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="navbar-main"
-                    aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a ui-sref="main" class="navbar-brand" style="font-size: 25px; color: white">Penninsula Plumbers</a>
-        </div>
-        <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-            <!-- <ul class="nav navbar-nav">
-               <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-                   <a ng-href="{{item.link}}">{{item.title}}</a>
-               </li>
-               <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-             </ul>-->
-
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/custreq')}" ><a style="color: rgb(240,99,99)" href="/custreq">Customer Request</a></li>
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/jobDetails')}"><a style="color: rgb(240,99,99)" href="/jobDetails" >Job Details</a></li>
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/addPlumber')}"><a style="color: rgb(240,99,99)" href="/addPlumber" >Add Plumber</a></li>
-                <li ng-class="{active: isActive('/logout')}"><a style="color: rgb(240,99,99)" href="" ui-sref="login">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div ng-include="'components/navbar/navbar2.html'"></div>
 <div class="container-fluid">
     <div class="row" id="mains">
-        <div class="col-md-4 col-md-offset-4" style="background-color:white;margin-top: 100px;margin-bottom: 100px;border:1px solid black">
+        <div class="col-md-4 col-md-offset-4"
+             style="background-color:white;margin-top: 100px;margin-bottom: 100px;border:1px solid black">
             <h3 style="color:#008855">Job Details </h3>
 
             <form class="form" name="form" novalidate>
-               <!-- <select ng-model="menu"
-                        style="margin-left: 350px; background-color: #28a4c9; color: white; box-sizing: border-box; font-size: medium">
-                    <option value="active" style="color: white">Active</option>
-                    <option value="completed" style="color: white">Completed</option>
-                    <option value="inProgress" style="color: white">In-Progress</option>
-                </select>
-                <br><br><br>-->
+                <!-- <select ng-model="menu"
+                         style="margin-left: 350px; background-color: #28a4c9; color: white; box-sizing: border-box; font-size: medium">
+                     <option value="active" style="color: white">Active</option>
+                     <option value="completed" style="color: white">Completed</option>
+                     <option value="inProgress" style="color: white">In-Progress</option>
+                 </select>
+                 <br><br><br>-->
 
                 <div class="scrollit">
                     <table class="table table-bordered table-responsive">
-                       <!-- <tr class="text-center" style="background-color: #449d44">
-                            <td>
-                                Details
-                            </td>
-                        </tr>-->
+                        <!-- <tr class="text-center" style="background-color: #449d44">
+                             <td>
+                                 Details
+                             </td>
+                         </tr>-->
                         <tr ng-model="customers" ng-repeat="customer in customers">
                             <td><a href="#" ng-click="showMap(customer.customerId,customer.address)">
                                 <h4>{{customer.customerName}}</h4>{{customer.description}}
