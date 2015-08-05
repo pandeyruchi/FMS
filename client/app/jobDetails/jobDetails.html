@@ -1,58 +1,46 @@
-<!--<div ng-include="'components/navbar/navbar.html'"></div>-->
-<div class="navbar navbar-custom navbar-static-top" style="color:#000066" ng-controller="NavbarCtrl">
-    <div class="container">
+<nav class="navbar navbar-custom navbar-static-top" style="color:#000066" ng-controller="NavbarCtrl">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="navbar-main"
+                    aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand" style="font-size: 25px; color: white">Penninsula Plumbers</a>
+            <a ui-sref="main" class="navbar-brand" style="font-size: 25px; color: white">Penninsula Plumbers</a>
         </div>
-        <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-            <!-- <ul class="nav navbar-nav">
-               <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-                   <a ng-href="{{item.link}}">{{item.title}}</a>
-               </li>
-               <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-             </ul>-->
-
+        <div class="collapse navbar-collapse" id="navbar-main">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/custreq')}"><a style="color: rgb(240,99,99)"
-                                                                                        href="/custreq">Customer
-                    Request</a></li>
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/jobDetails')}"><a style="color: rgb(240,99,99)"
-                                                                                           href="/jobDetails">Job
-                    Details</a></li>
-                <li ng-class="{active: isActive('/logout')}"><a style="color: rgb(240,99,99)" href="" ui-sref="login">Logout</a>
+                <li><a style="color: rgb(240,99,99)" href="/custreq">Customer Request</a></li>
+                <li><a style="color: rgb(240,99,99)" href="/jobDetails">Job Details</a></li>
+                <li><a style="color: rgb(240,99,99)" href="" ui-sref="login">Logout</a>
                 </li>
             </ul>
         </div>
     </div>
-</div>
+</nav>
 <div class="container-fluid">
-    <div class="row"
-         ng-style="{'background-image':'url(assets/images/peninsula.jpg)','margin-top':'-25px','background-size':'100% auto','height':'700px'}">
-        <div class="col-md-4 col-md-offset-4" style="background-color:white;margin-top: 100px;border:1px solid black">
+    <div class="row" id="mains">
+        <div class="col-md-4 col-md-offset-4" style="background-color:white;margin-top: 100px;margin-bottom: 100px;border:1px solid black">
             <h3 style="color:#008855">Job Details </h3>
 
             <form class="form" name="form" novalidate>
-                <select ng-model="menu"
+               <!-- <select ng-model="menu"
                         style="margin-left: 350px; background-color: #28a4c9; color: white; box-sizing: border-box; font-size: medium">
                     <option value="active" style="color: white">Active</option>
                     <option value="completed" style="color: white">Completed</option>
                     <option value="inProgress" style="color: white">In-Progress</option>
                 </select>
-                <br><br><br>
+                <br><br><br>-->
 
                 <div class="scrollit">
                     <table class="table table-bordered table-responsive">
-                        <tr class="text-center" style="background-color: #449d44">
+                       <!-- <tr class="text-center" style="background-color: #449d44">
                             <td>
                                 Details
                             </td>
-                        </tr>
+                        </tr>-->
                         <tr ng-model="customers" ng-repeat="customer in customers">
                             <td><a href="#" ng-click="showMap(customer.customerId,customer.address)">
                                 <h4>{{customer.customerName}}</h4>{{customer.description}}
@@ -66,7 +54,9 @@
             </form>
         </div>
     </div>
-    <div class="row" style="text-align: center">
-        <img src="assets/images/updated.png">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
+            <img class="img-responsive" src="assets/images/updated.png">
+        </div>
     </div>
 </div>

@@ -13,6 +13,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
     var newCenter = {};
 
 
+    ///This function creates map
     function createNewMap(lat, long) {
         var mapOptions = {
             zoom: 15,
@@ -45,6 +46,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
     }
 
+    ///This function calculates centre location based on customer address
     function getCentre() {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({"address": $scope.address}, function (results, status) {
@@ -62,6 +64,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
     }
 
+    ///This function computes distance(in Kms) between given lattitude and longitude
     function compute(lat1, lon1, lat2, lon2, unit) {
 
         var radlat1 = Math.PI * lat1 / 180;
@@ -83,6 +86,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         return dist;
     }
 
+    ///This function checks existing assigned plumbers
     function checkExistingPlumbers() {
         $http.get(host + '/api/assignJobList').then(function (result) {
             var data = result.data;
@@ -96,6 +100,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
 
     }
 
+    ///This function creates marker on Map
     function createMarker(plumber) {
         var marker = new google.maps.Marker({
             map: $scope.map,
@@ -129,6 +134,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
 
     };
 
+    /// This function assigns job to plumber
     $scope.assignJob = function () {
 
         var plumbers = $scope.iname.concat($scope.oname);
@@ -181,8 +187,10 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
     }
 
-
+    ///This method creates map with default lat and lng.
     createNewMap(18.518920, 73.860736);
+    ///This method checks for the existing plumber, calculates centre based on address and populate IN-OUT tables
     refresh();
+    ///This sets refresh interval in milliseconds
     $interval(refresh, 50000);
 });
