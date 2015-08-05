@@ -1,9 +1,8 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container-fluid">
-    <div class="row"
-         ng-style="{'background-image':'url(assets/images/peninsula.jpg)','margin-top':'-25px','background-size':'100% auto','height':'700px'}">
-        <div class="col-md-4 col-md-offset-4" style="background-color:white;margin-top: 100px;border:1px solid black">
+    <div class="row" id="mains">
+        <div class="col-md-4 col-md-offset-4 login-form">
             <h3 style="color:#008855">Login </h3>
 
             <form class="form" name="form" ng-submit="login(user)" novalidate>
@@ -38,7 +37,9 @@
             </form>
         </div>
     </div>
-    <div class="row" style="text-align: center">
-        <img src="assets/images/updated.png">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
+            <img class="img-responsive" src="assets/images/updated.png">
+        </div>
     </div>
 </div>

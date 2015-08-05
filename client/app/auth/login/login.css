@@ -16,3 +16,10 @@
   background-color: rgb(54,72,94);
 
 }
+
+.login-form{
+  background-color:white;
+  margin-top: 100px;
+  border:1px solid black;
+  margin-bottom: 100px;
+}

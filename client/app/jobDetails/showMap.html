@@ -11,12 +11,7 @@
             <a href="/" class="navbar-brand" style="font-size: 25px; color: white">Penninsula Plumbers</a>
         </div>
         <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-            <!-- <ul class="nav navbar-nav">
-               <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-                   <a ng-href="{{item.link}}">{{item.title}}</a>
-               </li>
-               <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-             </ul>-->
+
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/custreq')}" ><a style="color: rgb(240,99,99)" href="/custreq">Customer Request</a></li>
                 <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/jobDetails')}"><a style="color: rgb(240,99,99)" href="/jobDetails" >Job Details</a></li>
@@ -41,7 +36,7 @@
                     </td>
                 </tr>
                 <tr ng-model="iname" ng-repeat="inam in iname" >
-                    <td><input type="checkbox" ng-model="info.isInnerChecked" ng-change="inner(inam)"> {{inam.firstName}}</td>
+                    <td><input type="checkbox" ng-model="inam.isAssigned"> {{inam.firstName}}</td>
                 </tr>
             </table>
             <br><br><br><br><br>
@@ -54,7 +49,7 @@
                     </td>
                 </tr>
                 <tr ng-model="oname" ng-repeat="onam in oname" >
-                    <td><input type="checkbox" ng-model="isChecked" ng-change="outer(onam)"> {{onam.firstName}}</td>
+                    <td><input type="checkbox" ng-model="onam.isAssigned"> {{onam.firstName}}</td>
                 </tr>
             </table>
 

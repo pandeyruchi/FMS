@@ -1,36 +1,50 @@
 /**
  * Created by synerzip on 29/7/15.
  */
-angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile,$state) {
+angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile, $state, $interval) {
     var plumberName = "";
-    var plumbers = []; var jobList = [];
-    var list = [];
-    var list2 = [];
+    var jobList = [];
     $scope.iname = [];
     $scope.oname = [];
     var customerId = $stateParams.customerId;
+    var infoWindow = new google.maps.InfoWindow();
     $scope.address = $stateParams.address;
-    $scope.exist = true;
-    var isChecked = true;
 
-    console.log("cust id :" + customerId);
-
-    $scope.getCentre = function () {
-        getCentre();
-
-    };
-
-    var cities = [];
-    var circle = {};
     var newCenter = {};
-    var plumber = {};
 
-    $scope.refresh = function () {
-        refresh();
-        $interval(refresh, 5000);
-    };
-    createMap(18.518920, 73.860736);
-    refresh();
+
+    function createNewMap(lat, long) {
+        var mapOptions = {
+            zoom: 15,
+            center: new google.maps.LatLng(lat, long),
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        var circle = new google.maps.Circle({
+            map: $scope.map,
+            center: new google.maps.LatLng(lat, long),
+            radius: 500,
+            strokeColor: "#000000",
+            fillColor: "orange"
+        });
+
+
+        var marker = new google.maps.Marker({
+            map: $scope.map,
+            position: new google.maps.LatLng(lat, long, $scope.address),
+            title: $scope.address,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
+            zoom: 18
+        });
+
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.setContent('<h5>' + marker.title + '</h5>');
+            infoWindow.open($scope.map, marker);
+        });
+    }
+
     function getCentre() {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({"address": $scope.address}, function (results, status) {
@@ -48,269 +62,127 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
     }
 
-    function getMarker() {
-        for (i = 0; i < cities.length; i++) {
-            createMarker(cities[i]);
-        }
-    }
-
-    $scope.markers = [];
-
     function compute(lat1, lon1, lat2, lon2, unit) {
 
         var radlat1 = Math.PI * lat1 / 180;
         var radlat2 = Math.PI * lat2 / 180;
-
         var radlon1 = Math.PI * lon1 / 180;
-
         var radlon2 = Math.PI * lon2 / 180;
-
         var theta = lon1 - lon2;
-
         var radtheta = Math.PI * theta / 180;
-
         var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-
         dist = Math.acos(dist);
-
         dist = dist * 180 / Math.PI;
-
         dist = dist * 60 * 1.1515;
-
         if (unit == "K") {
-            dist = dist * 1.609344
+            dist = dist * 1.609344;
         }
-
         if (unit == "N") {
-            dist = dist * 0.8684
+            dist = dist * 0.8684;
         }
-
-        return dist
-
+        return dist;
     }
 
-    function createMap(lat, long) {
-        var mapOptions = {
-            zoom: 12,
-            center: new google.maps.LatLng(lat, long),
-            mapTypeId: google.maps.MapTypeId.RoadMap
-        };
-        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-    }
-
-    function createNewMap(lat, long) {
-        var mapOptions = {
-            zoom: 15,
-            center: new google.maps.LatLng(lat, long),
-            mapTypeId: google.maps.MapTypeId.TERRAIN
-        };
-        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        circle = new google.maps.Circle({
-            map: $scope.map,
-            center: new google.maps.LatLng(lat, long),
-            radius: 500,
-            strokeColor: "#000000",
-            fillColor: "orange"
+    function checkExistingPlumbers() {
+        $http.get(host + '/api/assignJobList').then(function (result) {
+            var data = result.data;
+            data.forEach(function (info) {
+                if (info.customerReqId === customerId) {
+                    jobList.push(info);
+                    console.log("inside function");
+                }
+            });
         });
 
+    }
 
+    function createMarker(plumber) {
         var marker = new google.maps.Marker({
             map: $scope.map,
-            position: new google.maps.LatLng(lat, long, $scope.address),
-            title: $scope.address,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
+            position: new google.maps.LatLng(plumber.latitude, plumber.longitude, plumber.plumberId),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/grey.png',
+            title: plumber.firstName + " " + plumber.lastName,
             zoom: 18
         });
+
+        var distance = compute(newCenter.lat, newCenter.long, plumber.latitude, plumber.longitude, 'K');
+        for (var i = 0; i < jobList.length; i++) {
+            if (jobList[i].plumberId === plumber.plumberId.toString()) {
+                plumber.isAssigned = true;
+            }
+        }
+        if (distance < 1) {
+            marker.icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
+            $scope.iname.push(plumber);
+        }
+        else {
+            marker.icon = 'http://maps.google.com/mapfiles/ms/icons/red.png';
+            $scope.oname.push(plumber);
+        }
+
+        //marker.content = '<div class="infoWindowContent">' + plumber.plumberId + '</div>';
 
         google.maps.event.addListener(marker, 'click', function () {
             infoWindow.setContent('<h5>' + marker.title + '</h5>');
             infoWindow.open($scope.map, marker);
-            setmarker = true;
-            activeMarker = marker;
         });
-    }
-
-
-
-
-
-   function checkExistingPlumbers(){
-       $http.get(host + '/api/assignJobList').then(function (result) {
-           var data = result.data;
-           data.forEach(function (info) {
-               jobList.push(info);
-               console.log("inside function");
-           });
-       });
-
-   }
-
-
-
-
-
-    function refresh() {
-        checkExistingPlumbers();
-        getCentre();
-
-        $http.get(host + '/api/getLocation').then(function (result) {
-
-            var data = result.data;
-            data.forEach(function (u) {
-                var city = {};
-                city.lat = u.latitude;
-                city.long = u.longitude;
-                city.plumberId = u.plumberId;
-                city.firstName = u.firstName;
-                city.lastName = u.lastName;
-                city.userName = u.userName;
-                cities.push(city);
-            });
-            getMarker();
-        });
-    }
-
-    var infoWindow = new google.maps.InfoWindow();
-    var setmarker = false;
-    var activeMarker = {};
-
-    var createMarker = function (info) {
-        var marker = new google.maps.Marker({
-            map: $scope.map,
-            position: new google.maps.LatLng(info.lat, info.long, info.plumberId),
-            icon: 'http://maps.google.com/mapfiles/ms/icons/grey.png',
-            zoom: 18
-        });
-
-        var distance = compute(newCenter.lat, newCenter.long, info.lat, info.long, 'K')
-        if (distance < 1) {
-            marker.icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
-            $scope.iname.push(info);
-            $scope.info =info;
-            for(var i=0; i<jobList.length; i++)
-            {
-                if(jobList[i].customerReqId === customerId && jobList[i].plumberId === info.plumberId.toString())
-                {
-
-                    $scope.info.isInnerChecked = true;
-                }
-            }
-        }
-        else {
-            marker.icon = 'http://maps.google.com/mapfiles/ms/icons/red.png';
-            $scope.oname.push(info);
-            $scope.info =info;
-            for(var i=0; i<jobList.length; i++)
-            {
-                if(jobList[i].customerReqId === customerId && jobList[i].plumberId === info.plumberId.toString())
-                {
-                    $scope.info.isChecked = true;
-                }
-            }
-        }
-
-        marker.content = '<div class="infoWindowContent">' + info.plumberId + '</div>';
-
-        plumber.customerId = info.customerId;
-        plumber.plumberId = info.plumberId;
-
-        google.maps.event.addListener(marker, 'click', function () {
-            var res = $http.post(host + '/api/getPlumberInformation', plumber);
-            res.success(function (data) {
-                infoWindow.setContent('<h2>' + data[0].firstName + '</h2>');
-                infoWindow.open($scope.map, marker);
-                setmarker = true;
-                activeMarker = marker;
-            });
-            res.error(function (err) {
-                console.log(err);
-            });
-        });
-
-        $scope.markers.push(marker);
-    };
-
-
-    $scope.outer = function (onum) {
-        console.log("ng-checked");
-        var contain = false;
-
-        for (var i = 0; i < list.length; i++) {
-            if (list[i] === onum.plumberId) {
-                contain = true;
-            }
-        }
-
-        if (!!contain) {
-            var index = plumbers.indexOf(onum.plumberId);
-            plumbers.splice(index, 1);
-            var index1 = list.indexOf(onum.plumberId);
-            list.splice(index1, 1);
-            console.log('Invalid');
-        }
-        else {
-            list.push(onum.plumberId);
-            plumbers.push(onum.plumberId);
-        }
 
     };
 
-    $scope.inner = function (inum) {
-        console.log("ng-checked");
-        var contain = false;
+    $scope.assignJob = function () {
 
-        for (var i = 0; i < list2.length; i++) {
-            if (list2[i] === inum.plumberId) {
-                contain = true;
+        var plumbers = $scope.iname.concat($scope.oname);
+        alert("done");
+
+        plumbers.forEach(function (plumber) {
+            var customerService = {};
+            customerService.customerReqId = customerId;
+            customerService.plumberId = plumber.plumberId;
+            if (!!plumber.isAssigned) {
+                var res = $http.post(host + '/api/customerRequestUpdation', customerService);
+                res.success(function (data) {
+                    console.log(data);
+                    if (!!data.error) {
+                        alert(data.Message);
+                    }
+                    else {
+                        alert("Data submitted successfully!")
+                        $state.go("finalJobDescription", {
+                            customerReqId: customerService.customerReqId,
+                            plumberId: customerService.plumberId
+                        });
+                    }
+                });
+                res.error(function (err) {
+                    console.log(err);
+                    alert("Error");
+                });
+
             }
-        }
+        });
 
-        if (!!contain) {
-            var index = plumbers.indexOf(inum.plumberId);
-            plumbers.splice(index, 1);
-            var index1 = list2.indexOf(inum.plumberId);
-            list2.splice(index1, 1);
-            console.log('Invalid');
-        }
-        else {
-            list2.push(inum.plumberId);
-            plumbers.push(inum.plumberId);
-        }
     };
-
-
 
     $scope.openInfoWindow = function (e, selectedMarker) {
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
     };
 
-    $scope.assignJob = function () {
-        alert("done");
-
-
-        plumbers.forEach(function (plumberId) {
-            var customerService = {};
-            customerService.customerReqId = customerId;
-            customerService.plumberId = plumberId;
-            var res = $http.post(host + '/api/customerRequestUpdation', customerService);
-            res.success(function (data) {
-                console.log(data);
-                if (!!data.error) {
-                    alert(data.Message);
-                }
-                else {
-                    alert("Data submitted successfully!")
-                    $state.go("finalJobDescription",{customerReqId:customerService.customerReqId,plumberId:customerService.plumberId});
-                }
-            });
-            res.error(function (err) {
-                console.log(err);
-                alert("Error");
+    function refresh() {
+        checkExistingPlumbers();
+        getCentre();
+        $scope.iname = [];
+        $scope.oname = [];
+        $http.get(host + '/api/getLocation').then(function (result) {
+            var plumbers = result.data;
+            plumbers.forEach(function (plumber) {
+                createMarker(plumber)
             });
         });
-
     }
+
+
+    createNewMap(18.518920, 73.860736);
+    refresh();
+    $interval(refresh, 50000);
 });
