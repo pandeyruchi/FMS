@@ -21,8 +21,8 @@ angular.module('peninsula').controller('custreqCtrl', function ($scope, $http, $
 
     $scope.user = {};
 
+    /// This method posts customer request data to server
     $scope.custreq = function () {
-
         var res = $http.post(host + '/api/customerRequest ', $scope.user);
         res.success(function (data) {
             console.log(data);
