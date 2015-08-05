@@ -136,9 +136,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
 
     /// This function assigns job to plumber
     $scope.assignJob = function () {
-
         var plumbers = $scope.iname.concat($scope.oname);
-        alert("done");
 
         plumbers.forEach(function (plumber) {
             var customerService = {};

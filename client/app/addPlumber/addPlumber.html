@@ -1,0 +1,122 @@
+<!--<div ng-include="'components/navbar/navbar.html'"></div>-->
+
+<nav class="navbar navbar-custom navbar-static-top" style="color:#000066" ng-controller="NavbarCtrl">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"  data-toggle="collapse" data-target="navbar-main"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a ui-sref="main" class="navbar-brand" style="font-size: 25px; color: white">Penninsula Plumbers</a>
+        </div>
+        <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+            <!-- <ul class="nav navbar-nav">
+               <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+                   <a ng-href="{{item.link}}">{{item.title}}</a>
+               </li>
+               <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+             </ul>-->
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/custreq')}" ><a style="color: rgb(240,99,99)" href="/custreq">Customer Request</a></li>
+                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/jobDetails')}"><a style="color: rgb(240,99,99)" href="/jobDetails" >Job Details</a></li>
+                <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/addPlumber')}"><a style="color: rgb(240,99,99)" href="/addPlumber" >Add Plumber</a></li>
+                <li ng-class="{active: isActive('/logout')}"><a style="color: rgb(240,99,99)" href="" ui-sref="login">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row" id="mains">
+        <div class="col-md-4 col-md-offset-4" style="margin-top:100px;margin-bottom:100px;background-color:white;border:1px solid black">
+            <h3 style="color:#008855">Add Plumber </h3>
+
+            <form class="form" name="form" ng-submit="addPlumber()" novalidate>
+
+                <div class="form-group" ng-class="{ 'has-success': form.email.$valid && form.email.$dirty,
+                                            'has-error': form.email.$invalid && form.email.$dirty }">
+                    <label>User Name</label>
+
+                    <input type="email" ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
+                           placeholder="someone@example.com" name="email" class="form-control"
+                           ng-model="user.userName"
+                           required/>
+
+                    <p class="help-block" ng-show="form.email.$error.email && form.email.$dirty ">
+                        Doesn't look like a valid email.
+                    </p>
+
+                    <p class="help-block" ng-show="form.email.$error.required && form.email.$dirty">
+                        What's your email address?
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
+                                            'has-error': form.firstname.$invalid && form.firstname.$dirty }">
+                    <label>First Name</label>
+                    <input type="text" name="firstname" class="form-control" ng-model="user.firstName" required>
+
+                    <p class="help-block" ng-show="form.firstname.$error.required && form.firstname.$dirty">
+                        Please enter first name
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{'has-success': form.lastname.$valid && form.lastname.$dirty,
+                                            'has-error': form.lastname.$invalid && form.lastname.$dirty }">
+                    <label>Last Name</label>
+                    <input type="text" name="lastname" class="form-control" ng-model="user.lastName" required>
+
+                    <p class="help-block" ng-show="form.lastname.$error.required && form.lastname.$dirty">
+                        Please enter last name
+                    </p>
+                </div>
+                <div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
+                                            'has-error': form.contact.$invalid && form.contact.$dirty }">
+                    <label>Phone</label>
+
+                    <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
+                           ng-pattern="/^[+]?[0-9]{10}$/">
+
+                    <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty ">
+                        Invalid contact number!
+                    </p>
+
+                    <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty">
+                        Contact number required!
+                    </p>
+                </div>
+
+
+                    <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
+                                            'has-error': form.address.$invalid && form.address.$dirty }">
+                        <label> Address</label>
+                    <textarea rows="4" ng-change="computeCoordinates()" class="form-control" name="address"
+                              ng-model="user.address" required></textarea>
+
+
+                        <p class="help-block" ng-show="form.address.$error.required && form.address.$dirty">
+                            Please enter address
+                        </p>
+                    </div>
+
+                    <button class="btn btn-primary  btn-login" type="submit">
+                      Add Plumber
+                    </button>
+                </div>
+                <br/>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
+            <img class="img-responsive" src="assets/images/updated.png">
+        </div>
+    </div>
+</div>
