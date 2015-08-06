@@ -1,5 +1,12 @@
 .scrollit {
     overflow:scroll;
-    height:350px;
+    height:450px;
     overflow-x: hidden;
+}
+
+.details-form{
+    background-color:white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border:1px solid black;
 }

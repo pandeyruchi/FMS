@@ -161,6 +161,27 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                 });
 
             }
+            else
+            {
+                var res = $http.post(host + '/api/deleteJob', customerService);
+                res.success(function (data) {
+                    console.log(data);
+                    if (!!data.error) {
+                        alert(data.Message);
+                    }
+                    else {
+                        alert("Data submitted successfully!")
+                        $state.go("finalJobDescription", {
+                            customerReqId: customerService.customerReqId,
+                            plumberId: customerService.plumberId
+                        });
+                    }
+                });
+                res.error(function (err) {
+                    console.log(err);
+                    alert("Error");
+                });
+            }
         });
 
     };

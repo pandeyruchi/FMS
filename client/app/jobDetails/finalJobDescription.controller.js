@@ -12,12 +12,15 @@ angular.module('peninsula').controller('finalJobDescriptionCtrl', function ($sco
     $http.get(host + '/api/assignJobList').then(function (result) {
         var data = result.data;
         data.forEach(function (info) {
-            if (!!$scope.assignedPlumberMap[info.customerReqId]) {
-                $scope.assignedPlumberMap[info.customerReqId].push(info);
-            } else {
-                $scope.assignedPlumberMap[info.customerReqId] = [info];
+            if(customerReqId === info.customerReqId)
+            {
+                if (!!$scope.assignedPlumberMap[info.customerReqId]) {
+                    $scope.assignedPlumberMap[info.customerReqId].push(info);
+                } else {
+                    $scope.assignedPlumberMap[info.customerReqId] = [info];
+                }
+                $scope.custReqNameMap[info.customerReqId] = info.customerName;
             }
-            $scope.custReqNameMap[info.customerReqId] = info.customerName;
         });
     });
 });
