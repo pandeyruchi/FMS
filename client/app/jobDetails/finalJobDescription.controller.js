@@ -11,6 +11,8 @@ angular.module('peninsula').controller('finalJobDescriptionCtrl', function ($sco
     var list = [];
     $http.get(host + '/api/assignJobList').then(function (result) {
         var data = result.data;
+
+        // This function prints the customer & assigned plumbers
         data.forEach(function (info) {
             if(customerReqId === info.customerReqId)
             {

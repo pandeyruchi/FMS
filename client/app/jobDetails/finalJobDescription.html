@@ -7,7 +7,7 @@
             <form class="form" name="form" novalidate>
                 <br>
 
-                <div class="scrollit">
+                <div >
                     <table class="table table-bordered table-responsive">
                         <tr class="text-center" style="background-color: #449d44">
                             <td>
@@ -25,9 +25,8 @@
                             <td>{{custReqNameMap[cust]}}</td>
                             <td>
                                 <span ng-repeat="job in jobs">
-                                    {{job.firstName}}
+                                    {{job.firstName }}
                                     <span ng-hide="$last">
-                                        ,
                                     </span>
                                 </span>
                             </td>
