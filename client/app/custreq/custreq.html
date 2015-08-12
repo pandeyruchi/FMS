@@ -69,15 +69,13 @@
                 <div class="form-group">
                     <label>Urgent</label>
                     <input type="radio" style="margin-left: 5px" name="yes" ng-model="user.urgentFlag" value="true"/>Yes
-                    <input type="radio" style="margin-left: 5px" name="no" ng-model="user.urgentFlag"
-                           checked="checked"/>No
+                    <input type="radio" style="margin-left: 5px" name="no" ng-model="user.urgentFlag" value="false"/>No
                 </div>
 
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit"
                             ng-disabled="form.user.$dirty && form.user.$invalid ||
-                         form.password.$dirty && form.password.$invalid" class="btn btn-primary"
-                            >Submit
+                         form.password.$dirty && form.password.$invalid" class="btn btn-primary">Submit
                     </button>
                 </div>
 
