@@ -35,16 +35,25 @@
                             </a>
                             </td>
                             <td>
-                                <span ng-repeat="job in jobs">
+                                <span ng-repeat="job in jobs | filter:{firstName:'!null'}">
                                     {{job.firstName}}
                                     <span ng-hide="$last">
                                         ,
                                     </span>
                                 </span>
                             </td>
-                            <td>
-                                {{jobs.length}}
-                            </td>
+                                <td>
+                                <span ng-repeat="job in jobs">
+                                    <span ng-if = "(job.plumberId > 0) && ($index == 0)">
+                                   {{jobs.length}}
+                                     </span>
+                                    <span ng-if = "job.plumberId == null">
+                                        {{0}}
+                                    </span>
+
+                                </span>
+                                </td>
+                               <td>
                         </tr>
                     </table>
                 </div>

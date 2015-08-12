@@ -2,39 +2,31 @@
  * Created by ruchyp on 7/22/2015.
  */
 
-angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http, $location, host,$state) {
-    $scope.customers=[];
+angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http, $location, host, $state) {
+    $scope.customers = [];
     $scope.assignedPlumberMap = {};
-    $scope.custReqNameMap ={};
-    $scope.custReqAddressMap ={};
-    $scope.custReqDescriptionMap ={};
-    var customers =[];
-    $http.get(host+'/api/getAllCustomerReq').then(function (result) {
-        console.log(result);
-        var data = result.data;
-        data.forEach(function(info){
-            $scope.customers.push(info);
-        });
-    });
+    $scope.custReqNameMap = {};
+    $scope.custReqAddressMap = {};
+    $scope.custReqDescriptionMap = {};
 
-    $http.get(host + '/api/assignJobList').then(function (result) {
+    // This is a get request for job assignment
+    $http.get(host + '/api/assignUnassignJobList').then(function (result) {
         var data = result.data;
         data.forEach(function (info) {
-            if (!!$scope.assignedPlumberMap[info.customerReqId]) {
-                $scope.assignedPlumberMap[info.customerReqId].push(info);
+            if (!!$scope.assignedPlumberMap[info.customerId]) {
+                $scope.assignedPlumberMap[info.customerId].push(info);
             } else {
-                $scope.assignedPlumberMap[info.customerReqId] = [info];
+                $scope.assignedPlumberMap[info.customerId] = [info];
             }
-            $scope.custReqNameMap[info.customerReqId] = info.customerName;
-            $scope.customers.forEach(function(info){
-                $scope.custReqAddressMap[info.customerId] = info.address;
-                $scope.custReqDescriptionMap[info.customerId] = info.description;
-            })
+            $scope.custReqNameMap[info.customerId] = info.customerName;
+            $scope.custReqAddressMap[info.customerId] = info.address;
+            $scope.custReqDescriptionMap[info.customerId] = info.description;
         });
     });
 
-    $scope.showMap = function(customerId, address){
-        $state.go("showMap",{customerId:customerId,address:address});
+    // This function sends selected customer id & address to the map page
+    $scope.showMap = function (customerId, address) {
+        $state.go("showMap", {customerId: customerId, address: address});
     };
 
 

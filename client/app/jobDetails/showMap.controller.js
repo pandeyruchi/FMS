@@ -1,5 +1,5 @@
 /**
- * Created by synerzip on 29/7/15.
+ * Created by anjali on 29/7/15.
  */
 angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile, $state, $interval) {
     var plumberName = "";
@@ -130,7 +130,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
             infoWindow.open($scope.map, marker);
         });
 
-    };
+    }
 
     /// This function assigns job to plumber
     $scope.assignJob = function () {
@@ -148,7 +148,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                         alert(data.Message);
                     }
                     else {
-                        alert("Data submitted successfully!")
+                       // alert("Data submitted successfully!")
                         $state.go("finalJobDescription", {
                             customerReqId: customerService.customerReqId,
                             plumberId: customerService.plumberId
@@ -163,14 +163,14 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
             }
             else
             {
-                var res = $http.post(host + '/api/deleteJob', customerService);
+                res = $http.post(host + '/api/deleteJob', customerService);
                 res.success(function (data) {
                     console.log(data);
                     if (!!data.error) {
                         alert(data.Message);
                     }
                     else {
-                        alert("Data submitted successfully!")
+                        //alert("Data submitted successfully!")
                         $state.go("finalJobDescription", {
                             customerReqId: customerService.customerReqId,
                             plumberId: customerService.plumberId

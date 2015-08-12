@@ -5,6 +5,19 @@ angular.module('peninsula').controller('addPlumberCtrl', function ($scope, $http
         
     };
 
+    function computeCoordinates() {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({"address": $scope.user.address}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+                var location = results[0].geometry.location;
+                $scope.user.latitude = location.G;
+                $scope.user.longitude = location.K;
+            }
+        });
+    }
+
+    $scope.computeCoordinates = computeCoordinates;
+
     $scope.addPlumber = function () {
        var pwd = btoa($scope.user.password);
        $scope.user.password = pwd;
