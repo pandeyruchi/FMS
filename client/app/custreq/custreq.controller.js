@@ -21,6 +21,7 @@ angular.module('peninsula').controller('custreqCtrl', function ($scope, $http, $
 
     $scope.user = {};
 
+
     /// This method posts customer request data to server
     $scope.custreq = function () {
         var res = $http.post(host + '/api/customerRequest ', $scope.user);
@@ -36,7 +37,7 @@ angular.module('peninsula').controller('custreqCtrl', function ($scope, $http, $
         });
         res.error(function (err) {
             console.log(err);
-            alert("From Error custreq unsuccesful");
+            alert("Please provide all the data \nCustomer request unsuccesful");
         })
     }
 });
