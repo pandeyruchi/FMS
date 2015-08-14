@@ -9,9 +9,9 @@
                 <div class="form-group" ng-class="{ 'has-success': form.user.$valid && form.user.$dirty,
                                             'has-error': form.user.$invalid && form.user.$dirty }">
                     <label> Username </label>
-                    <input type="text" name="user" class="form-control" ng-model="user.userName" required>
+                    <input type="text" name="user" class="form-control" ng-blur="visited = true" ng-model="user.userName" required>
 
-                    <p class="help-block" ng-show="form.user.$error.required && form.user.$dirty">
+                    <p class="help-block" ng-show="form.user.$error.required && form.user.$dirty && visited">
                         Please enter username
                     </p>
                 </div>
@@ -19,9 +19,9 @@
                 <div class="form-group" ng-class="{'has-success': form.password.$valid && form.password.$dirty,
                                             'has-error': form.password.$invalid && form.password.$dirty }">
                     <label>Password</label>
-                    <input type="password" name="password" class="form-control" ng-model="user.password">
+                    <input type="password" name="password" ng-blur="visitedPassword = true" class="form-control" ng-model="user.password">
 
-                    <p class="help-block" ng-show="form.password.$error.required && form.password.$dirty">
+                    <p class="help-block" ng-show="form.password.$error.required && form.password.$dirty && visitedPassword">
                         Please enter password
                     </p>
                 </div>

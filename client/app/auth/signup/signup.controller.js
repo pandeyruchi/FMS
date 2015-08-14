@@ -17,9 +17,12 @@ angular.module('peninsula').controller('signupCtrl', function ($scope, $http,$lo
                 $location.url("/main");
             }
         });
-        res.error(function (err) {
+        /*res.error(function (err) {
             console.log(err);
-            alert("From Error signup unsuccesful");
-        })
+            alert("Please provide all details!\nsignup unsuccesful");
+        })*/
+        res.error(function(data) {
+            alert( "failure message: " + data.message);
+        });
     }
 });

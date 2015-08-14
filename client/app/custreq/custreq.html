@@ -7,12 +7,12 @@
             <h3 style="color:#008855">Customer Request </h3>
 
             <form class="form" name="form" ng-submit="custreq()" novalidate>
-                <div class="form-group" ng-class="{ 'has-success': form.customerName.$valid && form.customerName.$dirty,
+                <div class="form-group" ng-class="{ 'has-success': submitted && form.customerName.$valid && form.customerName.$dirty,
                                             'has-error': form.customerName.$invalid && form.customerName.$dirty }">
                     <label> Customer name </label>
-                    <input type="text" name="customerName" class="form-control" ng-model="user.customerName" required>
+                    <input type="text" ng-blur="visitedName = true" name="customerName" class="form-control" ng-model="user.customerName" required>
 
-                    <p class="help-block" ng-show="form.customerName.$error.required && form.customerName.$dirty">
+                    <p class="help-block" ng-show="form.customerName.$error.required && form.customerName.$dirty && visitedName">
                         Please enter customer name
                     </p>
                 </div>
@@ -21,10 +21,10 @@
                                             'has-error': form.address.$invalid && form.address.$dirty }">
                     <label> Address</label>
                     <textarea rows="4" ng-change="computeCoordinates()" class="form-control" name="address"
-                              ng-model="user.address" required></textarea>
+                              ng-blur="visitedAddress = true" ng-model="user.address" required></textarea>
 
 
-                    <p class="help-block" ng-show="form.address.$error.required && form.address.$dirty">
+                    <p class="help-block" ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
                         Please enter address
                     </p>
                 </div>
@@ -32,33 +32,34 @@
                 <div class="form-group" ng-class="{ 'has-success': form.locality.$valid && form.locality.$dirty,
                                             'has-error': form.locality.$invalid && form.locality.$dirty }">
                     <label> Locality </label>
-                    <input type="text" name="locality" class="form-control" ng-model="user.locality" required>
+                    <input type="text" name="locality" ng-blur="visitedLocality = true" class="form-control" ng-model="user.locality" required>
 
-                    <p class="help-block" ng-show="form.locality.$error.required && form.locality.$dirty">
+                    <p class="help-block" ng-show="form.locality.$error.required && form.locality.$dirty && visitedLocality">
                         Please enter locality
                     </p>
                 </div>
 
                 <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
                                             'has-error': form.contact.$invalid && form.contact.$dirty }">
-                    <label>Contact number</label>
+                    <label>Phone</label>
 
                     <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
-                           ng-pattern="/^[+]?[0-9]{10,13}$/">
+                           ng-blur="visitedContact = true" ng-pattern="/^[+]?[0-9]{10}$/">
 
-                    <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty ">
+                    <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty && visitedContact">
                         Invalid contact number!
                     </p>
 
-                    <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty">
+                    <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
                         Contact number required!
                     </p>
+
                 </div>
 
                 <div class="form-group" ng-class="{ 'has-success': form.desc.$valid && form.desc.$dirty,
                                             'has-error': form.desc.$invalid && form.desc.$dirty }">
                     <label> Description </label>
-                    <textarea rows="4" class="form-control" name="desc" ng-model="user.description" required></textarea>
+                    <textarea rows="4" class="form-control" name="desc"  ng-model="user.description" required></textarea>
 
 
                     <p class="help-block" ng-show="form.desc.$error.required && form.desc.$dirty">
