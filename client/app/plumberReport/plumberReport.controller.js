@@ -22,10 +22,13 @@ angular.module('peninsula').controller('plumberReportCtrl', function ($scope,$ht
         for(var i = 0;i < $scope.plumbers.length;i++){
             if($scope.plumbers[i] == query){
                 plumberData.plumberId = i;
-                alert(plumberData);
+                alert("Plumber Id: "+plumberData.plumberId);
                 sendPlumberId(plumberData);
                 break;
             }
+        }
+        if(i == $scope.plumbers.length){
+            alert("Error : Please search again");
         }
     };
 
@@ -41,11 +44,8 @@ angular.module('peninsula').controller('plumberReportCtrl', function ($scope,$ht
                 alert(data.Message);
             }
             else {
-
+               /* alert("There is a problem!\nPlease search again!");*/
             }
         });
     }
-
-    $scope.name = "Name"
-
 });

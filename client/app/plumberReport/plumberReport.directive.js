@@ -14,8 +14,6 @@ angular.module('peninsula').directive('chartDirective', function () {
                 ['August',  3],
                 ['December', 0]];
 
-            //var report1 =[{"month":"March","work":2},{"month":"January","work":0},{"month":"July","work":6}];
-
             var newSample={};
             for(var i =0; i<$scope.report.length ; i++)
             {
@@ -42,25 +40,19 @@ angular.module('peninsula').directive('chartDirective', function () {
 
             // Set chart options
             var options = {'title':'Plumber Yearly Time Report ',
-                'width':400,
-                'height':300};
+                'width':1450,
+                'height':700,
+                'min':0,
+                'max':10,
+                backgroundColor: {
+                    stroke: 'blue',
+                    strokeWidth: 3
+                }
+            };
 
             // redraw the chart.
             var chart = new google.visualization.ColumnChart($elm[0]);
             chart.draw(data, options);
         }
     }
-});
-
-angular.module('peninsula').directive('autoComplete', function () {
-    return function(scope, iElement, iAttrs) {
-        iElement.autocomplete({
-            source: scope[iAttrs.uiItems],
-            select: function() {
-                $timeout(function() {
-                    iElement.trigger('input');
-                }, 0);
-            }
-        });
-    };
 });
