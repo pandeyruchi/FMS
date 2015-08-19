@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="app/auth/login/login.css">
     <link rel="stylesheet" href="app/jobDetails/showMap.css">
     <link rel="stylesheet" href="app/jobDetails/jobDetails.css">
+    <link rel="stylesheet" href="app/plumberReport/plumberReport.css">
     <link rel="stylesheet" href="app/main/main.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
 </head>
 <body ng-app="peninsula">
 <div ui-view="">
@@ -17,6 +19,7 @@
 <div>
 
 </div>
+
 
 </body>
 <script src="bower_components/angularjs/angular.js"></script>
@@ -42,4 +45,11 @@
 <script src="app/jobDetails/finalJobDescription.controller.js"></script>
 <script src="app/addPlumber/addPlumber.config.js"></script>
 <script src="app/addPlumber/addPlumber.controller.js"></script>
+<script src="app/plumberReport/plumberReport.config.js"></script>
+<script src="app/plumberReport/plumberReport.controller.js"></script>
+<script src="app/plumberReport/plumberReport.directive.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi?ext.js"></script>
+<script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart']});
+</script>
 </html>
