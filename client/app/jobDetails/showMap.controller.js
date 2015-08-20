@@ -150,11 +150,13 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                         alert(data.Message);
                     }
                     else {
-                        alert("Data submitted successfully!")
-                        $state.go("finalJobDescription", {
-                            customerReqId: customerService.customerReqId,
-                            plumberId: customerService.plumberId
-                        });
+                        alert("Customer Id : "+customerService.customerReqId+"\nAssigned plumber : "+customerService.plumberId);
+                         $state.go("finalJobDescription", {
+                         customerReqId: customerService.customerReqId,
+                         plumberId: customerService.plumberId
+                         });
+
+
                     }
                 });
                 res.error(function (err) {
