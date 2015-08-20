@@ -1,9 +1,9 @@
 /**
- * Created by anjali on 29/7/15.
+ * Created by synerzip on 29/7/15.
  */
 angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile, $state, $interval) {
     var plumberName = "";
-    var jobList = {};
+    var jobList = [];
     $scope.iname = [];
     $scope.oname = [];
     var customerId = $stateParams.customerId;
@@ -92,7 +92,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
             var data = result.data;
             data.forEach(function (info) {
                 if (info.customerReqId === customerId) {
-                    jobList[info.plumberId] = info;
+                    jobList.push(info);
                     console.log("inside function");
                 }
             });
@@ -111,8 +111,10 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
 
         var distance = compute(newCenter.lat, newCenter.long, plumber.latitude, plumber.longitude, 'K');
-        if (!!jobList[plumber.plumberId.toString()]) {
-            plumber.isAssigned = true;
+        for (var i = 0; i < jobList.length; i++) {
+            if (jobList[i].plumberId === plumber.plumberId.toString()) {
+                plumber.isAssigned = true;
+            }
         }
         if (distance < 1) {
             marker.icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
@@ -130,7 +132,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
             infoWindow.open($scope.map, marker);
         });
 
-    }
+    };
 
     /// This function assigns job to plumber
     $scope.assignJob = function () {
@@ -148,7 +150,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                         alert(data.Message);
                     }
                     else {
-                       // alert("Data submitted successfully!")
+                        alert("Data submitted successfully!")
                         $state.go("finalJobDescription", {
                             customerReqId: customerService.customerReqId,
                             plumberId: customerService.plumberId
@@ -160,27 +162,6 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                     alert("Error");
                 });
 
-            }
-            else
-            {
-                res = $http.post(host + '/api/deleteJob', customerService);
-                res.success(function (data) {
-                    console.log(data);
-                    if (!!data.error) {
-                        alert(data.Message);
-                    }
-                    else {
-                        //alert("Data submitted successfully!")
-                        $state.go("finalJobDescription", {
-                            customerReqId: customerService.customerReqId,
-                            plumberId: customerService.plumberId
-                        });
-                    }
-                });
-                res.error(function (err) {
-                    console.log(err);
-                    alert("Error");
-                });
             }
         });
 
@@ -204,7 +185,8 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         });
     }
 
-
+    ///This method creates map with default lat and lng.
+    createNewMap(18.518920, 73.860736);
     ///This method checks for the existing plumber, calculates centre based on address and populate IN-OUT tables
     refresh();
     ///This sets refresh interval in milliseconds

@@ -3,7 +3,7 @@
  */
 
 // Directive to display google chart
-angular.module('peninsula').directive('chartDirective', function () {
+angular.module('peninsula').directive('pieDirective', function () {
     return {
         restrict: 'A',
         link: function($scope, $elm, $attr) {
@@ -18,7 +18,7 @@ angular.module('peninsula').directive('chartDirective', function () {
             for(var i =0; i<$scope.report.length ; i++)
             {
                 var obj =$scope.report[i];
-                newSample[obj.month] = obj.count;
+                newSample[obj.customerName] = obj.rating;
             }
             var result = [];
 
@@ -31,7 +31,7 @@ angular.module('peninsula').directive('chartDirective', function () {
             data.addColumn('string', newData[0][0]);
 
             // all other columns are of type 'number'.
-            for ( i = 1; i < numCols; i++)
+            for (var i = 1; i < numCols; i++)
                 data.addColumn('number', newData[0][i]);
 
             // now add the rows.
@@ -39,7 +39,7 @@ angular.module('peninsula').directive('chartDirective', function () {
                 data.addRow(result[i]);
 
             // Set chart options
-            var options = {'title':'Plumber Yearly Time Report ',
+            var options = {'title':'Plumber Feedback',
                 'width':1450,
                 'height':700,
                 'min':0,
