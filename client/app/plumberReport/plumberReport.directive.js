@@ -51,7 +51,7 @@ angular.module('peninsula').directive('chartDirective', function () {
             };
 
             // redraw the chart.
-            var chart = new google.visualization.PieChart($elm[0]);
+            var chart = new google.visualization.ColumnChart($elm[0]);
             chart.draw(data, options);
         }
     }

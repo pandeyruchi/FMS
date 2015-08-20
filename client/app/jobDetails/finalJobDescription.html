@@ -21,8 +21,8 @@
                             </td>
                         </tr>
                         <tr class="text-center" ng-model="list" ng-repeat="(cust,jobs) in assignedPlumberMap">
-                            <td>{{cust}}</td>
-                            <td>{{custReqNameMap[cust]}}</td>
+                            <td><a href="#" ng-click="open()"> {{cust}}</a> </td>
+                            <td>{{custReqNameMap[cust].firstName}}</td>
                             <td>
                                 <span ng-repeat="job in jobs">
                                     {{job.firstName }} <br>
@@ -33,6 +33,34 @@
                         </tr>
 
                     </table>
+                    <div ng-show="isOpen">
+                        <script type="text/ng-template" id="myModalContent.html">
+
+                            <br>
+                                <h3 class="text-center" style="color: green">Customer-Plumber Details:</h3>
+
+                            <div class="modal-body">
+                                <form name="form" novalidate>
+                                    <ul ng-model="list" ng-repeat="(cust,jobs) in assignedPlumberMap">
+                                        <li><b>Customer Id :</b> {{cust}} </li>
+                                        <li><b>Customer Name :</b> {{custReqNameMap[cust].customerName}}</li>
+                                        <li><b>Customer Address :</b> {{custReqNameMap[cust].address}}</li>
+                                        <li><b>Customer Phone Number :</b> {{custReqNameMap[cust].mobileNo}}</li>
+                                        <li><b>Assigned Plumbers :</b></li>
+                                        <ul ng-repeat="job in jobs">
+                                             <li>{{job.firstName }} <br>
+                                            <span ng-hide="$last">
+                                            </span>
+                                            </li>
+                                         </ul>
+                                        <li><b>Job Description :</b> {{custReqNameMap[cust].description}}</li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <button class="btn btn-primary center-block" type="button"  ng-click="ok()">OK</button>
+                            <br>
+                        </script>
+                    </div>
                 </div>
             </form>
         </div>
