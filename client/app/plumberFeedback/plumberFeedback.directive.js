@@ -7,7 +7,7 @@ angular.module('peninsula').directive('pieDirective', function () {
     return {
         restrict: 'A',
         link: function($scope, $elm, $attr) {
-            var newData = [['Month', 'work'],
+            var newData = [['Rating', 'Count'],
                 ['March',  1],
                 ['January',  7],
                 ['July',  6],
@@ -18,7 +18,7 @@ angular.module('peninsula').directive('pieDirective', function () {
             for(var i =0; i<$scope.report.length ; i++)
             {
                 var obj =$scope.report[i];
-                newSample[obj.customerName] = obj.rating;
+                newSample[obj.Rating] = obj.Count;
             }
             var result = [];
 
@@ -42,8 +42,8 @@ angular.module('peninsula').directive('pieDirective', function () {
             var options = {'title':'Plumber Feedback',
                 'width':1450,
                 'height':700,
-                'min':0,
-                'max':10,
+                'min':1,
+                'max':5,
                 backgroundColor: {
                     stroke: 'blue',
                     strokeWidth: 3

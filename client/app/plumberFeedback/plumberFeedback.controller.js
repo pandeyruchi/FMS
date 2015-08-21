@@ -36,7 +36,7 @@ angular.module('peninsula').controller('plumberFeedbackCtrl', function ($scope,$
     // function to post the plumberId of selected plumber and get data
    function sendPlumberId(plumberData) {
        console.log(plumberData);
-        var res = $http.post(host + '/api/plumberFeedback',plumberData);
+        var res = $http.post(host + '/api/plumberFeedbackReport',plumberData);
         res.success(function (data) {
             $scope.report  = data;
             console.log($scope.report);
