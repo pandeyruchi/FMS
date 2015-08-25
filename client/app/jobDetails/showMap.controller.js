@@ -150,7 +150,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                         alert(data.Message);
                     }
                     else {
-                        alert("Customer Id : "+customerService.customerReqId+"\nAssigned plumber : "+customerService.plumberId);
+                       // alert("Customer Id : "+customerService.customerReqId+"\nAssigned plumber : "+customerService.plumberId);
                          $state.go("finalJobDescription", {
                          customerReqId: customerService.customerReqId,
                          plumberId: customerService.plumberId
