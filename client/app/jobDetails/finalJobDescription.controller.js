@@ -4,7 +4,7 @@
 
 
 angular.module('peninsula').controller('finalJobDescriptionCtrl', function ($scope, $http, host, $stateParams,$modal) {
-    var customerReqId = $stateParams.customerReqId;
+    var jobReqId = $stateParams.jobReqId;
     var plumberId = $stateParams.plumberId;
     $scope.assignedPlumberMap = {};
     $scope.custReqNameMap ={};
@@ -19,14 +19,14 @@ angular.module('peninsula').controller('finalJobDescriptionCtrl', function ($sco
 
         // This function prints the customer & assigned plumbers
         data.forEach(function (info) {
-            if(customerReqId === info.customerReqId)
+            if(jobReqId === info.jobReqId)
             {
-                if (!!$scope.assignedPlumberMap[info.customerReqId]) {
-                    $scope.assignedPlumberMap[info.customerReqId].push(info);
+                if (!!$scope.assignedPlumberMap[info.jobReqId]) {
+                    $scope.assignedPlumberMap[info.jobReqId].push(info);
                 } else {
-                    $scope.assignedPlumberMap[info.customerReqId] = [info];
+                    $scope.assignedPlumberMap[info.jobReqId] = [info];
                 }
-                $scope.custReqNameMap[info.customerReqId] = info;
+                $scope.custReqNameMap[info.jobReqId] = info;
                 console.log("info : "+info.mobileNo);
             }
         });

@@ -3,7 +3,7 @@
  */
 angular.module('peninsula').config(function($stateProvider){
     $stateProvider.state('showMap',{
-        url:"/showMap/{customerId}/{address}",
+        url:"/showMap/{jobId}/{address}",
         templateUrl:"app/jobDetails/showMap.html",
         controller:"showMapCtrl"
 

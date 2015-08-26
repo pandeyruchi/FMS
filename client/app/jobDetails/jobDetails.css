@@ -1,6 +1,6 @@
 .scrollit {
     overflow:scroll;
-    height:450px;
+    height:400px;
     overflow-x: hidden;
 }
 

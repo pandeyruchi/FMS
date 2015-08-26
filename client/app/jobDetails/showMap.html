@@ -6,33 +6,58 @@
         </div>
         <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
             <div class="row">
-                <table class="table table-bordered table-responsive">
-                    <tr  class="text-center" style="background-color: #449d44">
-                        <td>
-                            Plumbers in Range
-                        </td>
-                    </tr>
-                    <tr ng-model="iname" ng-repeat="inam in iname" >
-                        <td><input type="checkbox" ng-model="inam.isAssigned"> {{inam.firstName}}</td>
-                    </tr>
-                </table>
-                <br><br><br><br><br>
-            </div>
-            <div class="row">
-                <table class="table table-bordered table-responsive">
-                    <tr  class="text-center" style="background-color: #d58512">
-                        <td>
-                            Plumbers Out of Range
-                        </td>
-                    </tr>
-                    <tr ng-model="oname" ng-repeat="onam in oname" >
-                        <td><input type="checkbox" ng-model="onam.isAssigned"> {{onam.firstName}}</td>
-                    </tr>
-                </table>
+                <div class="form-inline">
+                    <input CLASS="form-control" type="checkbox" id="inRange" ng-model="inRange">
+                    <h4 class="form-control" style="color: green">Plumbers In Range :</h4>
+                    <div>
+                        <table class="table table-bordered table-responsive">
 
+                            <tr ng-model="iname" ng-repeat="inam in iname">
+                                <td><input type="checkbox" ng-model="inam.isAssigned"> {{inam.firstName}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
+
+
+            <div class="row" ng-show="!inRange">
+                <div class="form-inline">
+                    <h4 class="form-control" style="color: red">Plumbers Out Of Range :</h4>
+                    <div>
+                        <table class="table table-bordered table-responsive">
+                            <tr ng-model="oname" ng-repeat="onam in oname">
+                                <td><input type="checkbox" ng-model="onam.isAssigned"> {{onam.firstName}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="background-color: #dcdcdc">
+                <form name="form">
+                    <h4 class="text-center">Customer Details</h4>
+                    <ul ng-repeat="(cust,jobs) in assignedPlumberMap">
+                        <li><b>Customer Id :</b> {{cust}}</li>
+                        <li><b>Customer Name :</b> {{custReqNameMap[cust].customerName}}</li>
+                        <li><b>Customer Address :</b> {{custReqNameMap[cust].address}}</li>
+                        <li><b>Customer Phone Number :</b> {{custReqNameMap[cust].mobileNo}}</li>
+                        <li><b>Assigned Plumbers :</b></li>
+                        <ul ng-repeat="job in jobs">
+                            <li>{{job.firstName }} <br>
+                                                <span ng-hide="$last">
+                                                </span>
+                            </li>
+                        </ul>
+                        <li><b>Job Description :</b> {{custReqNameMap[cust].description}}</li>
+                    </ul>
+                </form>
+            </div>
+
+
             <div class="row text-center">
-                <button class="btn btn-primary" type="submit" ng-click="assignJob()">Next
+                <button class="btn btn-primary" ng-click="assignJob()" type="submit">Update
                 </button>
             </div>
 

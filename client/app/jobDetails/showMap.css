@@ -2,7 +2,7 @@
     /*height:500px;*/
     /*width:500px;*/
     margin-bottom: 20px;
-    height: 550px;
+    height: 600px;
     width: 100%;
     box-shadow: 3px 3px 10px black;
 }
@@ -36,4 +36,18 @@
 
 #filters li a.selected {
     border-color: rgba(175, 47, 47, 0.2);
+}
+
+#inRange{
+    width: 20px; /*Desired width*/
+    height: 20px; /*Desired height*/
+    background-color: green;
+}
+
+h4{
+    color: green;
+}
+table {
+    height: 50px;
+    overflow-x: scroll;
 }

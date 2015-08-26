@@ -3,7 +3,7 @@
  */
 angular.module('peninsula').config(function($stateProvider){
     $stateProvider.state('finalJobDescription',{
-        url:"/finalJobDescription/{customerReqId}/{plumberId}",
+        url:"/finalJobDescription/{jobReqId}/{plumberId}",
         templateUrl:"app/jobDetails/finalJobDescription.html",
         controller:"finalJobDescriptionCtrl"
     })
