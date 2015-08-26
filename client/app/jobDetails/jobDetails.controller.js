@@ -13,20 +13,20 @@ angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http
     $http.get(host + '/api/assignUnassignJobList').then(function (result) {
         var data = result.data;
         data.forEach(function (info) {
-            if (!!$scope.assignedPlumberMap[info.customerId]) {
-                $scope.assignedPlumberMap[info.customerId].push(info);
+            if (!!$scope.assignedPlumberMap[info.jobId]) {
+                $scope.assignedPlumberMap[info.jobId].push(info);
             } else {
-                $scope.assignedPlumberMap[info.customerId] = [info];
+                $scope.assignedPlumberMap[info.jobId] = [info];
             }
-            $scope.custReqNameMap[info.customerId] = info.customerName;
-            $scope.custReqAddressMap[info.customerId] = info.address;
-            $scope.custReqDescriptionMap[info.customerId] = info.description;
+            $scope.custReqNameMap[info.jobId] = info.customerName;
+            $scope.custReqAddressMap[info.jobId] = info.address;
+            $scope.custReqDescriptionMap[info.jobId] = info.description;
         });
     });
 
     // This function sends selected customer id & address to the map page
-    $scope.showMap = function (customerId, address) {
-        $state.go("showMap", {customerId: customerId, address: address});
+    $scope.showMap = function (jobId, address) {
+        $state.go("showMap", {jobId: jobId, address: address});
     };
 
 

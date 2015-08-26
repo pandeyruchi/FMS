@@ -6,9 +6,12 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
     var jobList = [];
     $scope.iname = [];
     $scope.oname = [];
-    var customerId = $stateParams.customerId;
+    var jobReqId = $stateParams.jobId;
+    console.log("1. var jobReqId" + jobReqId);
+    console.log("1.$stateParams.jobId" + $stateParams.jobId);
     var infoWindow = new google.maps.InfoWindow();
     $scope.address = $stateParams.address;
+    $scope.inRange = true;
 
     var newCenter = {};
 
@@ -16,7 +19,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
     ///This function creates map
     function createNewMap(lat, long) {
         var mapOptions = {
-            zoom: 15,
+            zoom: 12,
             center: new google.maps.LatLng(lat, long),
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
@@ -25,7 +28,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         var circle = new google.maps.Circle({
             map: $scope.map,
             center: new google.maps.LatLng(lat, long),
-            radius: 500,
+            radius: 7000,
             strokeColor: "#000000",
             fillColor: "orange"
         });
@@ -36,7 +39,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
             position: new google.maps.LatLng(lat, long, $scope.address),
             title: $scope.address,
             icon: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
-            zoom: 18
+            zoom: 10
         });
 
 
@@ -91,7 +94,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
         $http.get(host + '/api/assignJobList').then(function (result) {
             var data = result.data;
             data.forEach(function (info) {
-                if (info.customerReqId === customerId) {
+                if (info.jobReqId === jobReqId) {
                     jobList.push(info);
                     console.log("inside function");
                 }
@@ -107,7 +110,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
             position: new google.maps.LatLng(plumber.latitude, plumber.longitude, plumber.plumberId),
             icon: 'http://maps.google.com/mapfiles/ms/icons/grey.png',
             title: plumber.firstName + " " + plumber.lastName,
-            zoom: 18
+            zoom: 10
         });
 
         var distance = compute(newCenter.lat, newCenter.long, plumber.latitude, plumber.longitude, 'K');
@@ -116,7 +119,7 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                 plumber.isAssigned = true;
             }
         }
-        if (distance < 1) {
+        if (distance < 7) {
             marker.icon = 'http://maps.google.com/mapfiles/ms/icons/green.png';
             $scope.iname.push(plumber);
         }
@@ -135,28 +138,25 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
     };
 
     /// This function assigns job to plumber
-    $scope.assignJob = function () {
+    var customerService = {};
+
+    function assignJob() {
+
         var plumbers = $scope.iname.concat($scope.oname);
 
         plumbers.forEach(function (plumber) {
             var customerService = {};
-            customerService.customerReqId = customerId;
+            customerService.jobId = jobReqId;
             customerService.plumberId = plumber.plumberId;
             if (!!plumber.isAssigned) {
-                var res = $http.post(host + '/api/customerRequestUpdation', customerService);
+                var res = $http.post(host + '/api/jobRequestUpdation', customerService);
                 res.success(function (data) {
                     console.log(data);
                     if (!!data.error) {
                         alert(data.Message);
                     }
                     else {
-                        alert("Customer Id : "+customerService.customerReqId+"\nAssigned plumber : "+customerService.plumberId);
-                         $state.go("finalJobDescription", {
-                         customerReqId: customerService.customerReqId,
-                         plumberId: customerService.plumberId
-                         });
-
-
+                        alert("Data submitted successfully!")
                     }
                 });
                 res.error(function (err) {
@@ -165,18 +165,41 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
                 });
 
             }
+            else {
+                var x={};
+                x.jobReqId = jobReqId;
+                x.plumberId =plumber.plumberId;
+                var res = $http.post(host + '/api/deleteJob', x);
+                res.success(function (data) {
+                    console.log(data);
+                    if (!!data.error) {
+                        alert(data.Message);
+                    }
+                    else {
+                        alert("Data submitted successfully!")
+                    }
+                });
+                res.error(function (err) {
+                    console.log(err);
+                    alert("Error");
+                });
+            }
         });
-
+        getCustomerDetails();
     };
+
+    $scope.assignJob = assignJob;
 
     $scope.openInfoWindow = function (e, selectedMarker) {
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
     };
 
+    // This method checks for the existing plumber, calculates centre based on address and populate IN-OUT tables
     function refresh() {
         checkExistingPlumbers();
         getCentre();
+
         $scope.iname = [];
         $scope.oname = [];
         $http.get(host + '/api/getLocation').then(function (result) {
@@ -189,8 +212,36 @@ angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $
 
     ///This method creates map with default lat and lng.
     createNewMap(18.518920, 73.860736);
-    ///This method checks for the existing plumber, calculates centre based on address and populate IN-OUT tables
     refresh();
-    ///This sets refresh interval in milliseconds
-    $interval(refresh, 50000);
+    getCustomerDetails();
+
+
+    //This sets refresh interval in milliseconds(5 minutes)
+    $interval(refresh, 300000);
+
+    function getCustomerDetails() {
+        $scope.assignedPlumberMap = {};
+        $scope.custReqNameMap = {};
+
+
+        // This function is used to get the customer-plumber job assignments
+
+        $http.get(host + '/api/assignJobList').then(function (result) {
+            var data = result.data;
+
+            // This function prints the customer & assigned plumbers
+            data.forEach(function (info) {
+                if (jobReqId === info.jobReqId) {
+                    if (!!$scope.assignedPlumberMap[info.jobReqId]) {
+                        $scope.assignedPlumberMap[info.jobReqId].push(info);
+                    } else {
+                        $scope.assignedPlumberMap[info.jobReqId] = [info];
+                    }
+                    $scope.custReqNameMap[info.jobReqId] = info;
+                    console.log("info : " + info.mobileNo);
+                }
+            });
+        });
+    }
+
 });
