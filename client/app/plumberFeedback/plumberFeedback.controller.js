@@ -22,7 +22,7 @@ angular.module('peninsula').controller('plumberFeedbackCtrl', function ($scope,$
         for(var i = 0;i < $scope.plumbers.length;i++){
             if($scope.plumbers[i] == query){
                 plumberData.plumberId = i;
-                alert("Plumber Id: "+plumberData.plumberId);
+                //alert("Plumber Id: "+plumberData.plumberId);
                 sendPlumberId(plumberData);
                 $scope.name = plumberData.firstName;
                 break;
@@ -48,5 +48,17 @@ angular.module('peninsula').controller('plumberFeedbackCtrl', function ($scope,$
             }
         });
     }
-    //$interval($scope.send, 50000);
+
+    $scope.xFunction = function(){
+        return function(d) {
+            return d.Label;
+        };
+    }
+
+    $scope.yFunction = function(){
+        return function(d){
+            return d.Count;
+        };
+    }
+
 });

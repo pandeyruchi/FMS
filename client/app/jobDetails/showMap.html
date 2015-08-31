@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
-<div class="container-fluid">
+<div  class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
             <div id="map"></div>
@@ -8,7 +8,8 @@
             <div class="row">
                 <div class="form-inline">
                     <input CLASS="form-control" type="checkbox" id="inRange" ng-model="inRange">
-                    <h4 class="form-control" style="color: green">Plumbers In Range :</h4>
+                    <b style="color: #005580">Click me to show Plumbers Out Of Range</b>
+                    <br><h4 class="form-control" style="color: green">Plumbers In Range :</h4>
                     <div>
                         <table class="table table-bordered table-responsive">
 
@@ -30,10 +31,14 @@
                                 <td><input type="checkbox" ng-model="onam.isAssigned"> {{onam.firstName}}</td>
                             </tr>
                         </table>
-
                     </div>
                 </div>
             </div>
+
+            <div class="row text-center">
+                <button class="btn btn-primary" ng-click="assignJob();getCustomerDetails();"  type="submit">Update
+                </button>
+            </div><br>
 
             <div class="row" style="background-color: #dcdcdc">
                 <form name="form">
@@ -55,12 +60,10 @@
                 </form>
             </div>
 
-
-            <div class="row text-center">
-                <button class="btn btn-primary" ng-click="assignJob()" type="submit">Update
+            <br><div class="row text-center">
+                <button class="btn btn-primary" type="submit" ng-click="redirect_main()">OK
                 </button>
             </div>
-
 
         </div>
     </div>

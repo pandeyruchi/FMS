@@ -6,14 +6,14 @@
             </div>
         <div class="col-md-4 col-lg-4 col-lg-offset-4">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" ng-model="query">
+                <input type="text" class="form-control" auto-complete ui-items="allTags" placeholder="Search" name="srch-term" id="srch-term" ng-model="query">
                 <div class="input-group-btn">
                     <button class="btn btn-default" ng-click="send(query)" type="submit"><i class="fa fa-search"></i></button>
                 </div>
                 </div>
             </div>
     </div>
-    <div class="row">
+    <!--<div class="row">
         <div class="col-md-7 col-lg-7 col-xs-12 col-sm-12">
         </div>
         <div class="col-md-5 col-lg-5 col-lg-offset-4">
@@ -22,13 +22,16 @@
                     <p ng-repeat="plumber in plumbers | filter:query track by $index">{{  plumber}}</p>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="row">
-        <div class="col-md-7 col-lg-7 col-xs-12 col-sm-12">
+        <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
+        </div><br><br><br>
+        <div class="col-md-4 col-lg-4 col-lg-offset-4">
+            <div style="border:solid" ng-if="report.length > 0">
+            <nvd3 options="options" data="report"></nvd3>
+            </div>
         </div>
-        <div class="col-md-5 col-lg-5 col-lg-offset-1">
-            <div ng-if="report.length > 0" chart-directive></div>
-        </div>
+    </div>
         </div>
     </div>
 </div>
