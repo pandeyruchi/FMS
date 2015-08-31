@@ -3,11 +3,11 @@
  */
 
 var app = angular.module('peninsula', [
-    'ui.router','ui.bootstrap'
+    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3'
 ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
         .otherwise('/login');
 
     $locationProvider.html5Mode(true);
 });
-app.constant('host',"http://54.191.207.203:3600");
+app.constant('host',"http://52.88.35.207:3600");

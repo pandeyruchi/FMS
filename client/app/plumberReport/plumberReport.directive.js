@@ -2,12 +2,26 @@
  * Created by anjali tanpure on 14/8/15.
  */
 
+
+
+angular.module('peninsula').directive('autoComplete', function($timeout) {
+    return function(scope, iElement, iAttrs) {
+        iElement.autocomplete({
+            source: scope[iAttrs.uiItems],
+            select: function() {
+                $timeout(function() {
+                    iElement.trigger('input');
+                }, 0);
+            }
+        });
+    };
+});
 // Directive to display google chart
 angular.module('peninsula').directive('chartDirective', function () {
     return {
         restrict: 'A',
         link: function($scope, $elm, $attr) {
-            var newData = [['Month', 'work'],
+            var newData = [['Rating', 'Count'],
                 ['March',  1],
                 ['January',  7],
                 ['July',  6],
@@ -18,7 +32,7 @@ angular.module('peninsula').directive('chartDirective', function () {
             for(var i =0; i<$scope.report.length ; i++)
             {
                 var obj =$scope.report[i];
-                newSample[obj.month] = obj.count;
+                newSample[obj.Rating] = obj.Count;
             }
             var result = [];
 
@@ -31,7 +45,7 @@ angular.module('peninsula').directive('chartDirective', function () {
             data.addColumn('string', newData[0][0]);
 
             // all other columns are of type 'number'.
-            for ( i = 1; i < numCols; i++)
+            for (var i = 1; i < numCols; i++)
                 data.addColumn('number', newData[0][i]);
 
             // now add the rows.
@@ -39,11 +53,11 @@ angular.module('peninsula').directive('chartDirective', function () {
                 data.addRow(result[i]);
 
             // Set chart options
-            var options = {'title':'Plumber Yearly Time Report ',
+            var options = {'title':'Plumber Feedback',
                 'width':1450,
                 'height':700,
-                'min':0,
-                'max':10,
+                'min':1,
+                'max':5,
                 backgroundColor: {
                     stroke: 'blue',
                     strokeWidth: 3
@@ -51,7 +65,7 @@ angular.module('peninsula').directive('chartDirective', function () {
             };
 
             // redraw the chart.
-            var chart = new google.visualization.ColumnChart($elm[0]);
+            var chart = new google.visualization.PieChart($elm[0]);
             chart.draw(data, options);
         }
     }
