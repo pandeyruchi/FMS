@@ -51,13 +51,13 @@ angular.module('peninsula').controller('plumberFeedbackCtrl', function ($scope,$
 
     $scope.xFunction = function(){
         return function(d) {
-            return d.Label;
+            return d.label;
         };
     }
 
     $scope.yFunction = function(){
         return function(d){
-            return d.Count;
+            return d.count;
         };
     }
 

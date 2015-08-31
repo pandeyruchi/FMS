@@ -61,7 +61,7 @@ angular.module('peninsula').controller('plumberReportCtrl', function ($scope,$ht
         chart: {
             type: 'discreteBarChart',
             height: 450,
-            x: function(d){return d.Month;},
+            x: function(d){return d.month;},
             y: function(d){return d.count;},
             showValues: true,
             valueFormat: function(d){
