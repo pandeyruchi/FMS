@@ -7,8 +7,8 @@
     /// This method posts login request data to server
     $scope.login = function (user) {
       $scope.progressbar = ngProgressFactory.createInstance();
-      $scope.progressbar.setHeight('5px');
-      $scope.progressbar.setColor('#00f2ff');
+      $scope.progressbar.setHeight('4px');
+      $scope.progressbar.setColor('#0274ff');
       $scope.progressbar.start();
         var pwd = btoa(user.password);
         user.password = pwd;
