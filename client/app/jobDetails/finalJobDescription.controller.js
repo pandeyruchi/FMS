@@ -3,7 +3,7 @@
  */
 
 
-angular.module('peninsula').controller('finalJobDescriptionCtrl', function ($scope, $http, host, $stateParams,$modal) {
+angular.module('pune').controller('finalJobDescriptionCtrl', function ($scope, $http, host, $stateParams,$modal) {
     var jobReqId = $stateParams.jobReqId;
     var plumberId = $stateParams.plumberId;
     $scope.assignedPlumberMap = {};
@@ -60,7 +60,7 @@ angular.module('peninsula').controller('finalJobDescriptionCtrl', function ($sco
 });
 
 // This is the helper controller used for modal instance
-angular.module('peninsula').controller('ModalInstanceCtrl', function ($scope, $modalInstance, assignedPlumberMap,custReqNameMap) {
+angular.module('pune').controller('ModalInstanceCtrl', function ($scope, $modalInstance, assignedPlumberMap,custReqNameMap) {
 
     $scope.assignedPlumberMap = assignedPlumberMap;
     $scope.custReqNameMap = custReqNameMap;

@@ -1,5 +1,5 @@
 
-angular.module('peninsula').controller('addPlumberCtrl', function ($scope, $http,$location,host) {
+angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$location,host) {
 
     $scope.user = {
         

@@ -2,8 +2,8 @@
  * Created by ruchyp on 7/22/2015.
  */
 
-var app = angular.module('peninsula', [
-    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3'
+var app = angular.module('pune', [
+    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3','ngProgress'
 ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
         .otherwise('/login');

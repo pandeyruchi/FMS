@@ -4,10 +4,10 @@
   "authors": [
     "Ruchi Pandey <ruchi.pandey@synerzip.com>"
   ],
-  "description": "This is a web client for Peninsula Plumber app",
+  "description": "This is a web client for Pune Plumber app",
   "main": "app.js",
   "keywords": [
-    "Peninsula"
+    "Pune"
   ],
   "ignore": [
     "**/.*",
@@ -21,6 +21,7 @@
     "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.3.5",
     "d3": "~3.5.3",
-    "angularjs-nvd3-directives": "0.0.7"
+    "ngprogress": "~1.1.2",
+    "angularjs-nvd3-directives":"0.0.7"
   }
 }

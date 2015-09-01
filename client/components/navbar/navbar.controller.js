@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('peninsula')
+angular.module('pune')
   .controller('NavbarCtrl', function ($scope, $location) {
     $scope.menu = [{
       'title': 'Home',

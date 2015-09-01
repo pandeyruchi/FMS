@@ -3,7 +3,7 @@
  */
 
 // Directive to display google chart
-angular.module('peninsula').directive('pieDirective', function () {
+angular.module('pune').directive('pieDirective', function () {
     return {
         restrict: 'A',
         link: function($scope, $elm, $attr) {

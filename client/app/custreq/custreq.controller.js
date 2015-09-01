@@ -2,7 +2,7 @@
  * Created by ruchyp on 7/22/2015.
  */
 
-angular.module('peninsula').controller('custreqCtrl', function ($scope, $http, $location, host) {
+angular.module('pune').controller('custreqCtrl', function ($scope, $http, $location, host) {
 
     //var user = {};
 

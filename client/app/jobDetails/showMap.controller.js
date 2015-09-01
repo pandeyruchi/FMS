@@ -1,7 +1,7 @@
 /**
  * Created by synerzip on 29/7/15.
  */
-angular.module('peninsula').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile, $state, $interval,$timeout) {
+angular.module('pune').controller('showMapCtrl', function ($scope, $http, $location, host, $stateParams, $compile, $state, $interval,$timeout) {
     // Variable Declarations
     var plumberName = "";
     var jobList = [];

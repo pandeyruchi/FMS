@@ -1,5 +1,5 @@
 
-angular.module('peninsula').controller('plumberReportCtrl', function ($scope,$http,host,$location) {
+angular.module('pune').controller('plumberReportCtrl', function ($scope,$http,host,$location) {
 
     // Variable declarations
     $scope.plumbers = [];

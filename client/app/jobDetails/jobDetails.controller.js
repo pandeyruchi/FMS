@@ -2,7 +2,7 @@
  * Created by ruchyp on 7/22/2015.
  */
 
-angular.module('peninsula').controller('jobDetailsCtrl', function ($scope, $http, $location, host, $state) {
+angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $location, host, $state) {
     $scope.customers = [];
     $scope.assignedPlumberMap = {};
     $scope.custReqNameMap = {};

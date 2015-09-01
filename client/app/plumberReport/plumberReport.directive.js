@@ -6,7 +6,7 @@
 
 
 // Directive to display google chart
-angular.module('peninsula').directive('chartDirective', function () {
+angular.module('pune').directive('chartDirective', function () {
     return {
         restrict: 'A',
         link: function($scope, $elm, $attr) {

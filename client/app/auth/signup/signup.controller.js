@@ -1,4 +1,4 @@
-angular.module('peninsula').controller('signupCtrl', function ($scope, $http,$location,host) {
+angular.module('pune').controller('signupCtrl', function ($scope, $http,$location,host) {
 
     $scope.user = {
         
