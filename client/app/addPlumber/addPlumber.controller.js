@@ -1,9 +1,14 @@
 
-angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$location,host) {
+angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$location,host, ngProgressFactory) {
 
     $scope.user = {
         
     };
+
+    $scope.progressbar = ngProgressFactory.createInstance();
+    $scope.progressbar.setHeight('4px');
+    $scope.progressbar.setColor('#0274ff');
+
 
     function computeCoordinates() {
         var geocoder = new google.maps.Geocoder();
@@ -19,19 +24,23 @@ angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$loc
     $scope.computeCoordinates = computeCoordinates;
 
     $scope.addPlumber = function () {
+      $scope.progressbar.start();
        var pwd = btoa($scope.user.password);
        $scope.user.password = pwd;
 	 var res = $http.post(host+'/api/addPlumber', $scope.user);
         res.success(function (data) {
             console.log(data);
             if (!!data.error) {
+              $scope.progressbar.complete();
                 alert(data.Message);
             }
             else {
+              $scope.progressbar.complete();
                 $location.url("/main");
             }
         });
         res.error(function (err) {
+          $scope.progressbar.complete();
             console.log(err);
             alert("From Error add plumber unsuccesful");
         })

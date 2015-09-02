@@ -3,18 +3,22 @@
  */
 
 
-angular.module('pune').controller('finalJobDescriptionCtrl', function ($scope, $http, host, $stateParams,$modal) {
+angular.module('pune').controller('finalJobDescriptionCtrl', function ($scope, $http, host, $stateParams,$modal, ngProgressFactory) {
     var jobReqId = $stateParams.jobReqId;
     var plumberId = $stateParams.plumberId;
     $scope.assignedPlumberMap = {};
     $scope.custReqNameMap ={};
     $scope.isOpen =  false;
 
+    $scope.progressbar = ngProgressFactory.createInstance();
+    $scope.progressbar.setHeight('4px');
+    $scope.progressbar.setColor('#0274ff');
     var list = [];
 
     // This function is used to get the customer-plumber job assignments
     function mapping(){
     $http.get(host + '/api/assignJobList').then(function (result) {
+      $scope.progressbar.start();
         var data = result.data;
 
         // This function prints the customer & assigned plumbers
@@ -28,8 +32,10 @@ angular.module('pune').controller('finalJobDescriptionCtrl', function ($scope, $
                 }
                 $scope.custReqNameMap[info.jobReqId] = info;
                 console.log("info : "+info.mobileNo);
+                $scope.progressbar.complete();
             }
         });
+        $scope.progressbar.complete();
     });
     }
 

@@ -1,31 +1,31 @@
 <header>
-    <nav class="navbar navbar-inverse navbar-static-top" ng-controller="NavbarCtrl">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle"  data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span  class="icon-bar"></span>
-                    <span  class="icon-bar"></span>
-                </button>
-                <a ui-sref="main" class="navbar-brand">PUNE PLUMBERS</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a  href="/signup">Add Admin</a></li>
-                    <li><a  href="/custreq">Customer Request</a></li>
-                    <li><a  href="/jobDetails">Job Details</a></li>
-                    <li><a  href="/addPlumber" >Add Plumber</a></li>
-                    <li dropdown>
-                        <a href="#" dropdown-toggle>Reports<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a  href="/plumberReport"><u>Plumber Report</u></a></li>
-                            <li><a  href="/plumberFeedback"><u>Feedback Report</u></a></li>
-                        </ul>
-                    </li>
-                    <li><a  href="" ui-sref="login">Logout</a></li>
-                </ul>
+  <nav class="navbar navbar-inverse navbar-static-top" ng-controller="NavbarCtrl">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle"  data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span  class="icon-bar"></span>
+          <span  class="icon-bar"></span>
+        </button>
+        <a ui-sref="main" class="navbar-brand" style="font-size: 25px; color: white">Pune Plumbers</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a  href="/signup">Add Admin</a></li>
+          <li><a  href="/custreq">Customer Request</a></li>
+          <li><a  href="/jobDetails">Job Details</a></li>
+          <li><a  href="/addPlumber" >Add Plumber</a></li>
+          <li dropdown>
+            <a href="#" dropdown-toggle>Reports<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a  href="/plumberReport"><u>Plumber Report</u></a></li>
+              <li><a  href="/plumberFeedback"><u>Feedback Report</u></a></li>
+            </ul>
+          </li>
+          <li><a  href="" ui-sref="login">Logout</a></li>
+        </ul>
 
-            </div>
-        </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
 </header>
