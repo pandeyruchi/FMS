@@ -11,11 +11,13 @@ angular.module('pune').controller('plumberReportCtrl', function ($scope,$http,ho
     $scope.plumberNames=[];
     $scope.reportDuration = [];
 
-    // Adding values to plumber reports
+    // Adding values in array for plumber reports duration
     $scope.reportDuration.push("plumberWeeklyTimeReport","plumberMonthlyTimeReport","plumberThreeMonthlyTimeReport","plumberSixMonthlyTimeReport","plumberYearlyTimeReport");
-  $scope.progressbar = ngProgressFactory.createInstance();
-  $scope.progressbar.setHeight('4px');
-  $scope.progressbar.setColor('#0274ff');
+
+    $scope.progressbar = ngProgressFactory.createInstance();
+    $scope.progressbar.setHeight('4px');
+    $scope.progressbar.setColor('#0274ff');
+
     // API called to get the data
     $http.get(host + '/api/getLocation').then(function (result) {
         var data = result.data;
@@ -41,20 +43,20 @@ angular.module('pune').controller('plumberReportCtrl', function ($scope,$http,ho
         }
     };
 
-    // function to post the plumberId of selected plumber
+    // function to post the plumberId of selected plumber according to report
    function sendPlumberId(plumberData,item) {
-$scope.progressbar.start();
+        $scope.progressbar.start();
        if(item =="plumberThreeMonthlyTimeReport"){
            var res = $http.post(host + '/api/plumberThreeMonthlyTimeReport',plumberData);
            res.success(function (data) {
                $scope.report  = [{values:data}];
                console.log($scope.report);
                if (!!data.error) {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    alert(data.Message);
                }
                else {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    /* alert("There is a problem!\nPlease search again!");*/
                }
            });
@@ -65,11 +67,11 @@ $scope.progressbar.complete();
                $scope.report  = [{values:data}];
                console.log($scope.report);
                if (!!data.error) {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    alert(data.Message);
                }
                else {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    /* alert("There is a problem!\nPlease search again!");*/
                }
            });
@@ -80,11 +82,11 @@ $scope.progressbar.complete();
                $scope.report  = [{values:data}];
                console.log($scope.report);
                if (!!data.error) {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    alert(data.Message);
                }
                else {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    /* alert("There is a problem!\nPlease search again!");*/
                }
            });
@@ -95,11 +97,11 @@ $scope.progressbar.complete();
                $scope.report  = [{values:data}];
                console.log($scope.report);
                if (!!data.error) {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    alert(data.Message);
                }
                else {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    /* alert("There is a problem!\nPlease search again!");*/
                }
            });
@@ -110,16 +112,15 @@ $scope.progressbar.complete();
                $scope.report  = [{values:data}];
                console.log($scope.report);
                if (!!data.error) {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    alert(data.Message);
                }
                else {
-$scope.progressbar.complete();
+                    $scope.progressbar.complete();
                    /* alert("There is a problem!\nPlease search again!");*/
                }
            });
        }
-
     }
 
 
