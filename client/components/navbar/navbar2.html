@@ -11,15 +11,20 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a  href="/signup">Add Admin</a></li>
           <li><a  href="/custreq">Customer Request</a></li>
           <li><a  href="/jobDetails">Job Details</a></li>
-          <li><a  href="/addPlumber" >Add Plumber</a></li>
           <li dropdown>
             <a href="#" dropdown-toggle>Reports<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a  href="/plumberReport"><u>Plumber Report</u></a></li>
-              <li><a  href="/plumberFeedback"><u>Feedback Report</u></a></li>
+              <li><a  href="/plumberReport"><u>Plumber Performance</u></a></li>
+              <li><a  href="/plumberFeedback"><u>Customer Satisfaction</u></a></li>
+            </ul>
+          </li>
+          <li dropdown>
+            <a href="#" dropdown-toggle>Settings<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a  href="/signup"><u>Plumber Report</u></a></li>
+              <li><a  href="/addPlumber"><u>Feedback Report</u></a></li>
             </ul>
           </li>
           <li><a  href="" ui-sref="login">Logout</a></li>
@@ -34,3 +39,8 @@
         </div>
     </nav>
 </header>
+
+<!--
+
+<li><a  href="/signup">Add Admin</a></li>
+<li><a  href="/addPlumber" >Add Plumber</a></li>-->

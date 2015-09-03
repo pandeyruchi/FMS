@@ -5,7 +5,12 @@ angular.module('pune').controller('plumberFeedbackCtrl', function ($scope,$http,
   $scope.plumbers = [];
   var id;
   var plumberData = {};
+  $scope.itemList=[];
+  var plumberName;
   $scope.report = [];
+  $scope.plumberNames=[];
+  $scope.reportDuration = [];
+  var reportss=[];
 
 
   $scope.progressbar = ngProgressFactory.createInstance();
@@ -15,14 +20,15 @@ angular.module('pune').controller('plumberFeedbackCtrl', function ($scope,$http,
   // API called to get the data
   $http.get(host + '/api/getLocation').then(function (result) {
     var data = result.data;
+    console.log(result.data);
     data.forEach(function (info) {
       $scope.plumbers[info.plumberId] = info.firstName;
-      // console.log($scope.plumbers);
+      $scope.plumberNames.push(info.firstName);
     });
   });
 
   // Helper function to compare plumber's name
-  $scope.send = function(query) {
+  function send (query) {
     for(var i = 0;i < $scope.plumbers.length;i++){
       if($scope.plumbers[i] == query){
         plumberData.plumberId = i;
@@ -36,6 +42,13 @@ angular.module('pune').controller('plumberFeedbackCtrl', function ($scope,$http,
       alert("Error : Please search again");
     }
   };
+
+
+  $scope.changedValue=function(plumberName) {
+    $scope.itemList.push(plumberName);
+    send(plumberName);
+  }
+
 
   // function to post the plumberId of selected plumber and get data
   function sendPlumberId(plumberData) {

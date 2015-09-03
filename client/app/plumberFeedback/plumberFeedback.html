@@ -1,28 +1,25 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
 
-<div class="container-fluid">
+<div id="mains" class="container-fluid">
     <div class="row">
             <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
             </div>
         <div class="col-md-4 col-lg-4 col-lg-offset-4">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" ng-model="query">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" ng-click="send(query)" type="submit"><i class="fa fa-search"></i></button>
+                <div>
+                    <select style="width: 280px;" class="selectpicker" data-style="btn-primary" ng-model="plumberSelected" ng-change="changedValue(plumberSelected)"
+                            data-ng-options="plumber for plumber in plumberNames">
+                        <option value="">Select Plumber</option>
+                    </select>
                 </div>
+
+            </div>
                 </div>
             </div>
     </div>
     <div class="row">
         <div class="col-md-7 col-lg-7 col-xs-12 col-sm-12">
         </div>
-        <div class="col-md-5 col-lg-5 col-lg-offset-4">
-            <div class="input-group">
-                <div ng-show="query">
-                    <p ng-repeat="plumber in plumbers | filter:query track by $index">{{  plumber}}</p>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
         </div><br><br><br>

@@ -25,5 +25,10 @@
                 $location.url("/main");
             }
         });
+        res.error(function (err) {
+            $scope.progressbar.complete();
+            console.log(err);
+            alert("Username or password incorrect !\nLogin Unsuccessful !");
+        })
     }
 });
