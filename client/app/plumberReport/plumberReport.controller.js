@@ -61,6 +61,10 @@ angular.module('pune').controller('plumberReportCtrl', function ($scope,$http,ho
                    /* alert("There is a problem!\nPlease search again!");*/
                }
            });
+           res.error(function (err) {
+             $scope.progressbar.complete();
+               console.log(err);
+           })
        }
        else if(item =="plumberSixMonthlyTimeReport"){
            var res = $http.post(host + '/api/plumberSixMonthlyTimeReport',plumberData);
@@ -76,6 +80,11 @@ angular.module('pune').controller('plumberReportCtrl', function ($scope,$http,ho
                    /* alert("There is a problem!\nPlease search again!");*/
                }
            });
+           res.error(function (err) {
+             $scope.progressbar.complete();
+               console.log(err);
+               alert("From Error add plumber unsuccesful");
+           })
        }
        else if(item =="plumberWeeklyTimeReport"){
            var res = $http.post(host + '/api/plumberWeeklyTimeReport',plumberData);
@@ -91,6 +100,10 @@ angular.module('pune').controller('plumberReportCtrl', function ($scope,$http,ho
                    /* alert("There is a problem!\nPlease search again!");*/
                }
            });
+           res.error(function (err) {
+             $scope.progressbar.complete();
+               console.log(err);
+           })
        }
        else if(item =="plumberMonthlyTimeReport"){
            var res = $http.post(host + '/api/plumberMonthlyTimeReport',plumberData);

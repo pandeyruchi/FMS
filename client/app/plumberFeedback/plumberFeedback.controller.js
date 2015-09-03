@@ -67,6 +67,10 @@ angular.module('pune').controller('plumberFeedbackCtrl', function ($scope,$http,
         /* alert("There is a problem!\nPlease search again!");*/
       }
     });
+    res.error(function (err) {
+      $scope.progressbar.complete();
+      console.log(err);
+    })
   }
 
   $scope.xFunction = function(){
