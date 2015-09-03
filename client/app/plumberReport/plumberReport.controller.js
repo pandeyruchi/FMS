@@ -5,8 +5,13 @@ angular.module('pune').controller('plumberReportCtrl', function ($scope,$http,ho
     $scope.plumbers = [];
     var id;
     var plumberData = {};
-    $scope.report = [];$scope.plumberNames=[];
+    $scope.itemList=[];
+    var plumberName;
+    $scope.report = [];
+    $scope.plumberNames=[];
     $scope.reportDuration = [];
+
+    // Adding values to plumber reports
     $scope.reportDuration.push("plumberWeeklyTimeReport","plumberMonthlyTimeReport","plumberThreeMonthlyTimeReport","plumberSixMonthlyTimeReport","plumberYearlyTimeReport");
   $scope.progressbar = ngProgressFactory.createInstance();
   $scope.progressbar.setHeight('4px');
@@ -120,9 +125,10 @@ $scope.progressbar.complete();
 
     $scope.options = {
         chart: {
+            title:'Work Report',
             type: 'discreteBarChart',
             height: 450,
-            x: function(d){return d.Month;},
+            x: function(d){return d.day;},
             y: function(d){return d.count;},
             showValues: true,
             valueFormat: function(d){
@@ -140,8 +146,7 @@ $scope.progressbar.complete();
         }
     }
 
-    $scope.itemList=[];
-    var plumberName;
+
     console.log($scope.plumbers);
 
     $scope.changedValue=function(item) {

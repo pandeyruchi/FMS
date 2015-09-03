@@ -4,9 +4,9 @@
 
 <div class="container-fluid">
     <div class="row">
-        <!--<div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-        </div>-->
-        <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12">
+        </div>
+        <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 offset5">
             <div class="input-group">
                 <div>
                     <select style="width: 280px;" class="selectpicker" data-style="btn-primary" ng-model="plumberSelected" ng-change="changedValue(plumberSelected)"
@@ -15,27 +15,39 @@
                     </select>
                 </div>
             </div>
-
         </div>
-            <div class="col-md-4 col-lg-4 col-lg-offset-4">
-                <div style="border:solid; width: 900px" ng-if="report.length > 0">
-                    <nvd3 options="options" data="report"></nvd3>
-
-                </div>
-            </div>
-    </div>
-    <div class="row" style="margin-top: 100px">
-       <!-- <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-        </div>-->
-        <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
+        <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12">
             <div class="input-group">
                 <div>
                     <select style="width: 280px;" class="selectpicker" data-style="btn-primary" ng-model="duration" ng-change="changedValueDuration(duration)"
                             data-ng-options="report for report in reportDuration">
-                        <option value="">PlumberWeekly</option>
+                        <option value="" selected>plumberWeeklyReport</option>
                     </select>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row" style="margin-top: 100px">
+       <!-- <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
+        </div>-->
+        <div class="col-md-4 col-lg-4 col-lg-offset-3">
+            <div style="border:solid; width: 900px" ng-if="report.length > 0">
+                <h3><b> Work Report</b></h3>
+                <nvd3 options="options" data="report"></nvd3>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
