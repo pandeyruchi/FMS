@@ -5,6 +5,27 @@
             <div id="map"></div>
         </div>
         <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+
+            <div class="row" style="background-color: #dcdcdc">
+                <form name="form">
+                    <h4 class="text-center">Customer Details</h4>
+                    <ul ng-repeat="(cust,jobs) in assignedPlumberMap">
+                        <li><b>Customer Id :</b> {{cust}}</li>
+                        <li><b>Customer Name :</b> {{custReqNameMap[cust].customerName}}</li>
+                        <li><b>Customer Address :</b> {{custReqNameMap[cust].address}}</li>
+                        <li><b>Customer Phone Number :</b> {{custReqNameMap[cust].mobileNo}}</li>
+                        <li><b>Assigned Plumbers :</b></li>
+                        <ul ng-repeat="job in jobs">
+                            <li>{{job.firstName }} <br>
+                                                <span ng-hide="$last">
+                                                </span>
+                            </li>
+                        </ul>
+                        <li><b>Job Description :</b> {{custReqNameMap[cust].description}}</li>
+                    </ul>
+                </form>
+            </div>
+
             <div class="row">
                 <div class="form-inline">
                     <input CLASS="form-control" type="checkbox" id="inRange" ng-model="inRange">
@@ -40,25 +61,7 @@
                 </button>
             </div><br>
 
-            <div class="row" style="background-color: #dcdcdc">
-                <form name="form">
-                    <h4 class="text-center">Customer Details</h4>
-                    <ul ng-repeat="(cust,jobs) in assignedPlumberMap">
-                        <li><b>Customer Id :</b> {{cust}}</li>
-                        <li><b>Customer Name :</b> {{custReqNameMap[cust].customerName}}</li>
-                        <li><b>Customer Address :</b> {{custReqNameMap[cust].address}}</li>
-                        <li><b>Customer Phone Number :</b> {{custReqNameMap[cust].mobileNo}}</li>
-                        <li><b>Assigned Plumbers :</b></li>
-                        <ul ng-repeat="job in jobs">
-                            <li>{{job.firstName }} <br>
-                                                <span ng-hide="$last">
-                                                </span>
-                            </li>
-                        </ul>
-                        <li><b>Job Description :</b> {{custReqNameMap[cust].description}}</li>
-                    </ul>
-                </form>
-            </div>
+
 
             <br><div class="row text-center">
                 <button class="btn btn-primary" type="submit" ng-click="redirect_main()">OK
