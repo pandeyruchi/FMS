@@ -1,38 +1,53 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
 
+
+
 <div class="container-fluid">
     <div class="row">
-            <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-            </div>
-        <div class="col-md-4 col-lg-4 col-lg-offset-4">
-            <div class="input-group">
-                <input type="text" class="form-control" auto-complete ui-items="allTags" placeholder="Search" name="srch-term" id="srch-term" ng-model="query">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" ng-click="send(query)" type="submit"><i class="fa fa-search"></i></button>
-                </div>
-                </div>
-            </div>
-    </div>
-    <!--<div class="row">
-        <div class="col-md-7 col-lg-7 col-xs-12 col-sm-12">
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12">
         </div>
-        <div class="col-md-5 col-lg-5 col-lg-offset-4">
+        <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 offset5">
             <div class="input-group">
-                <div ng-show="query">
-                    <p ng-repeat="plumber in plumbers | filter:query track by $index">{{  plumber}}</p>
+                <div>
+                    <select style="width: 280px;" class="selectpicker" data-style="btn-primary" ng-model="plumberSelected" ng-change="changedValue(plumberSelected)"
+                             data-ng-options="plumber for plumber in plumberNames">
+                        <option value="">Select Plumber</option>
+                    </select>
+                </div>
             </div>
         </div>
-    </div>-->
-    <div class="row">
-        <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-        </div><br><br><br>
-        <div class="col-md-4 col-lg-4 col-lg-offset-4">
-            <div style="border:solid" ng-if="report.length > 0">
-            <nvd3 options="options" data="report"></nvd3>
+        <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12">
+            <div class="input-group">
+                <div>
+                    <select style="width: 280px;" class="selectpicker" data-style="btn-primary" ng-model="duration" ng-change="changedValueDuration(duration)"
+                            data-ng-options="report for report in reportDuration">
+                        <option value="" selected>plumberWeeklyReport</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
+    <div class="row" style="margin-top: 100px">
+       <!-- <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
+        </div>-->
+        <div class="col-md-4 col-lg-4 col-lg-offset-3">
+            <div style="border:solid; width: 900px" ng-if="report.length > 0">
+                <h3><b> Work Report</b></h3>
+                <nvd3 options="options" data="report"></nvd3>
+
+            </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
