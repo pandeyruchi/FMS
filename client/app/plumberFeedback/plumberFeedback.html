@@ -1,45 +1,39 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
 
 <div id="mains" class="container-fluid">
-    <div class="row">
-            <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-            </div>
-        <div class="col-md-4 col-lg-4 col-lg-offset-4">
-            <div class="input-group">
-                <div>
-                    <select style="width: 280px;" class="selectpicker" data-style="btn-primary" ng-model="plumberSelected" ng-change="changedValue(plumberSelected)"
-                            data-ng-options="plumber for plumber in plumberNames">
-                        <option value="">Select Plumber</option>
-                    </select>
-                </div>
+  <div class="row">
+    <div class="col-md-2 col-lg-2 col-xs-12 col-sm-12">
+        <li class="list-group-item" ng-model="one" ng-click="changedValue(one)">{{one}}
+          <span style="position:relative;display:inline-block;float:right">
+            <i class="fa fa-star fa-2x text-right" style="color:#00c129;"></i>
+            <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">1</span>
+          </span>
+        </li>
+        <li class="list-group-item" ng-model="two" ng-click="changedValue(two)">{{two}}
+          <span style="position:relative;display:inline-block;float:right">
+            <i class="fa fa-star fa-2x text-right" style="color:  #7fcc88"></i>
+            <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">2</span>
+          </span>
+        </li>
+        <li class="list-group-item" ng-model="three" ng-click="changedValue(three)">{{three}}
+          <span style="position:relative;display:inline-block;float:right">
+              <i class="fa fa-star fa-2x text-right" style="color:  #b6d6b7"></i>
+              <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">3</span>
+          </span>
+        </li>
+        <li class="list-group-item " ng-click="changedValue(plumber)" ng-repeat="plumber in plumberNames">{{plumber}}</li>
+    </div>
 
-            </div>
-                </div>
-            </div>
+    <div class="col-md-2 col-lg-2 col-xs-12 col-sm-12"></div>
+
+    <div id="mains" class="container" style="position: absolute; left: 15em; width:100%;margin: 0 auto">
+      <div class="col-lg-10 col-sm-10" id="pie-chart">
+        <div class="panel panel-default">
+          <div class="panel-body">
+              <highchart config="chartConfig" class="span10"></highchart>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-7 col-lg-7 col-xs-12 col-sm-12">
-        </div>
-    <div class="row">
-        <div class="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-        </div><br><br><br>
-        <div class="col-md-4 col-lg-4 col-lg-offset-4">
-            <div style="border:solid" ng-if="report.length > 0">
-                <nvd3-pie-chart
-                        data="report"
-                        id="exampleId"
-                        width="600"
-                        height="450"
-                        x="xFunction()"
-                        y="yFunction()"
-                        showLabels="true"
-                        labelType="value"
-                        showlegend="true"
-                        tooltips="true">
-                </nvd3-pie-chart>
-            </div>
-        </div>
-        </div>
-    </div>
+  </div>
 </div>
-

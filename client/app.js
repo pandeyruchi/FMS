@@ -3,7 +3,7 @@
  */
 
 var app = angular.module('pune', [
-    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3','ngProgress'
+    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3','ngProgress','highcharts-ng'
 ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
         .otherwise('/login');
