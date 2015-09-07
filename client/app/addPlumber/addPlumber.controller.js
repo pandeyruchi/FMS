@@ -1,5 +1,6 @@
 
-angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$location,host, ngProgressFactory) {
+angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$location,host, ngProgressFactory,$analytics) {
+    $analytics.pageTrack('/addPlumber');
 
     $scope.user = {
         

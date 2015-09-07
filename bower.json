@@ -23,6 +23,8 @@
     "d3": "~3.5.3",
     "ngprogress": "~1.1.2",
     "angularjs-nvd3-directives":"0.0.7",
-    "highcharts-ng":"0.0.10"
+    "highcharts-ng":"0.0.10",
+    "angulartics":"0.20.0",
+    "angulartics-google-analytics":"0.1.1"
   }
 }

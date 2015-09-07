@@ -3,8 +3,9 @@
  */
 
 var app = angular.module('pune', [
-    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3','ngProgress','highcharts-ng'
-]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3','ngProgress','highcharts-ng','angulartics',
+    'angulartics.google.analytics'
+]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider,$analyticsProvider) {
     $urlRouterProvider
         .otherwise('/login');
 

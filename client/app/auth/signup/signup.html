@@ -8,7 +8,7 @@
 
                 <div class="form-group" ng-class="{ 'has-success': form.email.$valid && form.email.$dirty,
                                             'has-error': form.email.$invalid && form.email.$dirty }">
-                    <label>User Name</label>
+                    <label>Email</label>
 
                     <input type="email" ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
                            ng-blur="visited = true" placeholder="someone@example.com" name="email" class="form-control"
@@ -99,15 +99,11 @@
                     <button class="btn btn-primary  btn-login" type="submit">
                         Add
                     </button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary" type="reset" value="Reset">Reset</button>
                 </div>
                 <br/>
             </form>
         </div>
     </div>
-
-    <!--<div class="row">
-        <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
-            <img class="img-responsive" src="assets/images/updated.png">
-        </div>
-    </div>-->
 </div>

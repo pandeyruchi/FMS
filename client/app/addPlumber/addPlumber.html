@@ -9,7 +9,7 @@
 
                 <div class="form-group" ng-class="{ 'has-success': form.email.$valid && form.email.$dirty,
                                             'has-error': form.email.$invalid && form.email.$dirty }">
-                    <label>User Name</label>
+                    <label>Email</label>
 
                     <input type="email" ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
                            ng-blur="visited = true" placeholder="someone@example.com" name="email" class="form-control"
@@ -24,70 +24,102 @@
                         What's your email address?
                     </p>
                 </div>
-
                 <div class="form-group" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
                                             'has-error': form.firstname.$invalid && form.firstname.$dirty }">
                     <label>First Name</label>
-                    <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control" ng-model="user.firstName" required>
+                    <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control"
+                           ng-model="user.firstName" required>
 
-                    <p class="help-block" ng-show="form.firstname.$error.required && form.firstname.$dirty && visitedFirstName">
+                    <p class="help-block"
+                       ng-show="form.firstname.$error.required && form.firstname.$dirty && visitedFirstName">
                         Please enter first name
                     </p>
                 </div>
-
                 <div class="form-group" ng-class="{'has-success': form.lastname.$valid && form.lastname.$dirty,
                                             'has-error': form.lastname.$invalid && form.lastname.$dirty }">
                     <label>Last Name</label>
-                    <input type="text" name="lastname" ng-blur="visitedLastName = true" class="form-control" ng-model="user.lastName" required>
+                    <input type="text" name="lastname" ng-blur="visitedLastName = true" class="form-control"
+                           ng-model="user.lastName" required>
 
-                    <p class="help-block" ng-show="form.lastname.$error.required && form.lastname.$dirty && visitedLastName">
+                    <p class="help-block"
+                       ng-show="form.lastname.$error.required && form.lastname.$dirty && visitedLastName">
                         Please enter last name
                     </p>
                 </div>
 
+                <div class="form-group" ng-class="{ 'has-success': form.password.$valid && form.password.$dirty,
+                                            'has-error': form.password.$invalid && form.password.$dirty }">
+                    <label>Password</label>
+                    <input type="password" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/"
+                           ng-blur="visitedPassword = true" name="password" class="form-control" ng-model="user.password"
+                           required/>
+
+                    <p class="help-block" ng-show="form.password.$error.pattern && form.password.$dirty && visitedPassword">
+                        Doesn't look like a valid password.
+                    </p>
+
+                    <p class="help-block" ng-show="form.password.$error.required && form.password.$dirty && visitedPassword">
+                        Enter your password
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && form.confirmPassword.$dirty,
+                                            'has-error': form.confirmPassword.$invalid && form.confirmPassword.$dirty }">
+                    <label>Confirm Password</label>
+                    <input type="password" name="confirmPassword" class="form-control"
+                           ng-blur="visitedConfirm = true" ng-model="user.confirmPassword"
+                           required compare-to="user.password"/>
+
+                    <p class="help-block"
+                       ng-show="form.confirmPassword.$error.compareTo && form.confirmPassword.$dirty && visitedConfirm">
+                        Password didn't match.
+                    </p>
+
+                    <p class="help-block" ng-show="form.confirmPassword.$error.required && form.confirmPassword.$dirty && visitedConfirm">
+                        Re-enter your password.
+                    </p>
+                </div>
+
                 <div>
-
-                <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
+                    <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
                                         'has-error': form.contact.$invalid && form.contact.$dirty }">
-                    <label>Phone</label>
+                        <label>Phone</label>
 
-                    <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
-                           ng-blur="visitedContact = true" ng-pattern="/^[+]?[0-9]{10}$/">
+                        <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
+                               ng-blur="visitedContact = true" ng-pattern="/^[+]?[0-9]{10}$/">
 
-                    <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty && visitedContact">
-                        Invalid contact number!
-                    </p>
+                        <p class="help-block"
+                           ng-show="form.contact.$error.pattern && form.contact.$dirty && visitedContact">
+                            Invalid contact number!
+                        </p>
 
-                    <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
-                        Contact number required!
-                    </p>
-
-                </div>
-
-                <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
+                        <p class="help-block"
+                           ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
+                            Contact number required!
+                        </p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
                                         'has-error': form.address.$invalid && form.address.$dirty }">
-                    <label> Address</label>
-                <textarea rows="4" ng-change="computeCoordinates()" class="form-control" ng-blur="visitedAddress=true" name="address"
-                          ng-model="user.address" required></textarea>
+                        <label> Address</label>
+                        <textarea rows="4" ng-change="computeCoordinates()" class="form-control"
+                                  ng-blur="visitedAddress=true"
+                                  name="address"
+                                  ng-model="user.address" required></textarea>
 
 
-                    <p class="help-block" ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
-                        Please enter address
-                    </p>
-                </div>
-
-                    <button class="btn btn-primary  btn-login" type="submit">
-                      Add
-                    </button>
+                        <p class="help-block"
+                           ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
+                            Please enter address
+                        </p>
+                    </div>
+                    <button class="btn btn-primary  btn-login" type="submit" analytics-on="click"
+                            analytics-category="AddPlumber" analytics-event="AddPlumber"
+                            analytics-label="Add Plumber Information"> Add
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary" type="reset" value="Reset">Reset</button>
                 </div>
                 <br/>
             </form>
         </div>
     </div>
-
-    <!--<div class="row">
-        <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
-            <img class="img-responsive" src="assets/images/updated.png">
-        </div>
-    </div>-->
 </div>
