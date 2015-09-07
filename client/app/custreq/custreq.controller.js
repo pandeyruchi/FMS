@@ -2,8 +2,8 @@
 * Created by ruchyp on 7/22/2015.
 */
 
-angular.module('pune').controller('custreqCtrl', function ($scope, $http, $location, host, ngProgressFactory) {
-
+angular.module('pune').controller('custreqCtrl', function ($scope, $http, $location, host, ngProgressFactory,$analytics) {
+  $analytics.pageTrack('/custreq');
   //var user = {};
   $scope.progressbar = ngProgressFactory.createInstance();
   $scope.progressbar.setHeight('4px');

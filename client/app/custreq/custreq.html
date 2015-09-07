@@ -9,11 +9,31 @@
             <form class="form" name="form" ng-submit="custreq()" novalidate>
                 <div class="form-group" ng-class="{ 'has-success': submitted && form.customerName.$valid && form.customerName.$dirty,
                                             'has-error': form.customerName.$invalid && form.customerName.$dirty }">
-                    <label> Customer name </label>
-                    <input type="text" ng-blur="visitedName = true" name="customerName" class="form-control" ng-model="user.customerName" required>
+                    <label> Customer Name </label>
+                    <input type="text" ng-blur="visitedName = true" name="customerName" class="form-control"
+                           ng-model="user.customerName" required>
 
-                    <p class="help-block" ng-show="form.customerName.$error.required && form.customerName.$dirty && visitedName">
+                    <p class="help-block"
+                       ng-show="form.customerName.$error.required && form.customerName.$dirty && visitedName">
                         Please enter customer name
+                    </p>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-success': form.email.$valid && form.email.$dirty,
+                                            'has-error': form.email.$invalid && form.email.$dirty }">
+                    <label>Email</label>
+
+                    <input type="email" ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
+                           ng-blur="visited = true" placeholder="someone@example.com" name="email" class="form-control"
+                           ng-model="user.userName"
+                           required/>
+
+                    <p class="help-block" ng-show="form.email.$error.email && form.email.$dirty && visited">
+                        Doesn't look like a valid email.
+                    </p>
+
+                    <p class="help-block" ng-show="form.email.$error.required && form.email.$dirty && visited">
+                        What's your email address?
                     </p>
                 </div>
 
@@ -24,7 +44,8 @@
                               ng-blur="visitedAddress = true" ng-model="user.address" required></textarea>
 
 
-                    <p class="help-block" ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
+                    <p class="help-block"
+                       ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
                         Please enter address
                     </p>
                 </div>
@@ -32,10 +53,25 @@
                 <div class="form-group" ng-class="{ 'has-success': form.locality.$valid && form.locality.$dirty,
                                             'has-error': form.locality.$invalid && form.locality.$dirty }">
                     <label> Locality </label>
-                    <input type="text" name="locality" ng-blur="visitedLocality = true" class="form-control" ng-model="user.locality" required>
+                    <input type="text" name="locality" ng-blur="visitedLocality = true" class="form-control"
+                           ng-model="user.locality" required>
 
-                    <p class="help-block" ng-show="form.locality.$error.required && form.locality.$dirty && visitedLocality">
+                    <p class="help-block"
+                       ng-show="form.locality.$error.required && form.locality.$dirty && visitedLocality">
                         Please enter locality
+                    </p>
+                </div>
+
+
+                <div class="form-group" ng-class="{ 'has-success': submitted && form.city.$valid && form.city.$dirty,
+                                            'has-error': form.city.$invalid && form.city.$dirty }">
+                    <label> City </label>
+                    <input type="text" ng-blur="visitedCity = true" name="city" class="form-control"
+                           ng-model="user.city" required>
+
+                    <p class="help-block"
+                       ng-show="form.city.$error.required && form.city.$dirty && visitedCity">
+                        Please enter city
                     </p>
                 </div>
 
@@ -46,11 +82,13 @@
                     <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
                            ng-blur="visitedContact = true" ng-pattern="/^[+]?[0-9]{10}$/">
 
-                    <p class="help-block" ng-show="form.contact.$error.pattern && form.contact.$dirty && visitedContact">
+                    <p class="help-block"
+                       ng-show="form.contact.$error.pattern && form.contact.$dirty && visitedContact">
                         Invalid contact number!
                     </p>
 
-                    <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
+                    <p class="help-block"
+                       ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
                         Contact number required!
                     </p>
 
@@ -59,7 +97,7 @@
                 <div class="form-group" ng-class="{ 'has-success': form.desc.$valid && form.desc.$dirty,
                                             'has-error': form.desc.$invalid && form.desc.$dirty }">
                     <label> Description </label>
-                    <textarea rows="4" class="form-control" name="desc"  ng-model="user.description" required></textarea>
+                    <textarea rows="4" class="form-control" name="desc" ng-model="user.description" required></textarea>
 
 
                     <p class="help-block" ng-show="form.desc.$error.required && form.desc.$dirty">
@@ -68,24 +106,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Urgent</label>
-                    <input type="radio" style="margin-left: 5px" name="yes" ng-model="user.urgentFlag" value="true"/>Yes
-                    <input type="radio" style="margin-left: 5px" name="no" ng-model="user.urgentFlag" value="false"/>No
+                    <label>Priority</label>
+                    <input type="radio" style="margin-left: 5px" name="yes" ng-model="user.urgentFlag" value="true"/>High
+                    <input type="radio" style="margin-left: 5px" name="no" ng-model="user.urgentFlag" value="false"/>Normal
                 </div>
 
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit"
                             ng-disabled="form.user.$dirty && form.user.$invalid ||
-                         form.password.$dirty && form.password.$invalid" class="btn btn-primary">Submit
-                    </button>
+                         form.password.$dirty && form.password.$invalid" class="btn btn-primary" analytics-on="click"
+                            analytics-category="CustomerRequest" analytics-event="CustomerRequest" analytics-label="Submit Customer Request">Submit
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary" type="reset" value="Reset">Reset</button>
                 </div>
 
             </form>
         </div>
     </div>
-   <!-- <div class="row">
-        <div class="col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-xs-12">
-            <img class="img-responsive" src="assets/images/updated.png">
-        </div>
-    </div>-->
-</div>
