@@ -28,6 +28,7 @@ angular.module('pune').controller('custreqCtrl', function ($scope, $http, $locat
   /// This method posts customer request data to server
   $scope.custreq = function () {
     $scope.progressbar.start();
+    console.log("USER IS :" + $scope.user);
     var res = $http.post(host + '/api/jobRequest ', $scope.user);
     res.success(function (data) {
       console.log(data);
