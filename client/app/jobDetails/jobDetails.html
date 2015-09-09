@@ -1,61 +1,138 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
-<div class="container-fluid">
-    <div id="mains" class="row">
-        <div class="col-md-9 col-md-offset-2 details-form">
-            <h3 style="color:#008855">Job Details </h3>
+<div class="container-fluid container-fluid-map">
+    <div class="row">
+        <div class="col-md-6 customerBg">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <br/>
 
-            <form class="form" name="form" novalidate>
-                <!-- <select ng-model="menu"
-                         style="margin-left: 350px; background-color: #28a4c9; color: white; box-sizing: border-box; font-size: medium">
-                     <option value="active" style="color: white">Active</option>
-                     <option value="completed" style="color: white">Completed</option>
-                     <option value="inProgress" style="color: white">In-Progress</option>
-                 </select>
-                 <br><br><br>-->
-                <div class="scrollit">
-                    <table class="table table-bordered table-responsive">
-                        <tr class="text-center" style="background-color: #449d44">
-                            <td>
-                                <b>Customer Request</b>
-                            </td>
-                            <td>
-                                <b>Customer Detail</b>
-                            </td>
-                            <td>
-                                <b>Assigned Plumbers</b>
-                            </td>
-                            <td>
-                                <b>Total Count</b>
-                            </td>
-                        </tr>
-                        <tr ng-repeat="(cust,jobs) in assignedPlumberMap">
-                            <td>{{cust}}</td>
-                            <td><a href="#" ng-click="showMap(cust,custReqAddressMap[cust])">
-                                <h4>{{custReqNameMap[cust]}}</h4>{{custReqDescriptionMap[cust]}}
-                            </a>
-                            </td>
-                            <td>
-                                <span ng-repeat="job in jobs | filter:{firstName:'!null'}">
-                                    {{job.firstName}}
-                                    <span ng-hide="$last">
-                                        ,
-                                    </span>
-                                </span>
-                            </td>
-                                <td>
-                                <span ng-repeat="job in jobs">
-                                    <span ng-if = "(job.plumberId > 0) && ($index == 0)">
-                                   {{jobs.length}}
-                                     </span>
-                                    <span ng-if = "job.plumberId == null">
-                                        {{0}}
-                                    </span>
+                        <div class="col-md-6">
+                            <select ng-options="option.id as option.text for option in jobFilterOptions"
+                                    ng-model="filter.jobFilter" class="btn btn-default">
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div>
 
-                                </span>
-                        </tr>
-                    </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row max-height">
+                        <md-content class="customerBg">
+                            <md-list>
+                                <md-list-item class="md-3-line md-list-item-job"
+                                              ng-repeat="(id,job) in jobs| job:filter.jobFilter">
+                                    <table style="width: 110%; margin-left: -16px"
+                                           ng-class="{'greenBackground':job.selected}">
+                                        <tr class="upperGreenBand" ng-click="customerSelected(job)">
+                                            <td style="width:10%;padding-left: 10px;"><i ng-show="!!job.urgentFlag"
+                                                                                         class="red fa fa-exclamation-triangle fa-pull-left"></i>
+                                            </td>
+                                            <td style="width:75%">
+                                                <div class="md-list-item-text">
+                                                    <h3><strong>{{job.customerName}}</strong></h3>
+                                                    <h6 style="font-family: sans-serif">{{job.address}}</h6>
+                                                    <i class="fa fa-mobile fa-fw">&nbsp;{{job.mobileNo}}</i>
+                                                </div>
+                                            </td>
+                                            <td style="width: 15%;padding-right: 10px;">
+                                                <i ng-class="{'green':job.jobStatus==='completed','red':job.jobStatus==='active','yellow':job.jobStatus==='In progress'}"
+                                                   class="fa fa-circle fa-pull-right fa-2x"></i></td>
+                                        </tr>
+                                        <tr style="background: url(../assets/images/gaussian_blur.png)">
+                                            <td></td>
+                                            <td colspan="2">
+                                                <div collapse="!job.showDetails">
+                                                    <h4><b>Job ID:</b></h4>
+                                                    <h6>{{job.jobId}}</h6>
+                                                    <h4><b>Job Description</b></h4>
+                                                    <h6>{{job.description}}</h6>
+                                                    <span ng-show="!!job.plumbers.length"><strong>Assigned
+                                                        Plumber(s)</strong></span>
+                                                    <md-chips ng-model="job.plumbers" readonly="readonly">
+                                                        <md-chip-template>
+                                                            <strong>{{$chip.name}}</strong>
+                                                        </md-chip-template>
+                                                    </md-chips>
+                                                    <!--ng-disabled="!(selected && selectedP)"-->
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr collapse="!job.showDetails">
+                                            <td colspan="3" >
+                                                <button class="btn btn-default" style="width:100%"
+                                                        ng-click="assignJob(job)" type="button">
+                                                    Save
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-list-item>
+                            </md-list>
+                        </md-content>
+                    </div>
                 </div>
-            </form>
+                <div class="col-md-6 plumberBg">
+                    <div class="row">
+                        <br/>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select ng-options="option.id as option.text for option in plumberFilterOptions"
+                                            ng-model="filter.plumberFilter" class="btn btn-default">
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button href="" ng-click="order('firstName')" class="btn btn-link pull-left">
+                                        <i ng-show="!reverse" class="fa fa-sort-alpha-asc"></i>
+                                        <i ng-show="reverse" class="fa fa-sort-alpha-desc"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-3 ">
+                                    <button ng-click="order('jobCount')" class="btn btn-link pull-right">
+                                        <i ng-show="!reverse" class="fa fa-sort-numeric-asc"></i>
+                                        <i ng-show="reverse" class="fa fa-sort-numeric-desc"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row max-height">
+                        <md-content class="plumberBg">
+                            <md-list>
+                                <md-list-item class="md-3-line" ng-click="plumberClick(item)"
+                                              ng-class="{'presence':item.presence !== 'available' && !item.selected,'selected':item.selected}"
+                                              ng-repeat="item in plumbers |plumber:filter.plumberFilter|orderBy:predicate:reverse">
+                                    <md-divider ng-if="!$last"></md-divider>
+                                    <div class="md-list-item-text ">
+                                        <h3>{{item.firstName}} {{item.lastName}}</h3>
+                                        <h4>{{item.mobileNo}}</h4>
+                                    </div>
+                                    <div>
+                                        <span ng-class="{'badgeCustom':item.selected}"
+                                              class="badge">{{item.jobCount}}</span>
+                                    </div>
+
+                                </md-list-item>
+                            </md-list>
+                        </md-content>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="map"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
