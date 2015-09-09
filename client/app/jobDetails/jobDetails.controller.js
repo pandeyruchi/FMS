@@ -11,9 +11,12 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
 
   $scope.filter = {
     jobFilter: 'all',
-    plumberFilter: 'all'
+    plumberFilter: 'all',
+    customerFilter:''
   };
-
+  $scope.result1 = '';
+  $scope.options1 = null;
+  $scope.details1 = '';
 
   $scope.jobFilterOptions = [
     {id: 'completed', text: 'Completed'},
