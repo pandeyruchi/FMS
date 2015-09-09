@@ -3,12 +3,11 @@
  */
 
 var app = angular.module('pune', [
-    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3','ngProgress','highcharts-ng','angulartics',
-    'angulartics.google.analytics'
+    'ui.router','ui.bootstrap','nvd3ChartDirectives','nvd3','ngProgress','highcharts-ng','angulartics.google.analytics','angulartics'
 ]).config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider,$analyticsProvider) {
     $urlRouterProvider
         .otherwise('/login');
 
     $locationProvider.html5Mode(true);
 });
-app.constant('host',"http://52.24.1.69:3600");
+app.constant('host',"http://52.88.162.74:3600");
