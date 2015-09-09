@@ -5,6 +5,7 @@
     <base href="/">
     <title>Pune Plumber</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="app/auth/login/login.css">
     <link rel="stylesheet" href="app/jobDetails/showMap.css">
     <link rel="stylesheet" href="app/jobDetails/jobDetails.css">
@@ -15,7 +16,6 @@
           rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="app/main/main.css">
     <link rel="stylesheet" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -56,12 +56,16 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/ngprogress/build/ngprogress.js"></script>
 <script src="bower_components/angulartics/src/angulartics.js"></script>
+<script src="bower_components/lodash/lodash.min.js"></script>
 <script src="/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js"></script>
 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
 <script src="bower_components/d3/d3.js"></script>
 <script src="bower_components/nvd3/nv.d3.js"></script>
 <script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
 <script src="https://rawgit.com/krispo/angular-nvd3/master/dist/angular-nvd3.js"></script>
 <script src="app.js"></script>
 <script src="app/auth/login/login.config.js"></script>
@@ -90,7 +94,8 @@
 <script src="app/plumberFeedback/plumberFeedback.directive.js"></script>
 <script src="app/plumberAvailability/plumberAvailability.config.js"></script>
 <script src="app/plumberAvailability/plumberAvailability.controller.js"></script>
-
+<script src="app/common/filter/job.js"></script>
+<script src="app/common/filter/plumber.js"></script>
 <script type="text/javascript" src="http://www.google.com/jsapi?ext.js"></script>
 <script type="text/javascript">
     google.load('visualization', '1', {packages: ['corechart']});
