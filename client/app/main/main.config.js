@@ -4,6 +4,7 @@
 angular.module('pune').config(function($stateProvider){
     $stateProvider.state('main',{
         url:"/main",
-        templateUrl:"app/main/main.html"
+        templateUrl:"app/main/main.html",
+        controller:"mainCtrl"
     })
 });
