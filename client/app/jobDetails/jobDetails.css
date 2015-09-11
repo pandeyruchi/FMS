@@ -132,20 +132,29 @@ h6 {
 }
 
 .green {
-    color: green;
+    color: #33C44E;
 }
 
 .red {
-    color: red;
+    color: #FF2A2A;
 }
 
 .yellow {
-    color: orange;
+    color: #FFAA00;
 }
 
 .grey-light {
 
 }
+
+.headerFont{
+    font-family: 'Open Sans', sans-serif;font-size: 14px
+}
+
+.subHeaderFont{
+    font-family: 'Open Sans', sans-serif;font-size: 12px
+}
+
 
 .container-fluid-map {
     margin-top: -20px;
@@ -168,7 +177,7 @@ h6 {
 }
 
 .font-color{
-    color:#CFBEC8;
+    color:#BCBCBC;
 }
 
 .greenBackground {
@@ -229,4 +238,14 @@ h6 {
 
 .jumbotron-icon .fa-6 {
     font-size: 20em;
+}
+
+.contain-i-e-s,.icon-empty-star,.text-i-e-s{
+    height:100px; width:100px;
+}
+.contain-i-e-s{
+    position:relative;
+}
+.text-i-e-s{
+    text-align:center; position:absolute;
 }

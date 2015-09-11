@@ -35,28 +35,32 @@
                                             </td>
                                             <td style="width:75%">
                                                 <div class="md-list-item-text">
-                                                    <h3><strong>{{job.customerName}}</strong></h3>
-                                                    <h6 style="font-family: sans-serif">{{job.address}}</h6>
-                                                    <i class="fa fa-mobile fa-fw">&nbsp;{{job.mobileNo}}</i>
+                                                    <h3><strong class="headerFont">{{job.customerName}}</strong></h3>
+                                                    <h6 class="subHeaderFont">{{job.address}}</h6>
+
+                                                    <div class="subHeaderFont">
+                                                        <i class="fa fa-mobile fa-fw">&nbsp;{{job.mobileNo}}</i></div>
                                                 </div>
                                             </td>
                                             <td style="width: 15%;padding-right: 10px;">
-                                                <i ng-class="{'green':job.jobStatus==='completed','red':job.jobStatus==='active','yellow':job.jobStatus==='In progress'}"
+                                                <i ng-class="{'yellow':job.jobStatus==='completed','red':job.jobStatus==='active','green':job.jobStatus==='In progress'}"
                                                    class="fa fa-circle fa-pull-right fa-2x"></i></td>
                                         </tr>
-                                        <tr  style="background-color: #6D8D83">
+                                        <tr style="background-color: #6D8D83">
                                             <td></td>
                                             <td colspan="2">
                                                 <div collapse="!job.showDetails">
-                                                    <h4 class="off-white"><b>Job ID:</b></h4>
-                                                    <h5 class="white"><b>{{job.jobId}}</b></h5>
-                                                    <h4 class="off-white"><b>Job Description</b></h4>
-                                                    <h5 class="white"><b>{{job.description}}</b></h5>
-                                                    <span class="off-white" ng-show="!!job.plumbers.length"><strong>Assigned
+                                                    <h4 class="off-white"><b class="headerFont">Job ID:</b></h4>
+                                                    <h5 class="white"><b class="subHeaderFont">{{job.jobId}}</b></h5>
+                                                    <h4 class="off-white"><b class="headerFont">Job Description</b></h4>
+                                                    <h5 class="white"><b class="subHeaderFont">{{job.description}}</b>
+                                                    </h5>
+                                                    <span class="off-white" ng-show="!!job.plumbers.length"><strong
+                                                            class="headerFont">Assigned
                                                         Plumber(s)</strong></span>
                                                     <md-chips ng-model="job.plumbers" readonly="readonly">
                                                         <md-chip-template>
-                                                            <strong>{{$chip.name}}</strong>
+                                                            <strong class="subHeaderFont">{{$chip.name}}</strong>
                                                         </md-chip-template>
                                                     </md-chips>
                                                     <!--ng-disabled="!(selected && selectedP)"-->
@@ -64,8 +68,8 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-class="{'greenBackground':job.selected}"  collapse="!job.showDetails">
-                                            <td  colspan="3">
+                                        <tr ng-class="{'greenBackground':job.selected}" collapse="!job.showDetails">
+                                            <td colspan="3">
                                                 <button class="btn greenBackground" style="width:100%;color: white"
                                                         ng-click="assignJob(job)" type="button">
                                                     Save
@@ -79,11 +83,11 @@
                             </md-list>
                         </md-content>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-md-4 font-color" ng-model="pending">Pending: {{pending.length}}</div>
                         <div class="col-md-4 font-color" ng-model="assigned">Assigned:{{assigned.length}}</div>
                         <div class="col-md-4 font-color pull-right">Total:{{jobsArray.length}}</div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="col-md-6 plumberBg">
                     <div class="row">
@@ -118,9 +122,13 @@
                                               ng-class="{'presence':!item.available && !item.selected,'selected':item.selected}"
                                               ng-repeat="item in plumbers |plumber:filter.plumberFilter|orderBy:predicate:reverse">
                                     <md-divider ng-if="!$last"></md-divider>
-                                    <div class="md-list-item-text ">
-                                        <h3>{{item.firstName}} {{item.lastName}}</h3>
-                                        <h4>{{item.mobileNo}}</h4>
+                                    <div class="md-list-item-text">
+                                        <h3>
+                                            <div class="headerFont">{{item.firstName}} {{item.lastName}}</div>
+                                        </h3>
+                                        <h4>
+                                            <div class="subHeaderFont">{{item.mobileNo}}</div>
+                                        </h4>
                                     </div>
                                     <div>
                                         <span ng-class="{'badgeCustom':item.selected}"
@@ -131,11 +139,21 @@
                             </md-list>
                         </md-content>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 font-color" ng-model="avail">Available: {{avail.length}}</span></div>
-                        <div class="col-md-4 font-color" ng-model="unavail">Unavailable:{{unavail.length}}</div>
-                        <div class="col-md-4 font-color pull-right">Total:{{plumbers.length}}</div>
-                    </div>
+                    <!-- <div class="row">
+                         <div class="col-md-4 font-color" ng-model="avail">Available: {{avail.length}}</span></div>
+                         <div class="col-md-4 font-color" ng-model="unavail">Unavailable:{{unavail.length}}</div>
+                         <div class="col-md-4 font-color pull-right">Total:{{plumbers.length}}</div>
+                     </div>-->
+                </div>
+            </div>
+            <div class="row" style="background-color: #F1F1F1">
+                <div class="footer">
+                    <div class="col-md-2 font-color" ng-model="pending">Pending: {{pending.length}}</div>
+                    <div class="col-md-2 font-color" ng-model="assigned">Assigned:{{assigned.length}}</div>
+                    <div class="col-md-2 font-color">Total:{{jobsArray.length}}</div>
+                    <div class="col-md-2 font-color" ng-model="avail">Available: {{avail.length}}</span></div>
+                    <div class="col-md-2 font-color" ng-model="unavail">Unavailable:{{unavail.length}}</div>
+                    <div class="col-md-2 font-color">Total:{{plumbers.length}}</div>
                 </div>
             </div>
         </div>
