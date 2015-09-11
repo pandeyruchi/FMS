@@ -210,6 +210,8 @@
         <option value="$PROJECT_DIR$/client/app/jobDetails/jobDetails.html" />
         <option value="$PROJECT_DIR$/client/app/main/main.controller.js" />
         <option value="$PROJECT_DIR$/client/app/jobDetails/jobDetails.css" />
+        <option value="$PROJECT_DIR$/client/app/auth/signup/signup.css" />
+        <option value="$PROJECT_DIR$/client/app/addPlumber/addPlumber.css" />
         <option value="$PROJECT_DIR$/client/app/main/main.html" />
       </list>
     </option>
@@ -1013,6 +1015,26 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/app/jobDetails/jobDetails.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.8448277">
+          <caret line="231" column="1" selection-start-line="231" selection-start-column="1" selection-end-line="231" selection-end-column="1" />
+          <folding>
+            <element signature="e#3165#3350#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/auth/signup/signup.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.8448277">
+          <caret line="231" column="1" selection-start-line="231" selection-start-column="1" selection-end-line="231" selection-end-column="1" />
+          <folding>
+            <element signature="e#3165#3350#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/addPlumber/addPlumber.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.8448277">
           <caret line="231" column="1" selection-start-line="231" selection-start-column="1" selection-end-line="231" selection-end-column="1" />

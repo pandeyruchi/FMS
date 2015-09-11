@@ -105,10 +105,38 @@
                     </p>
                 </div>
 
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label>Priority</label>
                     <input type="radio" style="margin-left: 5px" name="yes" ng-model="user.urgentFlag" value="true"/>High
                     <input type="radio" style="margin-left: 5px" name="no" ng-model="user.urgentFlag" value="false"/>Normal
+                </div>-->
+
+                <div style="float: left; width: 70%; padding-left: 5px; padding-right: 5px;">
+                    <label>Priority </label> </br>
+                    <div style="float: left; padding-left: 5px; padding-right: 5px;">
+                        <input type="radio" name="yes" ng-model="user.urgentFlag" value="true">
+                        <label style="color: #666666; margin: 0 0px;">High</label>
+                        </input>
+                    </div>
+                    <div style="float: left; padding-left: 5px; padding-right: 5px; ">
+                        <input type="radio" name="no" ng-model="user.urgentFlag" value="false">
+                        <label style="color: #666666; margin: 0 0px;">Normal</label>
+                        </input>
+                    </div>
+                </div>
+
+                <div style="float: left; width: 70%; padding-left: 5px; padding-right: 5px;">
+                    <label>Notifications </label> </br>
+                    <div style="float: left; padding-left: 5px; padding-right: 5px;">
+                        <input type="checkbox" ng-model="user.messageNotification" ng-true-value="'yes'" ng-false-value="'no'">
+                        <label style="color: #666666; margin: 0 0px;">SMS</label>
+                        </input>
+                    </div>
+                    <div style="float: left; padding-left: 5px; padding-right: 5px; ">
+                        <input type="checkbox" ng-model="user.emailNotification" ng-true-value="'yes'" ng-false-value="'no'">
+                        <label style="color: #666666; margin: 0 0px;">email</label>
+                        </input>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -123,3 +151,24 @@
             </form>
         </div>
     </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
