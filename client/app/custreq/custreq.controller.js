@@ -23,12 +23,14 @@ angular.module('pune').controller('custreqCtrl', function ($scope, $http, $locat
   $scope.computeCoordinates = computeCoordinates;
 
   $scope.user = {};
+  $scope.user.msgNotification = "no";
+  $scope.user.emailNotification = "no";
 
 
   /// This method posts customer request data to server
   $scope.custreq = function () {
     $scope.progressbar.start();
-    console.log("USER IS :" + $scope.user);
+    console.log("USER IS :" + $scope.user.customerName + $scope.user.address + $scope.user.mobileNo + $scope.user.urgentFlag + $scope.user.emailNotification + $scope.user.msgNotification + $scope.user.city + $scope.user.locality+ $scope.user.description);
     var res = $http.post(host + '/api/jobRequest ', $scope.user);
     res.success(function (data) {
       console.log(data);
