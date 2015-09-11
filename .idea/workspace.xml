@@ -4,9 +4,9 @@
     <list default="true" id="a3e697e8-b326-4f36-b9ed-fc6f5a627e02" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/addPlumber/addPlumber.html" afterPath="$PROJECT_DIR$/client/app/addPlumber/addPlumber.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/index.html" afterPath="$PROJECT_DIR$/client/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/jobDetails/jobDetails.controller.js" afterPath="$PROJECT_DIR$/client/app/jobDetails/jobDetails.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/jobDetails/jobDetails.css" afterPath="$PROJECT_DIR$/client/app/jobDetails/jobDetails.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/jobDetails/jobDetails.html" afterPath="$PROJECT_DIR$/client/app/jobDetails/jobDetails.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/auth/signup/signup.css" afterPath="$PROJECT_DIR$/client/app/auth/signup/signup.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/auth/signup/signup.html" afterPath="$PROJECT_DIR$/client/app/auth/signup/signup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="peninsular-kids.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,18 +55,55 @@
       <file leaf-file-name="addPlumber.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/app/addPlumber/addPlumber.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14655173">
-              <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.09163347">
+              <caret line="5" column="73" selection-start-line="5" selection-start-column="73" selection-end-line="5" selection-end-column="73" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <marker date="1441967698246" expanded="true" signature="620:749" placeholder="{...}" />
-                <marker date="1441967698246" expanded="true" signature="1550:1689" placeholder="{...}" />
-                <marker date="1441967698246" expanded="true" signature="2393:2530" placeholder="{...}" />
-                <marker date="1441967698246" expanded="true" signature="3233:3396" placeholder="{...}" />
-                <marker date="1441967698246" expanded="true" signature="5261:5391" placeholder="{...}" />
-                <marker date="1441967698246" expanded="true" signature="5753:5875" placeholder="{...}" />
-                <marker date="1441967698246" expanded="true" signature="6203:6322" placeholder="{...}" />
+                <marker date="1441969301342" expanded="true" signature="609:738" placeholder="{...}" />
+                <marker date="1441969301342" expanded="true" signature="1586:1725" placeholder="{...}" />
+                <marker date="1441969301342" expanded="true" signature="2476:2613" placeholder="{...}" />
+                <marker date="1441969301342" expanded="true" signature="3363:3526" placeholder="{...}" />
+                <marker date="1441969301342" expanded="true" signature="5498:5628" placeholder="{...}" />
+                <marker date="1441969301342" expanded="true" signature="6027:6149" placeholder="{...}" />
+                <marker date="1441969301342" expanded="true" signature="6514:6633" placeholder="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signup.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/auth/signup/signup.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.4285715">
+              <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
+              <folding>
+                <marker date="1441968992144" expanded="true" signature="602:734" placeholder="{...}" />
+                <marker date="1441968992144" expanded="true" signature="1562:1702" placeholder="{...}" />
+                <marker date="1441968992144" expanded="true" signature="2444:2584" placeholder="{...}" />
+                <marker date="1441968992144" expanded="true" signature="3338:3504" placeholder="{...}" />
+                <marker date="1441968992144" expanded="true" signature="4398:4531" placeholder="{...}" />
+                <marker date="1441968992144" expanded="true" signature="4935:5062" placeholder="{...}" />
+                <marker date="1441968992144" expanded="true" signature="5443:5565" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addPlumber.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/addPlumber/addPlumber.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signup.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/auth/signup/signup.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="10" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,31 +126,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/main/main.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jobDetails.config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/jobDetails/jobDetails.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.807693">
-              <caret line="15" column="82" selection-start-line="15" selection-start-column="82" selection-end-line="15" selection-end-column="82" />
+            <state vertical-scroll-proportion="-10.461538">
+              <caret line="16" column="61" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -127,16 +144,6 @@
               <folding>
                 <element signature="e#8402#8497#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="custreq.config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/custreq/custreq.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -190,7 +197,6 @@
         <option value="$PROJECT_DIR$/client/app/jobdetails/jobDetails.config.js" />
         <option value="$PROJECT_DIR$/client/app/jobdetails/jobDetails.controller.js" />
         <option value="$PROJECT_DIR$/client/app/auth/login/login.html" />
-        <option value="$PROJECT_DIR$/client/app/auth/signup/signup.html" />
         <option value="$PROJECT_DIR$/client/app/main/main.css" />
         <option value="$PROJECT_DIR$/client/app/jobDetails/showMap.css" />
         <option value="$PROJECT_DIR$/client/app/custreq/custreq.controller.js" />
@@ -210,13 +216,14 @@
         <option value="$PROJECT_DIR$/client/app/common/filter/plumber.js" />
         <option value="$PROJECT_DIR$/client/app/main/main.config.js" />
         <option value="$PROJECT_DIR$/client/app/main/main.controller.js" />
-        <option value="$PROJECT_DIR$/client/app/auth/signup/signup.css" />
         <option value="$PROJECT_DIR$/client/app/addPlumber/addPlumber.css" />
         <option value="$PROJECT_DIR$/client/app/main/main.html" />
-        <option value="$PROJECT_DIR$/client/index.html" />
         <option value="$PROJECT_DIR$/client/app/jobDetails/jobDetails.html" />
         <option value="$PROJECT_DIR$/client/app/jobDetails/jobDetails.css" />
         <option value="$PROJECT_DIR$/client/app/jobDetails/jobDetails.controller.js" />
+        <option value="$PROJECT_DIR$/client/app/auth/signup/signup.css" />
+        <option value="$PROJECT_DIR$/client/index.html" />
+        <option value="$PROJECT_DIR$/client/app/auth/signup/signup.html" />
         <option value="$PROJECT_DIR$/client/app/addPlumber/addPlumber.html" />
       </list>
     </option>
@@ -483,6 +490,32 @@
               <option name="myItemId" value="auth" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="signup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="peninsular-kids" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plumber-webclient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -598,15 +631,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24107143" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294979" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15635179" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7166124" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -779,13 +813,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/auth/signup/signup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-72.57692">
-          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -964,20 +991,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/auth/signup/signup.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.8448277">
-          <caret line="231" column="1" selection-start-line="231" selection-start-column="1" selection-end-line="231" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/addPlumber/addPlumber.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.8448277">
-          <caret line="231" column="1" selection-start-line="231" selection-start-column="1" selection-end-line="231" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/main/main.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -993,14 +1006,6 @@
           <folding>
             <element signature="e#8402#8497#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693">
-          <caret line="15" column="82" selection-start-line="15" selection-start-column="82" selection-end-line="15" selection-end-column="82" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,19 +1046,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/addPlumber/addPlumber.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538">
+          <caret line="16" column="61" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/auth/signup/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.4285715">
+          <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
+          <folding>
+            <marker date="1441968992144" expanded="true" signature="602:734" placeholder="{...}" />
+            <marker date="1441968992144" expanded="true" signature="1562:1702" placeholder="{...}" />
+            <marker date="1441968992144" expanded="true" signature="2444:2584" placeholder="{...}" />
+            <marker date="1441968992144" expanded="true" signature="3338:3504" placeholder="{...}" />
+            <marker date="1441968992144" expanded="true" signature="4398:4531" placeholder="{...}" />
+            <marker date="1441968992144" expanded="true" signature="4935:5062" placeholder="{...}" />
+            <marker date="1441968992144" expanded="true" signature="5443:5565" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/auth/signup/signup.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/addPlumber/addPlumber.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14655173">
-          <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.09163347">
+          <caret line="5" column="73" selection-start-line="5" selection-start-column="73" selection-end-line="5" selection-end-column="73" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <marker date="1441967698246" expanded="true" signature="620:749" placeholder="{...}" />
-            <marker date="1441967698246" expanded="true" signature="1550:1689" placeholder="{...}" />
-            <marker date="1441967698246" expanded="true" signature="2393:2530" placeholder="{...}" />
-            <marker date="1441967698246" expanded="true" signature="3233:3396" placeholder="{...}" />
-            <marker date="1441967698246" expanded="true" signature="5261:5391" placeholder="{...}" />
-            <marker date="1441967698246" expanded="true" signature="5753:5875" placeholder="{...}" />
-            <marker date="1441967698246" expanded="true" signature="6203:6322" placeholder="{...}" />
+            <marker date="1441969301342" expanded="true" signature="609:738" placeholder="{...}" />
+            <marker date="1441969301342" expanded="true" signature="1586:1725" placeholder="{...}" />
+            <marker date="1441969301342" expanded="true" signature="2476:2613" placeholder="{...}" />
+            <marker date="1441969301342" expanded="true" signature="3363:3526" placeholder="{...}" />
+            <marker date="1441969301342" expanded="true" signature="5498:5628" placeholder="{...}" />
+            <marker date="1441969301342" expanded="true" signature="6027:6149" placeholder="{...}" />
+            <marker date="1441969301342" expanded="true" signature="6514:6633" placeholder="{...}" />
           </folding>
         </state>
       </provider>
