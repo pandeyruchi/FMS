@@ -3,7 +3,7 @@ angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$loc
     $analytics.pageTrack('/addPlumber');
 
     $scope.user = {
-        
+
     };
 
     $scope.progressbar = ngProgressFactory.createInstance();
@@ -22,7 +22,8 @@ angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$loc
         });
     }
 
-    $scope.computeCoordinates = computeCoordinates;
+
+  $scope.computeCoordinates = computeCoordinates;
 
     $scope.addPlumber = function () {
       $scope.progressbar.start();
@@ -33,7 +34,7 @@ angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$loc
             console.log(data);
             if (!!data.error) {
               $scope.progressbar.complete();
-                alert(data.Message);
+                alert(data.message);
             }
             else {
               $scope.progressbar.complete();
