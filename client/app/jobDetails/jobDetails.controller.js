@@ -1,20 +1,26 @@
 /**
  * Created by synerzip on 29/7/15.
  */
-angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $location, host, $stateParams, $compile, $state, $interval, $timeout) {
+angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $location, host,$filter, $stateParams, $compile, $state, $interval, $timeout) {
   // Variable Declarations
   var marker;
   var infoWindow = new google.maps.InfoWindow();
   var newCenter = {};
   $scope.jobs = {};
   $scope.plumbers = [];
+  $scope.jobsArray =[];
+
 
   $scope.filter = {
     jobFilter: 'all',
-    plumberFilter: 'all'
+    plumberFilter: 'all',
+    customerFilter:'',
+    jobPendingFilter:'active',
+    jobAssignedFilter:'In progress',
+    totalJobCountFilter:'all',
+    availFilter:1,
+    unAvailFilter:0
   };
-
-
   $scope.jobFilterOptions = [
     {id: 'completed', text: 'Completed'},
     {id: 'active', text: 'Open'},
@@ -23,10 +29,12 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
   ];
 
   $scope.plumberFilterOptions = [
-    {id: 'available', text: 'Available'},
-    {id: 'unavailable', text: 'Un-Available'},
+    {id: 1, text: 'Available'},
+    {id: 0, text: 'Un-Available'},
     {id: 'all', text: 'All Plumbers'}
   ];
+
+
 
 
   $scope.predicate = 'jobCount';
@@ -91,6 +99,9 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
     var res = $http.get(host + '/api/assignUnassignJobList').success(function (result) {
       //console.log(result.data);
       var data = result;
+      $scope.jobsArray = data;
+      $scope.pending = $filter('jobCount')($scope.jobsArray,$scope.filter.jobPendingFilter);
+      $scope.assigned = $filter('jobCount')($scope.jobsArray,$scope.filter.jobAssignedFilter);
       if (data != null) {
         data.forEach(function (job) {
           if (!$scope.jobs[job.jobId]) {
@@ -123,6 +134,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
       console.log(err);
       alert("Error");
     });
+
   }
 
 
@@ -134,6 +146,9 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
     var res = $http.get(host + '/api/getAllPlumbersDetail').success(function (result) {
       //console.log(result.data);
       var data = result;
+      $scope.plumbersList = data;
+      $scope.avail = $filter('plumber')($scope.plumbersList,$scope.filter.availFilter);
+      $scope.unavail = $filter('plumber')($scope.plumbersList,$scope.filter.unAvailFilter);
       if (data != null) {
         data.forEach(function (info) {
           $scope.sortType = info.firstName;
@@ -217,6 +232,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         alert("Error");
       });
     });
+    getJobDetails();
   };
 
 
