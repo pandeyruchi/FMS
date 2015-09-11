@@ -1,0 +1,38 @@
+<div ng-include="'components/navbar/navbar2.html'"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 col-lg-2 col-xs-12 col-sm-12">
+      <li class="list-group-item" ng-click="generateChart(one.id, one.name)" ng-model="one">{{one.name}}
+        <span style="position:relative;display:inline-block;float:right">
+          <i class="fa fa-star fa-2x text-right" style="color:#00c129;"></i>
+          <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">1</span>
+        </span>
+      </li>
+      <li class="list-group-item" ng-click="generateChart(two.id, two.name)" ng-model="two">{{two.name}}
+        <span style="position:relative;display:inline-block;float:right">
+          <i class="fa fa-star fa-2x text-right" style="color:  #7fcc88"></i>
+          <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">2</span>
+        </span>
+      </li>
+    <li class="list-group-item" ng-click="generateChart(three.id, thre.name)" ng-model="three">{{three.name}}
+      <span style="position:relative;display:inline-block;float:right">
+        <i class="fa fa-star fa-2x text-right" style="color:  #b6d6b7"></i>
+        <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">3</span>
+      </span>
+    </li>
+    <li class="list-group-item " ng-click="generateChart(plumber.id, plumber.name)" ng-repeat="plumber in plumberNames">{{plumber.name}}</li>
+    </div>
+  <div class="col-md-2 col-lg-2 col-xs-12 col-sm-12"></div>
+
+  <div class="container" id="mains" style="position: absolute; left: 15em; width:100%;margin: 0 auto">
+    <div class="col-lg-10 col-sm-10" id="pie-chart">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <highchart class="span10" config="chartConfig"></highchart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
