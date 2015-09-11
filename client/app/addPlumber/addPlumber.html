@@ -4,93 +4,93 @@
   <div class="row" id="mains">
     <div class="col-md-8 col-md-offset-2 details-form2">
       <form class="form" name="form" ng-submit="addPlumber()" novalidate>
-        <div class="panel" >
+        <div class="panel panels">
           <div class="panel-body">
             <div class="row">
               <!-- left side column-->
               <div class="col-sm-6">
                 <div class="row">
-                  <div class="col-sm-12"><h4 class="text-info"> Add New Plumber</h4>
+                  <div class="col-sm-12"><h4 class="text-info textInfo"> Add New Plumber</h4>
                     <div class="form-group" ng-class="{'has-success': form.email.$valid && form.email.$dirty,
                     'has-error':form.email.$invalid && form.email.$dirty}">
-                    <label>Email Address</label>
+                    <label class="labels">Email Address</label>
 
                     <input type="email" ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
-                    ng-blur="visited = true" placeholder="someone@example.com" name="email" class="form-control"
+                    ng-blur="visited = true" placeholder="someone@example.com" name="email" class="form-control formControl"
                     ng-model="user.userName"
                     required/>
 
-                    <p class="help-block" ng-show="form.email.$error.email && form.email.$dirty && visited">
+                    <p class="help-block helpBlock" ng-show="form.email.$error.email && form.email.$dirty && visited">
                       Please enter valid Email address.
                     </p>
 
-                    <p class="help-block" ng-show="form.email.$error.required && form.email.$dirty && visited">
+                    <p class="help-block helpBlock" ng-show="form.email.$error.required && form.email.$dirty && visited">
                       Email Address is required.
                     </p>
                   </div>
                   <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
                   'has-error': form.contact.$invalid && form.contact.$dirty  }">
-                  <label>Phone</label>
+                  <label class="labels">Phone</label>
 
-                  <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
+                  <input type="text" class="form-control formControl" name="contact" ng-model="user.mobileNo" required
                   ng-blur="visitedContact = true" ng-pattern="/^[+]?[0-9]{10}$/">
 
-                  <p class="help-block"
+                  <p class="help-block helpBlock"
                   ng-show="(form.contact.$error.pattern && form.contact.$dirty &&  visitedContact)">
                   Please enter valid contact number!
                 </p>
 
-                <p class="help-block" ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
+                <p class="help-block helpBlock" ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
                   Contact Number is required.
                 </p>
               </div>
               <div class="form-group" ng-class="{ 'has-success': form.password.$valid && form.password.$dirty,
               'has-error': form.password.$invalid && form.password.$dirty}">
-              <label>Password</label>
+              <label class="labels">Password</label>
               <input type="password" ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/"
-              ng-blur="visitedPassword = true" name="password" class="form-control" ng-model="user.password"
+              ng-blur="visitedPassword = true" name="password" class="form-control formControl" ng-model="user.password"
               required/>
 
-              <p class="help-block" ng-show="form.password.$error.pattern && form.password.$dirty && visitedPassword">
+              <p class="help-block helpBlock" ng-show="form.password.$error.pattern && form.password.$dirty && visitedPassword">
                 Please enter valid password.
               </p>
 
-              <p class="help-block" ng-show="form.password.$error.required && form.password.$dirty && visitedPassword">
+              <p class="help-block helpBlock" ng-show="form.password.$error.required && form.password.$dirty && visitedPassword">
                 Password is required.
               </p>
             </div>
 
             <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && form.confirmPassword.$dirty,
             'has-error': form.confirmPassword.$invalid && form.confirmPassword.$dirty}">
-            <label>Confirm Password</label>
-            <input type="password" name="confirmPassword" class="form-control"
+            <label class="labels">Confirm Password</label>
+            <input type="password" name="confirmPassword" class="form-control formControl"
             ng-blur="visitedConfirm = true" ng-model="user.confirmPassword"
             required compare-to="user.password"/>
 
-            <p class="help-block"
+            <p class="help-block helpBlock"
             ng-show="form.confirmPassword.$error.compareTo && form.confirmPassword.$dirty && visitedConfirm">
             Password didn't match.
           </p>
 
-          <p class="help-block" ng-show="form.confirmPassword.$error.required && form.confirmPassword.$dirty && visitedConfirm">
+          <p class="help-block helpBlock" ng-show="form.confirmPassword.$error.required && form.confirmPassword.$dirty && visitedConfirm">
             Re-enter your password.
           </p>
         </div>
         <div class ="hidden" style="float: left; width: 70%; padding-left: 5px; padding-right: 5px;">
-          <label style="font-size: 10pt; ">Notifications </label> </br>
+          <label class="labels" style="font-size: 10pt; ">Notifications </label> </br>
           <div style="float: left; padding-left: 5px; padding-right: 5px;">
             <input type="checkbox" ng-model="user.smsnotify" ng-true-value="'YES'" ng-false-value="'NO'">
-            <label style="color: #666666; margin: 0 0px;">SMS</label>
+            <label class="labels" style="color: #666666; margin: 0 0px;">SMS</label>
           </input>
         </div>
         <div style="float: left; padding-left: 5px; padding-right: 5px; ">
           <input type="checkbox" ng-model="user.emailnotify" ng-true-value="'YES'" ng-false-value="'NO'">
-          <label style="color: #666666; margin: 0 0px;">email</label>
+          <label class="labels" style="color: #666666; margin: 0 0px;">email</label>
         </input>
       </div>
       <div style="float: left; padding-left: 5px; padding-right: 5px; vertical-align: bottom">
         <input type="checkbox" ng-model="user.pushnotify" ng-true-value="'YES'" ng-false-value="'NO'">
-        <label style="color: #666666; margin: 0 0px;">Push Notifications</label>
+        <label class="labels" style="color: #666666; margin: 0 0px;">Push Notifications</label>
       </input>
     </div>
   </div>
@@ -103,41 +103,41 @@
   <div class="col-sm-12"><h4>&nbsp;</h4>
     <div class="form-group" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
     'has-error': form.firstname.$invalid && form.firstname.$dirty}">
-    <label>First Name</label>
-    <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control"
+    <label class="labels">First Name</label>
+    <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control formControl"
     ng-model="user.firstName" required>
 
-    <p class="help-block"
+    <p class="help-block helpBlock"
     ng-show="form.firstname.$error.required && form.firstname.$dirty && visitedFirstName">
     Please enter First Name
   </p>
 </div>
 <div class="form-group" ng-class="{'has-success': form.lastname.$valid && form.lastname.$dirty,
 'has-error': form.lastname.$invalid && form.lastname.$dirty}">
-<label>Last Name</label>
-<input type="text" name="lastname" ng-blur="visitedLastName = true" class="form-control"
+<label class="labels">Last Name</label>
+<input type="text" name="lastname" ng-blur="visitedLastName = true" class="form-control formControl"
 ng-model="user.lastName" required>
 
-<p class="help-block"
+<p class="help-block helpBlock"
 ng-show="form.lastname.$error.required && form.lastname.$dirty && visitedLastName">
 Please enter Last Name
 </p>
 </div>
 <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
 'has-error': form.address.$invalid && form.address.$dirty}">
-<label>Address</label>
-<textarea rows="4.5" ng-change="computeCoordinates()" class="form-control"
+<label class="labels">Address</label>
+<textarea rows="4.5" ng-change="computeCoordinates()" class="form-control formControl"
 ng-blur="visitedAddress=true"
 name="address"
 ng-model="user.address" required></textarea>
 
-<p class="help-block"
+<p class="help-block helpBlock"
 ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
 Please enter address
 </p>
 </div>
 <div class="form-group">
-  <button class="btn btn-primary  btn-login" ng-disabled="form.$invalid" type="submit" analytics-on="click"
+  <button class="btn btn-primary btn-login btnPage" ng-disabled="form.$invalid" type="submit" analytics-on="click"
   analytics-category="AddPlumber" analytics-event="AddPlumber"
   analytics-label="Add Plumber Information">Save
 </button>

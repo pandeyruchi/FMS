@@ -232,7 +232,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         alert("Error");
       });
     });
-    getJobDetails();
+
   };
 
 
