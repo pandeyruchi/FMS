@@ -6,7 +6,7 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" style="margin-top: -18px">
         <div class="col-md-4 form-group">
             <form class="form" name="form" ng-submit="signup()" novalidate>
 
@@ -18,54 +18,60 @@
                     <h5>{{job.address}}</h5>
                 </div>
                 <div class="form-group">
-                    <h5>{{contact}}</h5>
+                    <h5>{{+91}} {{contact}}</h5>
                 </div>
+                <br/>
                 <div>
                     <table style="width: 100%;margin-top: -20px;">
                         <tr>
                             <td class="text-left">
-                                <p ng-show="!showAddAddress">Select Address</p>
+                                <p ng-show="!showAddIssue">Select Issue</p>
 
-                                <p ng-show="showAddAddress">Enter Address</p>
+                                <p ng-show="showAddIssue">Enter Problem</p>
                             </td>
                             <td class="text-right">
                                 <a class="btn btn-link btn-sm" style="border: none"
-                                   ng-click="showAddAddress=!showAddAddress">
-                                    <p ng-show="!showAddAddress">or Add New</p>
+                                   ng-click="showAddIssue=!showAddIssue">
+                                    <p ng-show="!showAddIssue">or Add New</p>
 
-                                    <p ng-show="showAddAddress">or Select</p>
+                                    <p ng-show="showAddIssue">or Select</p>
                                 </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div ng-show="showAddIssue">
+                                    <input type="text" class="form-control" ng-model="issues">
+                                </div>
+                                <br/>
+                                <div ng-show="showAddIssue">
+                                    <textarea class="form-control" name="address" ng-blur="visitedAddress = true"
+                                              class="form-control"rows="3" required></textarea>
+                                    <button class="btn btn-success" ng-click="save()">OK</button>
+                                    <button class="btn btn-primary" ng-click="assignNew(job,issues)">Assign</button>
+
+                                </div>
+
                             </td>
                         </tr>
                     </table>
                 </div>
 
-                <div class="form-group">
+                <div ng-show="!showAddIssue" class="form-group">
                     <md-content>
                         <md-list>
-                            <md-list-item ng-click="jobSelected(job)" class="md-3-line md-list-item-job"
-                                          ng-repeat="job in jobs">
+                            <md-list-item ng-click="jobSelected(job)" class="md-3-line md-list-item-job">
                                 <div class="md-list-item-text">
-                                    <h3><strong class="headerFont">{{job.address}}</strong></h3>
+                                    <h3><strong class="headerFont">{{job.issues}}</strong></h3>
                                 </div>
                                 <md-divider ng-if="!$last"></md-divider>
                             </md-list-item>
                         </md-list>
                     </md-content>
                     <button class="btn btn-success" ng-click="ok()">OK</button>
+                    <button class="btn btn-primary" ng-click="assign()">Assign</button>
                 </div>
 
-                <div ng-show="showAddAddress" class="form-group" ng-class="{'has-success': form.address.$valid && form.address.$dirty,
-                                            'has-error': form.address.$invalid && form.address.$dirty }">
-
-                    <textarea class="form-control" name="address" ng-blur="visitedAddress = true" class="form-control"
-                              rows="3" required></textarea>
-
-                    <p class="help-block"
-                       ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
-                        Please enter user
-                    </p>
-                </div>
             </form>
 
         </div>

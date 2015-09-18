@@ -3,7 +3,7 @@
  */
 angular.module('pune').config(function($stateProvider){
     $stateProvider.state('jobDetails',{
-        url:"/jobDetails",
+        url:"/jobDetails\{job}",
         templateUrl:"app/jobDetails/jobDetails.html",
         controller:"jobDetailsCtrl"
     })

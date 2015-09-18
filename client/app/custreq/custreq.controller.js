@@ -46,7 +46,13 @@ angular.module('pune').controller('custreqCtrl', function ($scope, $http, $locat
         }
 
         $scope.ok =function(){
+
             $state.go("customerRequest",{job:JSON.stringify($scope.selectedJob),contact:$scope.user.contact});
+        }
+
+        $scope.new =function(job,address){
+            job.address = address;
+            $state.go("customerRequest",{job:JSON.stringify(job),contact:$scope.user.contact});
         }
 
         createNewMap(18.518920, 73.860736);

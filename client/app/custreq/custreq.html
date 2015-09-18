@@ -1,13 +1,14 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
-<nav class="navbar navbar-default navbar-static-top" style="padding-left: 10px" ng-controller="NavbarCtrl">
+<nav class="navbar navbar-default navbar-static-top" style="padding-left: 10px;margin-top: -20px"
+     ng-controller="NavbarCtrl">
     <div class="navbar-header">
         <h4 style="color:#6D5960;text-align: center">Register a new call</h4>
     </div>
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
+    <div class="row" style="margin-top: -18px">
+        <div class="col-md-4" style="background-color: #f9f9f9">
             <form class="form" name="form" ng-submit="signup()" novalidate>
 
                 <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
@@ -44,7 +45,7 @@
                     </p>
 
                 </div>
-                <div>
+                <div ng-show="!!customerName">
                     <table style="width: 100%;margin-top: -20px;">
                         <tr>
                             <td class="text-left">
@@ -65,8 +66,8 @@
                 </div>
 
                 <div class="form-group">
-                    <md-content>
-                        <md-list>
+                    <md-content style="color: #f9f9f9">
+                        <md-list ng-show="!showAddAddress">
                             <md-list-item ng-click="jobSelected(job)" class="md-3-line md-list-item-job"
                                           ng-repeat="job in jobs">
                                 <div class="md-list-item-text">
@@ -74,22 +75,31 @@
                                 </div>
                                 <md-divider ng-if="!$last"></md-divider>
                             </md-list-item>
+                            <button class="btn btn-success pull-right" ng-click="ok()">OK</button>
+                        </md-list>
+                        <md-list ng-show="showAddAddress">
+                            <md-list-item class="md-3-line md-list-item-job"
+                                          ng-repeat="job in jobs | limitTo:1">
+                                <div>
+                                <textarea class="form-control" ng-model="address" name="address"
+                                          rows="3" required></textarea>
+                                    <button class="btn btn-success pull-right" ng-click="new(job,address)">OK</button>
+                                </div>
+                                <md-divider ng-if="!$last"></md-divider>
+                            </md-list-item>
                         </md-list>
                     </md-content>
-                    <button class="btn btn-success" ng-click="ok()">OK</button>
+
                 </div>
 
-                <div ng-show="showAddAddress" class="form-group" ng-class="{'has-success': form.address.$valid && form.address.$dirty,
-                                            'has-error': form.address.$invalid && form.address.$dirty }">
+                <!--  <div ng-show="showAddAddress" class="form-group" ng-class="{'has-success': form.address.$valid && form.address.$dirty,
+                                              'has-error': form.address.$invalid && form.address.$dirty }">
 
-                    <textarea class="form-control" name="address" ng-blur="visitedAddress = true" class="form-control"
-                              rows="3" required></textarea>
+                      <textarea class="form-control" ng-model="job.address" name="address" ng-blur="visitedAddress = true"
+                                class="form-control"
+                                rows="3" required></textarea>
 
-                    <p class="help-block"
-                       ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
-                        Please enter user
-                    </p>
-                </div>
+                  </div>-->
             </form>
         </div>
         <div class="col-md-8">

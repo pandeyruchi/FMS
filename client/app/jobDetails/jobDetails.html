@@ -43,7 +43,7 @@
                                                 </div>
                                             </td>
                                             <td style="width: 15%;padding-right: 10px;">
-                                                <i ng-class="{'orange':job.jobStatus==='assigned','red':job.jobStatus==='active','green':job.jobStatus==='In progress'}"
+                                                <i ng-class="{'orange':job.jobStatus==='assigned','red':job.jobStatus==='unassigned','green':job.jobStatus==='inProgress'}"
                                                    class="fa fa-circle fa-pull-right fa-2x">
                                                     <md-tooltip>{{job.jobStatus}}</md-tooltip>
                                                 </i></td>
@@ -56,30 +56,46 @@
                                                     <!-- <h4 class="off-white"><b class="headerFont">Job ID:</b></h4>
                                                      <h5 class="white"><b class="subHeaderFont">{{job.jobId}}</b></h5>-->
                                                     <div class="form-inline">
-                                                        <h4 class="off-white"><b class="headerFont">Job Description</b>
-                                                        </h4>
-                                                        <input type="checkbox" checked="job.urgentFlag">Priority
+                                                        <table style="width:100%">
+                                                            <tr>
+                                                                <td style="width:75%"><h4 class="off-white"><b class="headerFont">Job
+                                                                    Description</b></h4></td>
+                                                                <td style="width:25%"><input type="checkbox" checked="job.urgentFlag">Priority
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h5 class="white"><b class="subHeaderFont">{{job.issues}}</b>
+                                                                    </h5>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                     <span class="off-white"
+                                                                           ng-show="!!job.plumbers.length"><strong
+                                                                             class="headerFont">Assigned
+                                                                         Plumber(s)</strong></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <md-chips ng-show="job.status !== 'inProgress'"
+                                                                              ng-model="job.plumbers"
+                                                                              readonly="readonly">
+                                                                        <md-chip-template>
+                                                                            <strong class="subHeaderFont">{{$chip.name}}</strong>
+                                                                        </md-chip-template>
+                                                                    </md-chips>
+                                                                    <md-chips ng-show="job.status === 'inProgress'"
+                                                                              ng-model="job.plumbers" readonly="true">
+                                                                        <md-chip-template>
+                                                                            <strong class="subHeaderFont">{{$chip.name}}</strong>
+                                                                        </md-chip-template>
+                                                                    </md-chips>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
-
-                                                    <h5 class="white"><b class="subHeaderFont">{{job.issues}}</b>
-                                                    </h5>
-                                                    <span class="off-white" ng-show="!!job.plumbers.length"><strong
-                                                            class="headerFont">Assigned
-                                                        Plumber(s)</strong></span>
-                                                    <md-chips ng-show="job.status !== 'In progress'"
-                                                              ng-model="job.plumbers" readonly="readonly">
-                                                        <md-chip-template>
-                                                            <strong class="subHeaderFont">{{$chip.name}}</strong>
-                                                        </md-chip-template>
-                                                    </md-chips>
-                                                    <md-chips ng-show="job.status === 'In progress'"
-                                                              ng-model="job.plumbers" readonly="true">
-                                                        <md-chip-template>
-                                                            <strong class="subHeaderFont">{{$chip.name}}</strong>
-                                                        </md-chip-template>
-                                                    </md-chips>
-                                                    <!--ng-disabled="!(selected && selectedP)"-->
-
                                                 </div>
                                             </td>
                                         </tr>
@@ -114,14 +130,22 @@
                             </select>
                             <button href="" ng-click="order('firstName')" style="padding-left: 0px"
                                     class="btn btn-link">
-                                <i ng-show="!reverse" class="fa fa-sort-alpha-asc"><md-tooltip>Sort Ascending : A-Z</md-tooltip></i>
-                                <i ng-show="reverse" class="fa fa-sort-alpha-desc"><md-tooltip>Sort Descending : Z-A</md-tooltip></i>
+                                <i ng-show="!reverse" class="fa fa-sort-alpha-asc">
+                                    <md-tooltip>Sort Ascending : A-Z</md-tooltip>
+                                </i>
+                                <i ng-show="reverse" class="fa fa-sort-alpha-desc">
+                                    <md-tooltip>Sort Descending : Z-A</md-tooltip>
+                                </i>
                             </button>
                         </div>
                         <div class="col-md-3">
                             <button ng-click="order('jobCount')" class="btn btn-link">
-                                <i ng-show="!reverse" class="fa fa-sort-numeric-asc"><md-tooltip>Sort Ascending : 1-9</md-tooltip></i>
-                                <i ng-show="reverse" class="fa fa-sort-numeric-desc"><md-tooltip>Sort Descending : 9-1</md-tooltip></i>
+                                <i ng-show="!reverse" class="fa fa-sort-numeric-asc">
+                                    <md-tooltip>Sort Ascending : 1-9</md-tooltip>
+                                </i>
+                                <i ng-show="reverse" class="fa fa-sort-numeric-desc">
+                                    <md-tooltip>Sort Descending : 9-1</md-tooltip>
+                                </i>
                             </button>
                         </div>
                     </div>

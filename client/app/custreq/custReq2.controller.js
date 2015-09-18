@@ -2,7 +2,7 @@
  * Created by ruchyp on 7/22/2015.
  */
 
-angular.module('pune').controller('custReq2Ctrl', function ($scope, $http, $location, host, ngProgressFactory, $analytics,$stateParams) {
+angular.module('pune').controller('custReq2Ctrl', function ($scope,$state, $http, $location, host, ngProgressFactory, $analytics,$stateParams) {
         $analytics.pageTrack('/custreq');
         //var user = {};
         $scope.progressbar = ngProgressFactory.createInstance();
@@ -22,6 +22,30 @@ angular.module('pune').controller('custReq2Ctrl', function ($scope, $http, $loca
                     $scope.user.longitude = location.K;
                 }
             });
+        }
+
+        $scope.assign = function(){
+            $scope.newJob = {};
+            $scope.newJob.check =0;
+            $scope.newJob.customerId = $scope.job.customerId;
+            $scope.newJob.issues =$scope.job.issues;
+            $scope.newJob.address = $scope.job.address;
+            $scope.newJob.locality =$scope.job.locality;
+            $scope.newJob.longitude =$scope.job.longitude;
+            $scope.newJob.latitude =$scope.job.latitude;
+            $scope.newJob.urgentFlag =$scope.job.urgentFlag.toString();
+            $scope.newJob.email =$scope.job.email;
+            $scope.newJob.city =$scope.job.city;
+            var res = $http.post(host + '/api/jobReqByMobileNo', $scope.newJob);
+            res.success(function (data) {
+                data.selected = true;
+                $state.go("jobDetails",{job:JSON.stringify(data)});
+            });
+            res.error(function (err) {
+                console.log(err);
+                alert("Error");
+            });
+
         }
 
         $scope.getJobDetails = function (contact) {
@@ -49,6 +73,29 @@ angular.module('pune').controller('custReq2Ctrl', function ($scope, $http, $loca
 
         $scope.ok =function(){
             $state.go("customerRequest",{job:$scope.selectedJob,contact:$scope.user.contact});
+        }
+
+        $scope.assignNew =function(job, issues){
+            $scope.newJob = {};
+            $scope.newJob.check =0;
+            $scope.newJob.customerId = job.customerId;
+            $scope.newJob.issues =issues;
+            $scope.newJob.address = job.address;
+            $scope.newJob.locality =job.locality;
+            $scope.newJob.longitude =job.longitude;
+            $scope.newJob.latitude =job.latitude;
+            $scope.newJob.urgentFlag =job.urgentFlag.toString();
+            $scope.newJob.email =job.email;
+            $scope.newJob.city =job.city;
+            var res = $http.post(host + '/api/jobReqByMobileNo', $scope.newJob);
+            res.success(function (data) {
+                data.selected = true;
+                $state.go("jobDetails",{job:JSON.stringify(data)});
+            });
+            res.error(function (err) {
+                console.log(err);
+                alert("Error");
+            });
         }
 
         createNewMap(18.518920, 73.860736);

@@ -1,1 +1,130 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
+
+<div class="col-md-offset-1 col-md-3">
+    <!--  <span class="badge" id="pending">{{pendingList.length}}</span>-->
+    <div class="dashboard-badge orange-badge">
+        <div class="dashboard-number">
+            {{pendingList.length}}</div>
+        <div class="dashboard-label">
+            <b>pending</b></div>
+    </div>
+    <br/><br/>
+    <div class="dropdown">
+        <button style="margin-left: 25px" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">This Week
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li ng-repeat="duration in durationList"><a ng-click="changedValueDurationPending(duration)">{{duration}}</a></li>
+        </ul>
+    </div>
+    <br/>
+    <md-content class="customerBg">
+        <md-list>
+            <md-list-item class="md-3-line md-list-item-job"
+                          ng-repeat="plumber in pendingList">
+                <table style="width: 110%; margin-left: -16px; overflow: hidden">
+                    <tr>
+                        <td style="width:10%;padding-left: 10px;">
+                        </td>
+                        <td style="width:75%">
+                            <div class="md-list-item-text">
+                                <h3><strong class="headerFont" style="color: darkgrey">{{$index+1}} {{plumber.customerName}}</strong></h3>
+                                <h6 class="subHeaderFont">{{plumber.address}}</h6>
+
+                                <div class="subHeaderFont">
+                                    <i class="fa fa-mobile fa-fw">&nbsp;{{plumber.mobileNo}}</i></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>
+
+
+<div  class="col-md-offset-1 col-md-3">
+    <div class="dashboard-badge green-badge">
+        <div class="dashboard-number">
+            {{assignedList.length}}</div>
+        <div class="dashboard-label">
+            <b>assigned</b>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="dropdown">
+        <button style="margin-left: 25px" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">This Week
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li ng-repeat="duration in durationList"><a ng-click="changedValueDurationAssigned(duration)">{{duration}}</a></li>
+        </ul>
+    </div>
+    <br/>
+    <md-content class="customerBg">
+        <md-list>
+            <md-list-item class="md-3-line md-list-item-job"
+                          ng-repeat="plumber in assignedList">
+                <table style="width: 110%; margin-left: -16px; overflow: hidden">
+                    <tr>
+                        <td style="width:10%;padding-left: 10px;">
+                        </td>
+                        <td style="width:75%">
+                            <div class="md-list-item-text">
+                                <h3><strong class="headerFont" style="color: darkgrey">{{$index+1}} {{plumber.customerName}}</strong></h3>
+                                <h6 class="subHeaderFont">{{plumber.address}}</h6>
+
+                                <div class="subHeaderFont">
+                                    <i class="fa fa-mobile fa-fw">&nbsp;{{plumber.mobileNo}}</i></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>
+
+<div class="col-md-offset-1 col-md-3">
+    <div class="dashboard-badge grey-badge">
+        <div class="dashboard-number">
+            {{completedList.length}}</div>
+        <div class="dashboard-label">
+            <b>completed</b>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="dropdown">
+        <button style="margin-left: 25px" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">This Week
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li ng-repeat="duration in durationList"><a ng-click="changedValueDurationCompleted(duration)">{{duration}}</a></li>
+        </ul>
+    </div>
+    <br/>
+    <md-content class="customerBg" style="padding-right: 100px">
+        <md-list>
+            <md-list-item class="md-3-line md-list-item-job"
+                          ng-repeat="plumber in completedList">
+                <table style="width: 110%; margin-left: -16px">
+                    <tr>
+                        <td style="width:10%;padding-left: 10px;">
+
+                        </td>
+                        <td style="width:75%">
+                            <div class="md-list-item-text">
+                                <h3><strong class="headerFont" style="color: darkgrey">{{$index+1}} {{plumber.customerName}}</strong></h3>
+                                <h6 class="subHeaderFont">{{plumber.address}}</h6>
+
+                                <div class="subHeaderFont">
+                                    <i class="fa fa-mobile fa-fw">&nbsp;{{plumber.mobileNo}}</i></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>
