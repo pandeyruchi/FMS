@@ -7,7 +7,7 @@
                     <div class="row">
                         <br/>
 
-                        <div class="col-md-offset-1 col-md-8">
+                        <div class="col-md-offset-1 col-md-9" style="padding-left: 0px;">
                             <!--  <select ng-options="option.id as option.text for option in jobFilterOptions"
                                       ng-model="filter.jobFilter" class="btn btn-default">
                               </select>
@@ -27,7 +27,7 @@
                         <md-content class="customerBg">
                             <md-list>
                                 <md-list-item class="md-3-line md-list-item-job"
-                                              ng-repeat="(id,job) in jobs| job:filter.jobFilter|customer:filter.customerFilter">
+                                              ng-repeat="(id,job) in jobs| job:filter.jobFilter|customer:filter.customerFilter | sortByDate">
                                     <table style="width: 110%; margin-left: -16px">
                                         <tr ng-class="{'upperGreenBand':job.selected}" ng-click="customerSelected(job)">
                                             <td style="width:10%;padding-left: 10px;"><i ng-show="!!job.urgentFlag"
@@ -43,22 +43,37 @@
                                                 </div>
                                             </td>
                                             <td style="width: 15%;padding-right: 10px;">
-                                                <i ng-class="{'yellow':job.jobStatus==='completed','red':job.jobStatus==='active','green':job.jobStatus==='In progress'}"
-                                                   class="fa fa-circle fa-pull-right fa-2x"></i></td>
+                                                <i ng-class="{'orange':job.jobStatus==='assigned','red':job.jobStatus==='active','green':job.jobStatus==='In progress'}"
+                                                   class="fa fa-circle fa-pull-right fa-2x">
+                                                    <md-tooltip>{{job.jobStatus}}</md-tooltip>
+                                                </i></td>
+
                                         </tr>
                                         <tr style="background-color: #6D8D83">
                                             <td></td>
                                             <td colspan="2">
                                                 <div collapse="!job.showDetails">
-                                                    <h4 class="off-white"><b class="headerFont">Job ID:</b></h4>
-                                                    <h5 class="white"><b class="subHeaderFont">{{job.jobId}}</b></h5>
-                                                    <h4 class="off-white"><b class="headerFont">Job Description</b></h4>
-                                                    <h5 class="white"><b class="subHeaderFont">{{job.description}}</b>
+                                                    <!-- <h4 class="off-white"><b class="headerFont">Job ID:</b></h4>
+                                                     <h5 class="white"><b class="subHeaderFont">{{job.jobId}}</b></h5>-->
+                                                    <div class="form-inline">
+                                                        <h4 class="off-white"><b class="headerFont">Job Description</b>
+                                                        </h4>
+                                                        <input type="checkbox" checked="job.urgentFlag">Priority
+                                                    </div>
+
+                                                    <h5 class="white"><b class="subHeaderFont">{{job.issues}}</b>
                                                     </h5>
                                                     <span class="off-white" ng-show="!!job.plumbers.length"><strong
                                                             class="headerFont">Assigned
                                                         Plumber(s)</strong></span>
-                                                    <md-chips ng-model="job.plumbers" readonly="readonly">
+                                                    <md-chips ng-show="job.status !== 'In progress'"
+                                                              ng-model="job.plumbers" readonly="readonly">
+                                                        <md-chip-template>
+                                                            <strong class="subHeaderFont">{{$chip.name}}</strong>
+                                                        </md-chip-template>
+                                                    </md-chips>
+                                                    <md-chips ng-show="job.status === 'In progress'"
+                                                              ng-model="job.plumbers" readonly="true">
                                                         <md-chip-template>
                                                             <strong class="subHeaderFont">{{$chip.name}}</strong>
                                                         </md-chip-template>
@@ -93,38 +108,38 @@
                     <div class="row">
                         <br/>
 
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <select ng-options="option.id as option.text for option in plumberFilterOptions"
-                                            ng-model="filter.plumberFilter" class="btn btn-default">
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <button href="" ng-click="order('firstName')" class="btn btn-link pull-left">
-                                        <i ng-show="!reverse" class="fa fa-sort-alpha-asc"></i>
-                                        <i ng-show="reverse" class="fa fa-sort-alpha-desc"></i>
-                                    </button>
-                                </div>
-                                <div class="col-md-3 ">
-                                    <button ng-click="order('jobCount')" class="btn btn-link pull-right">
-                                        <i ng-show="!reverse" class="fa fa-sort-numeric-asc"></i>
-                                        <i ng-show="reverse" class="fa fa-sort-numeric-desc"></i>
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="col-md-9 form-group">
+                            <select ng-options="option.id as option.text for option in plumberFilterOptions"
+                                    ng-model="filter.plumberFilter" class="btn btn-default">
+                            </select>
+                            <button href="" ng-click="order('firstName')" style="padding-left: 0px"
+                                    class="btn btn-link">
+                                <i ng-show="!reverse" class="fa fa-sort-alpha-asc"><md-tooltip>Sort Ascending : A-Z</md-tooltip></i>
+                                <i ng-show="reverse" class="fa fa-sort-alpha-desc"><md-tooltip>Sort Descending : Z-A</md-tooltip></i>
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button ng-click="order('jobCount')" class="btn btn-link">
+                                <i ng-show="!reverse" class="fa fa-sort-numeric-asc"><md-tooltip>Sort Ascending : 1-9</md-tooltip></i>
+                                <i ng-show="reverse" class="fa fa-sort-numeric-desc"><md-tooltip>Sort Descending : 9-1</md-tooltip></i>
+                            </button>
                         </div>
                     </div>
                     <div class="row max-height">
                         <md-content class="plumberBg">
                             <md-list>
-                                <md-list-item class="md-3-line" ng-click="plumberClick(item)"
+                                <md-list-item class="md-2-line" ng-click="plumberClick(item)"
                                               ng-class="{'presence':!item.available && !item.selected,'selected':item.selected}"
                                               ng-repeat="item in plumbers |plumber:filter.plumberFilter|orderBy:predicate:reverse">
                                     <md-divider ng-if="!$last"></md-divider>
+                                    <img check-image ng-src="{{item.photoUrl}}?{{$index}}" class="md-avatar"
+                                         alt="image"/>
+
                                     <div class="md-list-item-text">
                                         <h3>
-                                            <div class="headerFont">{{item.firstName}} {{item.lastName}}</div>
+                                            <div class="headerFont">
+                                                {{item.firstName}} {{item.lastName}}
+                                            </div>
                                         </h3>
                                         <h4>
                                             <div class="subHeaderFont">{{item.mobileNo}}</div>
@@ -148,8 +163,8 @@
             </div>
             <div class="row" style="background-color: #F1F1F1">
                 <div class="footer">
-                    <div class="col-md-2 font-color" ng-model="pending">Pending: {{pending.length}}</div>
-                    <div class="col-md-2 font-color" ng-model="assigned">Assigned:{{assigned.length}}</div>
+                    <div class="col-md-2 font-color" ng-model="pending">Pending: {{getPendingJobCount()}}</div>
+                    <div class="col-md-2 font-color" ng-model="assigned">Assigned:{{getAssignedJobCount()}}</div>
                     <div class="col-md-2 font-color">Total:{{jobsArray.length}}</div>
                     <div class="col-md-2 font-color" ng-model="avail">Available: {{avail.length}}</span></div>
                     <div class="col-md-2 font-color" ng-model="unavail">Unavailable:{{unavail.length}}</div>

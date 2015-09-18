@@ -2,13 +2,15 @@
  * Created by ruchyp on 7/22/2015.
  */
 
-angular.module('pune').controller('custreqCtrl', function ($scope, $http, $location, host, ngProgressFactory, $analytics,$state) {
+angular.module('pune').controller('custReq2Ctrl', function ($scope, $http, $location, host, ngProgressFactory, $analytics,$stateParams) {
         $analytics.pageTrack('/custreq');
         //var user = {};
         $scope.progressbar = ngProgressFactory.createInstance();
         $scope.progressbar.setHeight('4px');
         $scope.progressbar.setColor('#0274ff');
         var marker;
+        $scope.job = JSON.parse($stateParams.job);
+        $scope.contact = $stateParams.contact;
 
 
         function computeCoordinates() {
@@ -46,7 +48,7 @@ angular.module('pune').controller('custreqCtrl', function ($scope, $http, $locat
         }
 
         $scope.ok =function(){
-            $state.go("customerRequest",{job:JSON.stringify($scope.selectedJob),contact:$scope.user.contact});
+            $state.go("customerRequest",{job:$scope.selectedJob,contact:$scope.user.contact});
         }
 
         createNewMap(18.518920, 73.860736);
