@@ -156,7 +156,7 @@
                                               ng-class="{'presence':!item.available && !item.selected,'selected':item.selected}"
                                               ng-repeat="item in plumbers |plumber:filter.plumberFilter|orderBy:predicate:reverse">
                                     <md-divider ng-if="!$last"></md-divider>
-                                    <img check-image ng-src="{{item.photoUrl}}?{{$index}}" class="md-avatar"
+                                    <img check-image ng-src="{{item.photoUrl}}" class="md-avatar"
                                          alt="image"/>
 
                                     <div class="md-list-item-text">

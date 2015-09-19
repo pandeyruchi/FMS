@@ -104,6 +104,22 @@ table {
     content: '\25b2';
 }
 
+.divCust{
+    background-color: #F9F9F9;
+    margin-top: -20px;
+    /* margin-left: 0px; */
+    padding-left: 5px;
+    margin-bottom: -10px;
+}
+
+.divider{
+
+    display: block;
+    border-top-width: 3px;
+    border-top-style: solid;
+    margin: 0;
+}
+
 .sortorder.reverse:after {
     content: '\25bc';
 }
@@ -189,7 +205,7 @@ h6 {
 }
 
 .font-color{
-    color:#BCBCBC;
+    color:#999999;
 }
 
 .greenBackground {

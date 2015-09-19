@@ -256,7 +256,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
                 return p.id === plumber.plumberId
             });
 
-            if (assigned.length > 0 && job.status === 'inprogress' && plumber.selected) {
+            if (assigned.length > 0 && job.status === 'inProgress' && plumber.selected) {
                 // Plumber is already assigned check for job status if it is 'in progress' dont allow plumber to be removed
                 alert("Job is in Progress. Plumber can't be removed");
                 return;

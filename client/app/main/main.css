@@ -46,7 +46,7 @@
     color: grey;
 }
 
-md-list{
+#dashboard.md-list{
     overflow-x: hidden;
     overflow-y: auto;
     max-height: 520px;
