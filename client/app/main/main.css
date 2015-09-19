@@ -53,6 +53,10 @@ md-list{
 
 }
 
+select {
+height: 30px;
+background-color: whitesmoke;
+}
 
 *{box-sizing: border-box;}
 .dashboard-container{margin-top:-21px; }
