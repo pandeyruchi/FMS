@@ -11,6 +11,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
     $scope.jobsArray = [];
 
 
+
     $scope.filter = {
         jobFilter: 'all',
         plumberFilter: 'all',
@@ -66,46 +67,33 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         });
     }
 
+    var hash;
+
     function getJobDetails() {
         var res = $http.get(host + '/api/assignUnassignJobList').success(function (result) {
             //console.log(result.data);
-            var data = result;
+            $scope.jobs = {};
+            var data = result[0].list;
+            hash = result[0].hash;
             $scope.jobsArray = data;
-            if (data != null) {
-                data.forEach(function (job) {
-                    if (!$scope.jobs[job.jobId]) {
-                        job.plumbers = [];
-                        job.plumbersOriginal = [];
-                        if (!!job.plumberId || job.plumberId !== null) {
-                            var plumber = {
-                                id: parseInt(job.plumberId),
-                                name: job.firstName + " " + job.lastName,
-                                status: job.status
-                            };
-                            job.plumbers.push(plumber);
-                            job.plumbersOriginal.push(plumber);
-                        }
-                        $scope.jobs[job.jobId] = job;
+            updateJobsMap(data)
+        });
+        res.error(function (err) {
+            console.log(err);
+            alert("Error");
+        });
+    }
 
-                    } else {
-                        if (!!job.plumberId || job.plumberId !== null) {
-                            var plumber = {
-                                id: parseInt(job.plumberId),
-                                name: job.firstName + " " + job.lastName,
-                                status: job.status
-                            };
-                            $scope.jobs[job.jobId].plumbers.push(plumber);
-                            $scope.jobs[job.jobId].plumbersOriginal.push(plumber);
 
-                        }
-                    }
-                });
-                updateCount();
-            }
-
-            if (!!$stateParams.job) {
-                $scope.selectedJob = JSON.parse($stateParams.job);
-                $scope.customerSelected($scope.selectedJob);
+    function updateJobDetails() {
+        var res = $http.post(host + '/api/updateStatus', {"hash": hash}).success(function (result) {
+            //console.log(result.data);
+            if (result.change === 'yes') {
+                $scope.jobs = {};
+                var data = result[0].list;
+                hash = result[0].hash;
+                $scope.jobsArray = data;
+                updateJobsMap(data)
             }
         });
         res.error(function (err) {
@@ -116,6 +104,45 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
     }
 
 
+    function updateJobsMap(data) {
+        if (data != null && data.length > 0) {
+            data.forEach(function (job) {
+
+                if (!$scope.jobs[job.jobId]) {
+                    job.plumbers = [];
+                    job.plumbersOriginal = [];
+                    if (!!job.plumberId || job.plumberId !== null) {
+                        var plumber = {
+                            id: parseInt(job.plumberId),
+                            name: job.firstName + " " + job.lastName,
+                            status: job.status
+                        };
+                        job.plumbers.push(plumber);
+                        job.plumbersOriginal.push(plumber);
+                    }
+                    $scope.jobs[job.jobId] = job;
+
+                } else {
+                    if (!!job.plumberId || job.plumberId !== null) {
+                        var plumber = {
+                            id: parseInt(job.plumberId),
+                            name: job.firstName + " " + job.lastName,
+                            status: job.status
+                        };
+                        $scope.jobs[job.jobId].plumbers.push(plumber);
+                        $scope.jobs[job.jobId].plumbersOriginal.push(plumber);
+
+                    }
+                }
+            });
+            if(!!$scope.jobs[$stateParams.jobId]){
+                $scope.customerSelected($scope.jobs[$stateParams.jobId]);
+            }
+            updateCount();
+        }
+
+    }
+
 // set the default sort type
     $scope.sortReverse = false;  // set the default sort order
 
@@ -123,6 +150,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
     function getPlumberDetails() {
         var res = $http.get(host + '/api/getAllPlumbersDetail').success(function (result) {
             //console.log(result.data);
+            $scope.plumbers = [];
             var data = result;
             $scope.plumbersList = data;
             $scope.avail = $filter('plumber')($scope.plumbersList, $scope.filter.availFilter);
@@ -198,10 +226,8 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
             promises.push(res);
         });
 
-        $q.all(promises).then(function() {
-            $scope.jobs={};
+        $q.all(promises).then(function () {
             getJobDetails();
-            $scope.plumbers =[];
             getPlumberDetails();
         });
         //to close on save
@@ -309,5 +335,9 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
     createNewMap(18.518920, 73.860736);
     getJobDetails();
     getPlumberDetails();
+    $interval(function () {
+        updateJobDetails();
+        getPlumberDetails();
+    }, 10000);
 
 });
