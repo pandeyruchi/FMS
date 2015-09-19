@@ -15,6 +15,7 @@ angular.module('pune').controller('signupCtrl', function ($scope, $http,$locatio
               var location = results[0].geometry.location;
               $scope.user.latitude = location.G;
               $scope.user.longitude = location.K;
+            console.log("hi"+$scope.user.latitude + " " + $scope.user.longitude);
           }
       });
   }
@@ -24,9 +25,15 @@ angular.module('pune').controller('signupCtrl', function ($scope, $http,$locatio
   $scope.signup = function () {
     $scope.progressbar.start();
 
+
+    computeCoordinates();
+
+
+
     var pwd = btoa($scope.user.password);
     $scope.user.password = pwd;
     var res = $http.post(host+'/api/signup', $scope.user);
+    console.log("hi"+$scope.user.latitude + " " + $scope.user.longitude);
     res.success(function (data) {
       console.log(data);
       if (!!data.error) {

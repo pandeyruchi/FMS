@@ -1,22 +1,36 @@
 /**
  * Created by synerzip on 29/7/15.
  */
-angular.module('pune').controller('mainCtrl', function ($scope, $http, $location, host,$filter, $stateParams, $compile, $state, $interval, $timeout) {
+angular.module('pune').controller('mainCtrl', function ($scope, $http, $location, host) {
 
+    // Variable declarations
     $scope.completedList = [];
     $scope.pendingList = [];
     $scope.assignedList = [];
     $scope.durationList = ['Last Three Days','Last Week','Last Month', 'Last Qarter','Last Six Month', 'Last Year', 'All Time'];
     var dur = {};
     var status = "";
+    $scope.duration = "Last Three Days";
+    $scope.duration2 = "Last Three Days";
+    $scope.duration3 = "Last Three Days";
 
+
+    $scope.setRequired = function() {
+        if($scope.optionValue==='Last Week') {
+            $scope.textRequired= true;
+        }
+        else {
+            $scope.textRequired = false;
+        }
+    }
+
+    // Function gets called when user selects a duration from drop down(pending)
     $scope.changedValueDurationPending=function(duration){
         status = "pending";
-        /*if(duration == "Last Three Days"  ){
-         duration = "plumberMonthlyTimeReport";
-         }*/
-        alert(duration);
-        if(duration == "Last Week"){
+        if(duration == "Last Three Days"  ){
+            duration = "3D";
+        }
+        else if(duration == "Last Week"){
             duration = "1W";
         }
         else if(duration == "Last Month"){
@@ -34,60 +48,63 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
         sendDuration(duration,status);
     }
 
-
-    $scope.changedValueDurationAssigned=function(duration){
+    // Function gets called when user selects a duration from drop down(assigned)
+    $scope.changedValueDurationAssigned=function(duration2){
         status = "assigned";
-        /*if(duration == "Last Three Days"){
-         duration = "plumberMonthlyTimeReport";
-         }*/
-        alert(duration);
-        if(duration == "Last Week"){
-            duration = "1W";
+        if(duration2 == "Last Three Days"){
+         duration2 = "3D";
+         }
+        else if(duration2 == "Last Week"){
+            duration2 = "1W";
         }
-        else if(duration == "Last Month"){
-            duration = "1M";
+        else if(duration2 == "Last Month"){
+            duration2 = "1M";
         }
-        else if(duration == "Last Quarter"){
-            duration = "3M";
+        else if(duration2 == "Last Quarter"){
+            duration2 = "3M";
         }
-        else if(duration == "Last Six Month"){
-            duration = "6M";
+        else if(duration2 == "Last Six Month"){
+            duration2 = "6M";
         }
-        else if(duration == "All Time"){
-            duration = "1Y";
+        else if(duration2 == "All Time"){
+            duration2 = "1Y";
         }
-        sendDuration(duration,status);
+        sendDuration(duration2,status);
     }
 
-
-    $scope.changedValueDurationCompleted=function(duration){
+    // Function gets called when user selects a duration from drop down(completed)
+    $scope.changedValueDurationCompleted=function(duration3){
         status = "completed"
-        /*if(duration == "Last Three Days"){
-         duration = "plumberMonthlyTimeReport";
-         }*/
-        alert(duration);
-        if(duration == "Last Week"){
-            duration = "1W";
+        if(duration3 == "Last Three Days"){
+            duration3 = "3D";
+         }
+        if(duration3 == "Last Week"){
+            duration3 = "1W";
         }
-        else if(duration == "Last Month"){
-            duration = "1M";
+        else if(duration3 == "Last Month"){
+            duration3 = "1M";
         }
-        else if(duration == "Last Quarter"){
-            duration = "3M";
+        else if(duration3 == "Last Quarter"){
+            duration3 = "3M";
         }
-        else if(duration == "Last Six Month"){
-            duration = "6M";
+        else if(duration3 == "Last Six Month"){
+            duration3 = "6M";
         }
-        else if(duration == "All Time"){
+        else if(duration3 == "All Time"){
             duration = "1Y";
         }
-        sendDuration(duration,status);
+        sendDuration(duration3,status);
     }
 
+
+    $scope.changedValueDurationAssigned("Last Three Days");
+    $scope.changedValueDurationPending("Last Three Days");
+    $scope.changedValueDurationCompleted("Last Three Days");
+
+
+
+    // Function used to get information for selected duration
     function sendDuration(duration,status) {
-
-
-
         console.log("Duration is :"+duration + status);
         if(status == "completed"){
             $scope.completedList = [];
@@ -99,279 +116,36 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             $scope.pendingList = [];
         }
         dur.duration = duration;
-        var res = $http.post(host + '/api/assignUnassignDateWiseJobList',dur);
-        res.success(function (result) {
-            console.log(result);
-            var data = result;
-            data.forEach(function (info) {
-                console.log("Info is : "+info);
-                if (info.jobStatus == "completed" && status=="completed") {
+            var res = $http.post(host + '/api/assignUnassignDateWiseJobList',dur);
+            res.success(function (result) {
+                console.log(result);
+                var data = result;
+                data.forEach(function (info) {
+                    console.log("Info is : "+info);
+                    if (info.jobStatus == "completed" && status=="completed") {
 
-                    $scope.completedList.push(info);
+                        $scope.completedList.push(info);
+                    }
+                    if (info.jobStatus == "unassigned" && status == "pending") {
+                        $scope.pendingList.push(info);
+                        console.log(info.customerName + " "+ info.mobileNo);
+                    }
+                    if (info.jobStatus == "assigned" && status=="assigned") {
+                        $scope.assignedList.push(info);
+                    }
+                });
+                if (!!data.error) {
+                   // $scope.progressbar.complete();
+                    alert(data.Message);
                 }
-                if (info.jobStatus == "unassigned" && status == "pending") {
-                    $scope.pendingList.push(info);
-                    console.log(info.customerName + " "+ info.mobileNo);
-                }
-                if (info.jobStatus == "assigned" && status=="assigned") {
-                    $scope.assignedList.push(info);
+                else {
+                    //$scope.progressbar.complete();
+                    /* alert("There is a problem!\nPlease search again!");*/
                 }
             });
-            if (!!data.error) {
-                // $scope.progressbar.complete();
-                alert(data.Message);
-            }
-            else {
-                //$scope.progressbar.complete();
-                /* alert("There is a problem!\nPlease search again!");*/
-            }
-        });
-        res.error(function (err) {
-            // $scope.progressbar.complete();
-            console.log(err);
-        })
+            res.error(function (err) {
+               // $scope.progressbar.complete();
+                console.log(err);
+            })
     }
-
-
-
-
-    /*
-     function send(duration) {
-     if (duration == "assignUnassignWeeklyJobList") {
-     $http.get(host + '/api/assignUnassignWeeklyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if (info.jobStatus == "completed") {
-     $scope.completedList.push(info);
-     }
-     if (info.jobStatus == "active") {
-     $scope.pendingList.push(info);
-     }
-     if (info.jobStatus == "In progress") {
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-     else if (duration == "assignUnassignMonthlyJobList") {
-     $http.get(host + '/api/assignUnassignMonthlyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-     else if (duration == "assignUnassignThreeMonthlyJobList") {
-     $http.get(host + '/api/assignUnassignThreeMonthlyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-     else if (duration == "assignUnassignSixMonthlyJobList") {
-     $http.get(host + '/api/assignUnassignSixMonthlyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-     else if (duration == "assignUnassignYearlyJobList") {
-     $http.get(host + '/api/assignUnassignYearlyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-     else if (duration == "assignUnassignJobList") {
-     $http.get(host + '/api/assignUnassignJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-     }
-
-
-
-     */
-
-
-
-
-
-
-
-
-    /* $http.get(host + '/api/assignUnassignJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-
-
-
-     $scope.lastWeek = function(){
-     $http.get(host + '/api/assignUnassignWeeklyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-
-     $scope.lastMonth = function(){
-     $http.get(host + '/api/assignUnassignMonthlyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-
-     $scope.lastQuarter = function(){
-     $http.get(host + '/api/assignUnassignThreeMonthlyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-
-
-     $scope.lastYear = function(){
-     $http.get(host + '/api/assignUnassignYearlyJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-
-     $scope.allTime = function(){
-     $http.get(host + '/api/assignUnassignJobList').then(function (result) {
-     var data = result.data;
-     console.log(result.data);
-     data.forEach(function (info) {
-     if(info.jobStatus == "completed"){
-     $scope.completedList.push(info);
-     }
-     if(info.jobStatus == "active"){
-     $scope.pendingList.push(info);
-     }
-     if(info.jobStatus == "In progress"){
-
-     $scope.assignedList.push(info);
-     }
-     });
-     });
-     }
-     */
-
 });
