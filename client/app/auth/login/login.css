@@ -15,7 +15,7 @@
 
 }
 
-.login-form{
+.login-form2{
   background-color:white;
   margin-top: 100px;
   border:1px solid black;
@@ -25,12 +25,26 @@
 .help-block{
     color: red;
 }
+
+
+.panels {
+    border-width: 2px;
+    border-color: lightgray;
+}
+
+.formControl {
+    border-radius: 10px;
+    padding: 3px 10px;
+    height: 25pt;
+    margin: 0 -5px;
+}
+
 /* Styling for the ngProgress itself */
 #ngProgress {
     margin: 0;
     padding: 0;
     z-index: 99998;
-    background-color: '00f2ff';
+    background-color: #00f2ff;
     color: green;
     box-shadow: 0 0 10px 0; /* Inherits the font color */
     height: 30px;
@@ -52,4 +66,54 @@
     left: 0;
     right: 0;
     z-index: 99999;
+}
+
+#mains {
+    /* background-image: url(/assets/images/pune.jpg);
+ */    background-size: cover;
+    margin-top: 80px;
+    background-repeat:no-repeat;
+}
+
+.application-navbar{background:url('/assets/images/headerTopImage.png') repeat-x;background-size:contain; border-bottom:0px;  }
+.application-navbar .navbar-brand, .application-navbar {color:#666;}
+.application-navbar .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #000000;
+    text-decoration: none;
+    background-color: #dadada;
+}
+.application-navbar .nav > li > a { color:#666;transition:all 0.5s ease;}
+.application-navbar .nav > li > a:hover, .application-navbar .nav > li > a:focus {background:transparent; color:#000000;}
+
+
+*{box-sizing: border-box;}
+.dashboard-container{margin-top:-21px; }
+.dashboard-container .same-height{min-height:100%;}
+.dashboard-container > .row > .col-sm-4{padding-top:21px;}
+
+.dashboard-badge{margin:0 auto;color:white;width:150px;height:150px; border-radius: 100%; min-height: 160px; min-width: 160px; padding-top:22px; text-align: center}
+.dashboard-list-number{width:10%; font-size:0.7em; padding-top: 12px !important;}
+.dashboard-table .headerFont{text-transform:capitalize;}
+.dashboard-table .md-list-item-text,.dashboard-table .subHeaderFont{padding:0px  !important}
+.dashboard-dropdown {
+    left: 34%;
+    left: calc(50% - 80px);}
+.form-control1{
+    margin-left: 10px;
+}
+.form-control2{
+    margin-left: 10px;
+}
+
+.form-control3{
+    margin-left: 10px;
+}
+
+.orange-badge{background-color: orange;}
+.green-badge{background-color: #33c44e;}
+.grey-badge{background-color: #e0e0e0; color: darkgrey}
+.dashboard-number{font-size: 5em; display: block; margin-bottom:-10px}
+.dashboard-label {
+    display: block;
+    font-size: medium;
 }

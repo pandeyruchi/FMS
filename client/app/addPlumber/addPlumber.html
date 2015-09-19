@@ -126,7 +126,7 @@ Please enter Last Name
 <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
 'has-error': form.address.$invalid && form.address.$dirty}">
 <label class="labels">Address</label>
-<textarea rows="4.5" ng-change="computeCoordinates()" class="form-control formControl"
+<textarea rows="5" ng-change="computeCoordinates()" class="form-control formControl"
 ng-blur="visitedAddress=true"
 name="address"
 ng-model="user.address" required></textarea>

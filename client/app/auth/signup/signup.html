@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
   <div id="mains" class="row">
-    <div class="col-md-8 col-md-offset-2 login-form2" >
+    <div class="col-md-8 col-md-offset-2 login-form" >
       <form class="form" name="form" ng-submit="signup()" novalidate>
         <div class="panel panels">
           <div class="panel-body">
@@ -107,7 +107,7 @@
   <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
   'has-error': form.address.$invalid && form.address.$dirty }">
   <label class="labels">Address</label>
-  <textarea rows="4.5" ng-change="computeCoordinates()" class="form-control formControl"
+  <textarea rows="5" ng-change="computeCoordinates()" class="form-control formControl"
   ng-blur="visitedAddress=true"
   name="address"
   ng-model="user.address" required></textarea>
@@ -128,6 +128,7 @@
 </div>
 </div>
 </div>
+ </div>
 </form>
 </div>
 </div>
