@@ -1,174 +1,106 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
+<nav class="navbar navbar-default navbar-static-top" style="padding-left: 10px;margin-top: -20px"
+     ng-controller="NavbarCtrl">
+    <div class="navbar-header">
+        <h4 style="color:#6D5960;text-align: center">Register a new call</h4>
+    </div>
+</nav>
 
 <div class="container-fluid">
-    <div id="mains" class="row">
-
-        <div class="col-md-4 col-md-offset-4 details-form">
-            <h3 style="color:#008855">Customer Request </h3>
-
-            <form class="form" name="form" ng-submit="custreq()" novalidate>
-                <div class="form-group" ng-class="{ 'has-success': submitted && form.customerName.$valid && form.customerName.$dirty,
-                                            'has-error': form.customerName.$invalid && form.customerName.$dirty }">
-                    <label> Customer Name </label>
-                    <input type="text" ng-blur="visitedName = true" name="customerName" class="form-control"
-                           ng-model="user.customerName" required>
-
-                    <p class="help-block"
-                       ng-show="form.customerName.$error.required && form.customerName.$dirty && visitedName">
-                        Please enter customer name
-                    </p>
-                </div>
-
-                <div class="form-group" ng-class="{ 'has-success': form.email.$valid && form.email.$dirty,
-                                            'has-error': form.email.$invalid && form.email.$dirty }">
-                    <label>Email</label>
-
-                    <input type="email" ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
-                           ng-blur="visited = true" placeholder="someone@example.com" name="email" class="form-control"
-                           ng-model="user.email"
-                           required/>
-
-                    <p class="help-block" ng-show="form.email.$error.email && form.email.$dirty && visited">
-                        Doesn't look like a valid email.
-                    </p>
-
-                    <p class="help-block" ng-show="form.email.$error.required && form.email.$dirty && visited">
-                        What's your email address?
-                    </p>
-                </div>
-
-                <div class="form-group" ng-class="{ 'has-success': form.address.$valid && form.address.$dirty,
-                                            'has-error': form.address.$invalid && form.address.$dirty }">
-                    <label> Address</label>
-                    <textarea rows="4" ng-change="computeCoordinates()" class="form-control" name="address"
-                              ng-blur="visitedAddress = true" ng-model="user.address" required></textarea>
-
-
-                    <p class="help-block"
-                       ng-show="form.address.$error.required && form.address.$dirty && visitedAddress">
-                        Please enter address
-                    </p>
-                </div>
-
-                <div class="form-group" ng-class="{ 'has-success': form.locality.$valid && form.locality.$dirty,
-                                            'has-error': form.locality.$invalid && form.locality.$dirty }">
-                    <label> Locality </label>
-                    <input type="text" name="locality" ng-blur="visitedLocality = true" class="form-control"
-                           ng-model="user.locality" required>
-
-                    <p class="help-block"
-                       ng-show="form.locality.$error.required && form.locality.$dirty && visitedLocality">
-                        Please enter locality
-                    </p>
-                </div>
-
-
-                <div class="form-group" ng-class="{ 'has-success': submitted && form.city.$valid && form.city.$dirty,
-                                            'has-error': form.city.$invalid && form.city.$dirty }">
-                    <label> City </label>
-                    <input type="text" ng-blur="visitedCity = true" name="city" class="form-control"
-                           ng-model="user.city" required>
-
-                    <p class="help-block"
-                       ng-show="form.city.$error.required && form.city.$dirty && visitedCity">
-                        Please enter city
-                    </p>
-                </div>
+    <div class="row" style="margin-top: -18px">
+        <div class="col-md-4" style="background-color: #f9f9f9">
+            <form class="form" name="form" ng-submit="signup()" novalidate>
 
                 <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
                                             'has-error': form.contact.$invalid && form.contact.$dirty }">
-                    <label>Phone</label>
+                    <label>Contact Number</label>
 
-                    <input type="text" class="form-control" name="contact" ng-model="user.mobileNo" required
-                           ng-blur="visitedContact = true" ng-pattern="/^[+]?[0-9]{10}$/">
-
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">+91</span>
+                        <input type="text" ng-model="customer.mobileNo" name="contact"
+                               ng-change="getJobDetails(customer.mobileNo)" class="form-control" placeholder="Contact No"
+                               ng-pattern="/^[+]?[0-9]{10}$/" aria-describedby="basic-addon1" required>
+                    </div>
                     <p class="help-block"
-                       ng-show="form.contact.$error.pattern && form.contact.$dirty && visitedContact">
-                        Invalid contact number!
-                    </p>
-
-                    <p class="help-block"
-                       ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
+                       ng-show="form.contact.$error.required && form.contact.$dirty">
                         Contact number required!
                     </p>
 
-                </div>
-
-                <div class="form-group" ng-class="{ 'has-success': form.desc.$valid && form.desc.$dirty,
-                                            'has-error': form.desc.$invalid && form.desc.$dirty }">
-                    <label> Description </label>
-                    <textarea rows="4" class="form-control" name="desc" ng-model="user.description" required></textarea>
-
-
-                    <p class="help-block" ng-show="form.desc.$error.required && form.desc.$dirty">
-                        Please enter an issue
+                    <p class="help-block"
+                       ng-show="form.contact.$error.pattern && form.contact.$dirty ">
+                        Invalid contact number!
                     </p>
+
+
                 </div>
 
-                <!--<div class="form-group">
-                    <label>Priority</label>
-                    <input type="radio" style="margin-left: 5px" name="yes" ng-model="user.urgentFlag" value="true"/>High
-                    <input type="radio" style="margin-left: 5px" name="no" ng-model="user.urgentFlag" value="false"/>Normal
-                </div>-->
+                <div class="form-group" ng-show="form.contact.$valid" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
+                                            'has-error': form.firstname.$invalid && form.firstname.$dirty }">
+                    <label>Name</label>
+                    <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control"
+                           ng-model="customer.customerName" required>
 
-                <div style="float: left; width: 70%; padding-left: 5px; padding-right: 5px;">
-                    <label>Priority </label> </br>
-                    <div style="float: left; padding-left: 5px; padding-right: 5px;">
-                        <input type="radio" name="yes" ng-model="user.urgentFlag" value="true">
-                        <label style="color: #666666; margin: 0 0px;">High</label>
-                        </input>
-                    </div>
-                    <div style="float: left; padding-left: 5px; padding-right: 5px; ">
-                        <input type="radio" name="no" ng-model="user.urgentFlag" value="false">
-                        <label style="color: #666666; margin: 0 0px;">Normal</label>
-                        </input>
-                    </div>
+                    <p class="help-block"
+                       ng-show="form.firstname.$error.required && form.firstname.$dirty ">
+                        Please enter customer name
+                    </p>
+
                 </div>
 
-                <div style="float: left; width: 70%; padding-left: 5px; padding-right: 5px;">
-                    <label>Notifications </label> </br>
-                    <div style="float: left; padding-left: 5px; padding-right: 5px;">
-                        <input type="checkbox" ng-model="user.messageNotification" ng-true-value="'yes'" ng-false-value="'no'">
-                        <label style="color: #666666; margin: 0 0px;">SMS</label>
-                        </input>
-                    </div>
-                    <div style="float: left; padding-left: 5px; padding-right: 5px; ">
-                        <input type="checkbox" ng-model="user.emailNotification" ng-true-value="'yes'" ng-false-value="'no'">
-                        <label style="color: #666666; margin: 0 0px;">email</label>
-                        </input>
-                    </div>
-                </div>
+                <div class="form-group" ng-show="form.contact.$valid"
+                     ng-class="{'has-success': form.address.$valid && form.address.$dirty,
+                                            'has-error': form.address.$invalid && form.address.$dirty }">
 
+
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="text-left">
+                                <label ng-show="showAddAddress || !jobs || jobs.length ===0">Enter Address</label>
+                                <label ng-show="jobs.length > 0 && !showAddAddress" class="text-left">Select
+                                    Address</label>
+                            </td>
+                            <td class="text-right">
+                                <a ng-show="jobs.length > 0" class="btn btn-link btn-sm"
+                                   ng-click="showAddAddress=!showAddAddress">
+                                    <label ng-show="!showAddAddress">or Add New</label>
+
+                                    <label ng-show="showAddAddress">or Select</label>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                     <textarea ng-show="showAddAddress || !jobs || jobs.length ===0" class="form-control"
+                               ng-model="request.address" ng-change="computeCoordinates(request)" name="address"
+                               rows="3" required></textarea>
+
+                    <p class="help-block"
+                       ng-show="form.address.$error.required && form.address.$dirty ">
+                        Please enter address
+                    </p>
+
+                    <md-list class="list-max-height" ng-show="!showAddAddress && jobs.length > 0">
+                        <md-list-item ng-click="jobSelected(job)"  ng-class="{'addressSelected':isSelected(job)}" class="md-3-line md-list-item-job"
+                                      ng-repeat="job in jobs">
+                            <div class="md-list-item-text">
+                                <p>{{job.address}}</p>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+
+                    </md-list>
+
+                </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit"
-                            ng-disabled="form.user.$dirty && form.user.$invalid ||
-                         form.password.$dirty && form.password.$invalid" class="btn btn-primary" analytics-on="click"
-                            analytics-category="CustomerRequest" analytics-event="CustomerRequest" analytics-label="Submit Customer Request">Submit
-                    </button>&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-primary" type="reset" value="Reset">Reset</button>
+                    <button ng-show=" form.contact.$valid"
+                            class="btn btn-success pull-right" ng-click="ok()"> Next
+                    </button>
                 </div>
-
             </form>
+        </div>
+        <div class="col-md-8">
+            <div id="map" style="height:550px"></div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

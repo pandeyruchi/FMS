@@ -1,6 +1,80 @@
 #mains {
-   /* background-image: url(/assets/images/pune.jpg);
-*/    background-size: cover;
+    /* background-image: url(/assets/images/pune.jpg);
+ */
+    background-size: cover;
     margin-top: 80px;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
+}
+
+#pending {
+    background-color: #ffaa00;
+    font-size: 50px;
+    padding: 38px;
+    border-radius: 100%;
+    width: 152px;
+    height: 150px;
+}
+
+#assigned {
+    background-color: #33c44e;
+    font-size: 50px;
+    padding: 38px;
+    border-radius: 100%;
+    width: 152px;
+    height: 150px;
+}
+
+#completed {
+    background-color: #e0e0e0;
+    font-size: 50px;
+    padding: 38px;
+    border-radius: 100%;
+    width: 152px;
+    height: 150px;
+    color: grey;
+}
+
+#dashboard.md-list {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 520px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.dashboard-badge {
+    color: white;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    min-height: 160px;
+    min-width: 160px;
+    padding-top: 22px;
+    text-align: center
+}
+
+.orange-badge {
+    background-color: orange;
+}
+
+.green-badge {
+    background-color: #33c44e;
+}
+
+.grey-badge {
+    background-color: #e0e0e0;
+    color: darkgrey
+}
+
+.dashboard-number {
+    font-size: 5em;
+    display: block;
+    margin-bottom: -10px
+}
+
+.dashboard-label {
+    display: block;
+    font-size: medium;
 }

@@ -7,7 +7,14 @@ angular.module('pune')
             input = input || [];
             var out = {};
             if (filter === 'all') {
-                return input;
+                for (var key in input) {
+                    if (input.hasOwnProperty(key)) {
+                        if (input[key].jobStatus !== 'completed') {
+                            out[key]=input[key];
+                        }
+                    }
+                }
+                return out;
             }
 
             for (var key in input) {

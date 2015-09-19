@@ -14,7 +14,7 @@ angular.module('pune')
                     /*if (input[key].contains(filter)) {
                         out.push(input[key]);
                     }*/
-                    if (input[key].customerName === filter) {
+                    if (input[key].customerName.toLowerCase().match(filter.toLowerCase())) {
                         out.push(input[key]);
                     }
                 }
