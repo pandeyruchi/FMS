@@ -17,89 +17,86 @@
 
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">+91</span>
-                        <input type="text" ng-model="user.contact" name="contact"
-                               ng-change="getJobDetails(user.contact)" class="form-control" placeholder="Contact No"
-                               ng-pattern="/^[+]?[0-9]{10}$/" aria-describedby="basic-addon1">
+                        <input type="text" ng-model="customer.mobileNo" name="contact"
+                               ng-change="getJobDetails(customer.mobileNo)" class="form-control" placeholder="Contact No"
+                               ng-pattern="/^[+]?[0-9]{10}$/" aria-describedby="basic-addon1" required>
                     </div>
+                    <p class="help-block"
+                       ng-show="form.contact.$error.required && form.contact.$dirty">
+                        Contact number required!
+                    </p>
 
                     <p class="help-block"
-                       ng-show="form.contact.$error.pattern && form.contact.$dirty && visitedContact">
+                       ng-show="form.contact.$error.pattern && form.contact.$dirty ">
                         Invalid contact number!
                     </p>
 
-                    <p class="help-block"
-                       ng-show="form.contact.$error.required && form.contact.$dirty && visitedContact">
-                        Contact number required!
-                    </p>
+
                 </div>
 
-                <div class="form-group" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
+                <div class="form-group" ng-show="form.contact.$valid" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
                                             'has-error': form.firstname.$invalid && form.firstname.$dirty }">
                     <label>Name</label>
                     <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control"
-                           ng-model="customerName" required>
+                           ng-model="customer.customerName" required>
 
                     <p class="help-block"
-                       ng-show="form.firstname.$error.required && form.firstname.$dirty && visitedFirstName">
-                        Please enter user
+                       ng-show="form.firstname.$error.required && form.firstname.$dirty ">
+                        Please enter customer name
                     </p>
 
                 </div>
-                <div ng-show="!!customerName">
-                    <table style="width: 100%;margin-top: -20px;">
+
+                <div class="form-group" ng-show="form.contact.$valid"
+                     ng-class="{'has-success': form.address.$valid && form.address.$dirty,
+                                            'has-error': form.address.$invalid && form.address.$dirty }">
+
+
+                    <table style="width: 100%;">
                         <tr>
                             <td class="text-left">
-                                <p ng-show="!showAddAddress">Select Address</p>
-
-                                <p ng-show="showAddAddress">Enter Address</p>
+                                <label ng-show="showAddAddress || !jobs || jobs.length ===0">Enter Address</label>
+                                <label ng-show="jobs.length > 0 && !showAddAddress" class="text-left">Select
+                                    Address</label>
                             </td>
                             <td class="text-right">
-                                <a class="btn btn-link btn-sm" style="border: none"
+                                <a ng-show="jobs.length > 0" class="btn btn-link btn-sm"
                                    ng-click="showAddAddress=!showAddAddress">
-                                    <p ng-show="!showAddAddress">or Add New</p>
+                                    <label ng-show="!showAddAddress">or Add New</label>
 
-                                    <p ng-show="showAddAddress">or Select</p>
+                                    <label ng-show="showAddAddress">or Select</label>
                                 </a>
                             </td>
                         </tr>
                     </table>
-                </div>
 
+
+                     <textarea ng-show="showAddAddress || !jobs || jobs.length ===0" class="form-control"
+                               ng-model="request.address" ng-change="computeCoordinates(request)" name="address"
+                               rows="3" required></textarea>
+
+                    <p class="help-block"
+                       ng-show="form.address.$error.required && form.address.$dirty ">
+                        Please enter address
+                    </p>
+
+                    <md-list class="list-max-height" ng-show="!showAddAddress && jobs.length > 0">
+                        <md-list-item ng-click="jobSelected(job)"  ng-class="{'addressSelected':isSelected(job)}" class="md-3-line md-list-item-job"
+                                      ng-repeat="job in jobs">
+                            <div class="md-list-item-text">
+                                <p>{{job.address}}</p>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+
+                    </md-list>
+
+                </div>
                 <div class="form-group">
-                    <md-content style="color: #f9f9f9">
-                        <md-list ng-show="!showAddAddress">
-                            <md-list-item ng-click="jobSelected(job)" class="md-3-line md-list-item-job"
-                                          ng-repeat="job in jobs">
-                                <div class="md-list-item-text">
-                                    <h3><strong class="headerFont">{{job.address}}</strong></h3>
-                                </div>
-                                <md-divider ng-if="!$last"></md-divider>
-                            </md-list-item>
-                            <button class="btn btn-success pull-right" ng-click="ok()">OK</button>
-                        </md-list>
-                        <md-list ng-show="showAddAddress">
-                            <md-list-item class="md-3-line md-list-item-job"
-                                          ng-repeat="job in jobs | limitTo:1">
-                                <div>
-                                <textarea class="form-control" ng-model="address" name="address"
-                                          rows="3" required></textarea>
-                                    <button class="btn btn-success pull-right" ng-click="new(job,address)">OK</button>
-                                </div>
-                                <md-divider ng-if="!$last"></md-divider>
-                            </md-list-item>
-                        </md-list>
-                    </md-content>
-
+                    <button ng-show=" form.contact.$valid"
+                            class="btn btn-success pull-right" ng-click="ok()"> Next
+                    </button>
                 </div>
-
-                <!--  <div ng-show="showAddAddress" class="form-group" ng-class="{'has-success': form.address.$valid && form.address.$dirty,
-                                              'has-error': form.address.$invalid && form.address.$dirty }">
-
-                      <textarea class="form-control" ng-model="job.address" name="address" ng-blur="visitedAddress = true"
-                                class="form-control"
-                                rows="3" required></textarea>
-
-                  </div>-->
             </form>
         </div>
         <div class="col-md-8">

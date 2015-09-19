@@ -1,7 +1,7 @@
 /**
  * Created by synerzip on 29/7/15.
  */
-angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $location, host, $filter, $stateParams, $compile, $state, $interval, $timeout) {
+angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $location, host, $filter, $stateParams, $q, $state, $interval, $timeout) {
     // Variable Declarations
     var marker;
     var infoWindow = new google.maps.InfoWindow();
@@ -31,17 +31,6 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         {id: 'all', text: 'All Plumbers'}
     ];
 
-    $scope.getPendingJobCount = function () {
-        return _.filter($scope.jobs, function (job) {
-            return job.jobStatus === 'unassigned';
-        }).length;
-    }
-
-    $scope.getAssignedJobCount = function () {
-        return _.filter($scope.jobs, function (job) {
-            return job.jobStatus === 'assigned';
-        }).length;
-    }
 
     $scope.predicate = 'jobCount';
     $scope.reverse = true;
@@ -82,7 +71,6 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
             //console.log(result.data);
             var data = result;
             $scope.jobsArray = data;
-
             if (data != null) {
                 data.forEach(function (job) {
                     if (!$scope.jobs[job.jobId]) {
@@ -112,6 +100,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
                         }
                     }
                 });
+                updateCount();
             }
 
             if (!!$stateParams.job) {
@@ -179,7 +168,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         }
         marker = new google.maps.Marker({
             map: $scope.map,
-            position: new google.maps.LatLng(18.518920, 73.860736, info.jobId),
+            position: new google.maps.LatLng(info.latitude, info.longitude, info.jobId),
             icon: 'http://maps.google.com/mapfiles/ms/icons/green.png',
             title: info.customerName,
             zoom: 10
@@ -198,32 +187,24 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
 
         var plumbersToAdd = _.difference(job.plumbers, job.plumbersOriginal);
         var plumbersToDelete = _.difference(job.plumbersOriginal, job.plumbers);
-
+        var defer = $q.defer();
+        var promises = [];
         plumbersToAdd.forEach(function (plumber) {
             var res = $http.post(host + '/api/jobRequestUpdation', {jobId: job.jobId, plumberId: plumber.id});
-            res.success(function (data) {
-                $scope.jobs =[];
-                getJobDetails();
-            });
-            res.error(function (err) {
-                console.log(err);
-                alert("Error");
-            });
+            promises.push(res);
         });
         plumbersToDelete.forEach(function (plumber) {
             var res = $http.post(host + '/api/deleteJob', {jobId: job.jobId, plumberId: plumber.id});
-            res.success(function (data) {
-                console.log(data);
-                $scope.jobs =[];
-                getJobDetails();
-                $scope.getPendingJobCount();
-                $scope.getAssignedJobCount();
-            });
-            res.error(function (err) {
-                console.log(err);
-                alert("Error");
-            });
+            promises.push(res);
         });
+
+        $q.all(promises).then(function() {
+            $scope.jobs={};
+            getJobDetails();
+            $scope.plumbers =[];
+            getPlumberDetails();
+        });
+        //to close on save
         job.showDetails = !job.showDetails;
 
 
@@ -239,7 +220,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
 // This function is used to redirect to main page on "OK"
     $scope.redirect_main = function () {
         $location.url("/main");
-    }
+    };
 
     $scope.plumberClick = function (plumber) {
 
@@ -313,7 +294,16 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         if (newVal !== oldVal) {
             highlightAssignedPlumbers();
         }
-    }, true)
+    }, true);
+    function updateCount() {
+        $scope.pendingJobCount = _.filter($scope.jobs, function (job) {
+            return job.jobStatus === 'unassigned';
+        }).length;
+        $scope.assignedJobCount = _.filter($scope.jobs, function (job) {
+            return job.jobStatus === 'assigned';
+        }).length;
+
+    }
 
     // Function calls
     createNewMap(18.518920, 73.860736);

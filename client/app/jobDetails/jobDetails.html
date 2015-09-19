@@ -60,7 +60,7 @@
                                                             <tr>
                                                                 <td style="width:75%"><h4 class="off-white"><b class="headerFont">Job
                                                                     Description</b></h4></td>
-                                                                <td style="width:25%"><input type="checkbox" checked="job.urgentFlag">Priority
+                                                                <td style="width:25%"><input type="checkbox" ng-model="job.urgentFlag"  ng-true-value="1"  ng-false-value="0" >Priority
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -141,10 +141,10 @@
                         <div class="col-md-3">
                             <button ng-click="order('jobCount')" class="btn btn-link">
                                 <i ng-show="!reverse" class="fa fa-sort-numeric-asc">
-                                    <md-tooltip>Sort Ascending : 1-9</md-tooltip>
+                                    <md-tooltip>Sort by Job Count</md-tooltip>
                                 </i>
                                 <i ng-show="reverse" class="fa fa-sort-numeric-desc">
-                                    <md-tooltip>Sort Descending : 9-1</md-tooltip>
+                                    <md-tooltip>Sort by Job Count</md-tooltip>
                                 </i>
                             </button>
                         </div>
@@ -187,8 +187,8 @@
             </div>
             <div class="row" style="background-color: #F1F1F1">
                 <div class="footer">
-                    <div class="col-md-2 font-color" ng-model="pending">Pending: {{getPendingJobCount()}}</div>
-                    <div class="col-md-2 font-color" ng-model="assigned">Assigned:{{getAssignedJobCount()}}</div>
+                    <div class="col-md-2 font-color" ng-model="pending">Pending: {{pendingJobCount}}</div>
+                    <div class="col-md-2 font-color" ng-model="assigned">Assigned:{{assignedJobCount}}</div>
                     <div class="col-md-2 font-color">Total:{{jobsArray.length}}</div>
                     <div class="col-md-2 font-color" ng-model="avail">Available: {{avail.length}}</span></div>
                     <div class="col-md-2 font-color" ng-model="unavail">Unavailable:{{unavail.length}}</div>
