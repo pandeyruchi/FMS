@@ -75,22 +75,20 @@ angular.module('pune').controller('custReq2Ctrl', function ($scope, $state, $htt
         var mapOptions = {
             zoom: 12,
             center: new google.maps.LatLng(lat, long),
-            mapTypeId: google.maps.MapTypeId.TERRAIN
+            mapTypeId: google.maps.MapTypeId.RoadMap
         };
         $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        var marker = new google.maps.Marker({
+
+        var circle = new google.maps.Circle({
             map: $scope.map,
-            position: new google.maps.LatLng(lat, long, $scope.address),
-            title: $scope.address,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/blue.png',
-            zoom: 10
+            center: new google.maps.LatLng($scope.job.latitude, $scope.job.longitude),
+            radius: 7000,
+            strokeColor: "#000000",
+            fillColor: "orange"
         });
 
+        createMarker($scope.job)
 
-        google.maps.event.addListener(marker, 'click', function () {
-            infoWindow.setContent('<h5>' + marker.title + '</h5>');
-            infoWindow.open($scope.map, marker);
-        });
     }
 
 

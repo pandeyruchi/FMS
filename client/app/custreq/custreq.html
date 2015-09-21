@@ -1,19 +1,22 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
-<nav class="navbar navbar-default navbar-static-top" style="padding-left: 10px;margin-top: -20px"
-     ng-controller="NavbarCtrl">
-    <div class="navbar-header">
-        <h4 style="color:#6D5960;text-align: center">Register a new call</h4>
-    </div>
-</nav>
 
 <div class="container-fluid">
     <div class="row" style="margin-top: -18px">
         <div class="col-md-4" style="background-color: #f9f9f9">
+            <!--<nav class="navbar navbar-default navbar-static-top" style="padding-left: 10px;margin-top: -20px"
+                 ng-controller="NavbarCtrl">
+                <div class="navbar-header">
+                    <h4 style="color:#6D5960;text-align: center">Register a new call</h4>
+                </div>
+            </nav>-->
+            <h4>Register a new call</h4>
+            <md-divider></md-divider>
+            <br/>
             <form class="form" name="form" ng-submit="signup()" novalidate>
 
                 <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
                                             'has-error': form.contact.$invalid && form.contact.$dirty }">
-                    <label>Contact Number</label>
+                    <label style="color:#9999A9"><h5>Contact Number</h5></label>
 
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">+91</span>
@@ -36,7 +39,7 @@
 
                 <div class="form-group" ng-show="form.contact.$valid" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
                                             'has-error': form.firstname.$invalid && form.firstname.$dirty }">
-                    <label>Name</label>
+                    <label style="color:#9999A9"><h5>Name</h5></label>
                     <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control"
                            ng-model="customer.customerName" required>
 
@@ -55,9 +58,9 @@
                     <table style="width: 100%;">
                         <tr>
                             <td class="text-left">
-                                <label ng-show="showAddAddress || !jobs || jobs.length ===0">Enter Address</label>
-                                <label ng-show="jobs.length > 0 && !showAddAddress" class="text-left">Select
-                                    Address</label>
+                                <label style="color:#9999A9" ng-show="showAddAddress || !jobs || jobs.length ===0"><h5>Enter Address</h5></label>
+                                <label style="color:#9999A9" ng-show="jobs.length > 0 && !showAddAddress" class="text-left"><h5>Select
+                                    Address</h5></label>
                             </td>
                             <td class="text-right">
                                 <a ng-show="jobs.length > 0" class="btn btn-link btn-sm"
@@ -100,7 +103,7 @@
             </form>
         </div>
         <div class="col-md-8">
-            <div id="map" style="height:550px"></div>
+            <div id="map" style="height:600px"></div>
         </div>
     </div>
 </div>
