@@ -1,13 +1,15 @@
 /**
  * Created by synerzip on 29/7/15.
  */
-angular.module('pune').controller('mainCtrl', function ($scope, $http, $location, host) {
-
+angular.module('pune').controller('mainCtrl', function ($scope, $http, $location, host,ngProgressFactory) {
+    $scope.progressbar = ngProgressFactory.createInstance();
+    $scope.progressbar.setHeight('4px');
+    $scope.progressbar.setColor('#0274ff');
     // Variable declarations
     $scope.completedList = [];
     $scope.pendingList = [];
     $scope.assignedList = [];
-    $scope.durationList = ['Last Three Days','Last Week','Last Month', 'Last Qarter','Last Six Month', 'Last Year', 'All Time'];
+    $scope.durationList = ['Last Three Days','Last Week','Last Month', 'Last Quarter','Last Six Month', 'Last Year', 'All Time'];
     var dur = {};
     var status = "";
     $scope.duration = "Last Three Days";
@@ -52,8 +54,8 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
     $scope.changedValueDurationAssigned=function(duration2){
         status = "assigned";
         if(duration2 == "Last Three Days"){
-         duration2 = "3D";
-         }
+            duration2 = "3D";
+        }
         else if(duration2 == "Last Week"){
             duration2 = "1W";
         }
@@ -77,7 +79,7 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
         status = "completed"
         if(duration3 == "Last Three Days"){
             duration3 = "3D";
-         }
+        }
         if(duration3 == "Last Week"){
             duration3 = "1W";
         }
@@ -106,6 +108,7 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
     // Function used to get information for selected duration
     function sendDuration(duration,status) {
         console.log("Duration is :"+duration + status);
+        $scope.progressbar.start();
         if(status == "completed"){
             $scope.completedList = [];
         }
@@ -116,36 +119,38 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             $scope.pendingList = [];
         }
         dur.duration = duration;
-            var res = $http.post(host + '/api/assignUnassignDateWiseJobList',dur);
-            res.success(function (result) {
-                console.log(result);
-                var data = result;
-                data.forEach(function (info) {
-                    console.log("Info is : "+info);
-                    if (info.jobStatus == "completed" && status=="completed") {
+        var res = $http.post(host + '/api/assignUnassignDateWiseJobList',dur);
+        res.success(function (result) {
+            console.log("REsult : "+result);
+            var data = result;
+            data.forEach(function (info) {
+                console.log("Info is : "+info);
+                if (info.jobStatus == "completed" && status=="completed") {
 
-                        $scope.completedList.push(info);
-                    }
-                    if (info.jobStatus == "unassigned" && status == "pending") {
-                        $scope.pendingList.push(info);
-                        console.log(info.customerName + " "+ info.mobileNo);
-                    }
-                    if (info.jobStatus == "assigned" && status=="assigned") {
-                        $scope.assignedList.push(info);
-                    }
-                });
-                if (!!data.error) {
-                   // $scope.progressbar.complete();
-                    alert(data.Message);
+                    $scope.completedList.push(info);
                 }
-                else {
-                    //$scope.progressbar.complete();
-                    /* alert("There is a problem!\nPlease search again!");*/
+                if (info.jobStatus == "unassigned" && status == "pending") {
+                    $scope.pendingList.push(info);
+                    console.log(info.customerName + " "+ info.mobileNo);
+                }
+                if (info.jobStatus == "assigned" && status=="assigned") {
+                    $scope.assignedList.push(info);
+                    console.log("Assigned : "+info.userName);
                 }
             });
-            res.error(function (err) {
-               // $scope.progressbar.complete();
-                console.log(err);
-            })
+            if (!!data.error) {
+                // $scope.progressbar.complete();
+                alert(data.Message);
+            }
+            else {
+                //$scope.progressbar.complete();
+                /* alert("There is a problem!\nPlease search again!");*/
+            }
+        });
+        res.error(function (err) {
+            // $scope.progressbar.complete();
+            console.log(err);
+        });
+        $scope.progressbar.complete();
     }
 });
