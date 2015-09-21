@@ -45,6 +45,9 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             duration = "6M";
         }
         else if(duration == "All Time"){
+            duration = "AT";
+        }
+        else if(duration == "Last Year"){
             duration = "1Y";
         }
         sendDuration(duration,status);
@@ -69,6 +72,9 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             duration2 = "6M";
         }
         else if(duration2 == "All Time"){
+            duration2 = "AT";
+        }
+        else if(duration2 == "Last Year"){
             duration2 = "1Y";
         }
         sendDuration(duration2,status);
@@ -93,7 +99,10 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             duration3 = "6M";
         }
         else if(duration3 == "All Time"){
-            duration = "1Y";
+            duration3 = "AT";
+        }
+        else if(duration3 == "Last Year"){
+            duration3 = "1Y";
         }
         sendDuration(duration3,status);
     }
