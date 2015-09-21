@@ -80,7 +80,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         });
         res.error(function (err) {
             console.log(err);
-            alert("Error");
+            // alert("Error");
         });
     }
 
@@ -98,7 +98,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         });
         res.error(function (err) {
             console.log(err);
-            alert("Error");
+            // alert("Error");
         });
 
     }
@@ -164,7 +164,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         });
         res.error(function (err) {
             console.log(err);
-            alert("Error");
+            // alert("Error");
         });
     }
 

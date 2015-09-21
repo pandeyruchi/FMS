@@ -107,7 +107,7 @@ angular.module('pune').controller('showMapCtrl', function ($scope, $http, $locat
         });
         res.error(function (err) {
             console.log(err);
-            alert("Error");
+            // alert("Error");
         });
     }
 
@@ -171,7 +171,7 @@ angular.module('pune').controller('showMapCtrl', function ($scope, $http, $locat
                 });
                 res.error(function (err) {
                     console.log(err);
-                    alert("Error");
+                    // alert("Error");
                 });
             }
             else {
@@ -188,7 +188,7 @@ angular.module('pune').controller('showMapCtrl', function ($scope, $http, $locat
                 });
                 res.error(function (err) {
                     console.log(err);
-                    alert("Error");
+                    // alert("Error");
                 });
             }
         });

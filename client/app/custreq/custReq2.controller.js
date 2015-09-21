@@ -62,7 +62,7 @@ angular.module('pune').controller('custReq2Ctrl', function ($scope, $state, $htt
         });
         res.error(function (err) {
             console.log(err);
-            alert("Error");
+            // alert("Error");
         });
 
     };
