@@ -212,17 +212,20 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
 
 // This function assigns job to plumber
     $scope.assignJob = function (job) {
-
         var plumbersToAdd = _.difference(job.plumbers, job.plumbersOriginal);
         var plumbersToDelete = _.difference(job.plumbersOriginal, job.plumbers);
         var defer = $q.defer();
         var promises = [];
+        if(plumbersToAdd.length==0 && plumbersToDelete.length==0){
+            var res = $http.post(host + '/api/jobRequestUpdation', {jobId: job.jobId, plumberId: job.plumberId, urgentFlag:job.urgentFlag.toString()});
+            promises.push(res);
+        }
         plumbersToAdd.forEach(function (plumber) {
-            var res = $http.post(host + '/api/jobRequestUpdation', {jobId: job.jobId, plumberId: plumber.id});
+            var res = $http.post(host + '/api/jobRequestUpdation', {jobId: job.jobId, plumberId: plumber.id, urgentFlag:job.urgentFlag.toString()});
             promises.push(res);
         });
         plumbersToDelete.forEach(function (plumber) {
-            var res = $http.post(host + '/api/deleteJob', {jobId: job.jobId, plumberId: plumber.id});
+            var res = $http.post(host + '/api/deleteJob', {jobId: job.jobId, plumberId: plumber.id,urgentFlag:job.urgentFlag.toString()});
             promises.push(res);
         });
 
