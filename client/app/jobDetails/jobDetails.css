@@ -288,3 +288,8 @@ h6 {
     border-radius: 50%;
     box-sizing: content-box;
 }
+
+.md-content{
+    display: block;
+    position: relative;
+}

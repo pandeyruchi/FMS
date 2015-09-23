@@ -31,7 +31,9 @@ angular.module('pune').controller('signupCtrl', function ($scope, $http,$locatio
 
 
     var pwd = btoa($scope.user.password);
+    var confirmPwd = btoa($scope.user.confirmPassword);
     $scope.user.password = pwd;
+    $scope.user.confirmPassword=confirmPwd;
     var res = $http.post(host+'/api/signup', $scope.user);
     console.log("hi"+$scope.user.latitude + " " + $scope.user.longitude);
     res.success(function (data) {

@@ -1,10 +1,7 @@
-
-angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$location,host, ngProgressFactory,$analytics) {
+angular.module('pune').controller('addPlumberCtrl', function ($scope, $http, $location, host, ngProgressFactory, $analytics) {
     $analytics.pageTrack('/addPlumber');
 
-    $scope.user = {
-
-    };
+    $scope.user = {};
 
     $scope.progressbar = ngProgressFactory.createInstance();
     $scope.progressbar.setHeight('4px');
@@ -25,23 +22,25 @@ angular.module('pune').controller('addPlumberCtrl', function ($scope, $http,$loc
     $scope.computeCoordinates = computeCoordinates;
 
     $scope.addPlumber = function () {
-      $scope.progressbar.start();
-       var pwd = btoa($scope.user.password);
-       $scope.user.password = pwd;
-	 var res = $http.post(host+'/api/addPlumber', $scope.user);
+        $scope.progressbar.start();
+        var pwd = btoa($scope.user.password);
+        var confirmPwd = btoa($scope.user.confirmPassword);
+        $scope.user.password = pwd;
+        $scope.user.confirmPassword = confirmPwd;
+        var res = $http.post(host + '/api/addPlumber', $scope.user);
         res.success(function (data) {
             console.log(data);
             if (!!data.error) {
-              $scope.progressbar.complete();
+                $scope.progressbar.complete();
                 alert(data.message);
             }
             else {
-              $scope.progressbar.complete();
+                $scope.progressbar.complete();
                 $location.url("/main");
             }
         });
         res.error(function (err) {
-          $scope.progressbar.complete();
+            $scope.progressbar.complete();
             console.log(err);
             alert("From Error add plumber unsuccesful");
         })

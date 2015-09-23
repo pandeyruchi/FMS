@@ -94,6 +94,10 @@ angular.module('pune').controller('custReq2Ctrl', function ($scope, $state, $htt
 
     $scope.user = {};
 
+    $scope.cancel=function(){
+        $location.url("/custreq");
+    }
+
     function createMarker(info) {
         if (marker !== undefined) {
             marker.setMap(null);

@@ -24,95 +24,97 @@
 
                     </div>
                     <div class="row max-height">
-                        <md-content class="customerBg">
-                            <md-list>
-                                <md-list-item class="md-3-line md-list-item-job"
-                                              ng-repeat="(id,job) in jobs| job:filter.jobFilter|customer:filter.customerFilter | sortByDate">
-                                    <table style="width: 110%; margin-left: -16px">
-                                        <tr ng-class="{'upperGreenBand':job.selected}" ng-click="customerSelected(job)">
-                                            <td style="width:10%;padding-left: 10px;"><i ng-show="!!job.urgentFlag"
-                                                                                         class="red fa fa-exclamation-triangle fa-pull-left"></i>
-                                            </td>
-                                            <td style="width:75%">
-                                                <div class="md-list-item-text">
-                                                    <h3><strong class="headerFont">{{job.customerName}}</strong></h3>
-                                                    <h6 class="subHeaderFont">{{job.address}}</h6>
+                        <md-list class="customerBg">
+                            <md-list-item class="md-3-line md-list-item-job"
+                                          ng-repeat="(id,job) in jobs| job:filter.jobFilter|customer:filter.customerFilter | sortByDate">
+                                <table style="width: 110%; margin-left: -16px">
+                                    <tr ng-class="{'upperGreenBand':job.selected}" ng-click="customerSelected(job)">
+                                        <td style="width:10%;padding-left: 10px;"><i ng-show="!!job.urgentFlag"
+                                                                                     class="red fa fa-exclamation-triangle fa-pull-left"></i>
+                                        </td>
+                                        <td style="width:75%">
+                                            <div class="md-list-item-text">
+                                                <h3><strong class="headerFont">{{job.customerName}}</strong></h3>
+                                                <h6 class="subHeaderFont">{{job.address}}</h6>
 
-                                                    <div class="subHeaderFont">
-                                                        <i class="fa fa-mobile fa-fw">&nbsp;{{job.mobileNo}}</i></div>
-                                                </div>
-                                            </td>
-                                            <td style="width: 15%;padding-right: 10px;">
-                                                <i ng-class="{'orange':job.jobStatus==='assigned','red':job.jobStatus==='unassigned','green':job.jobStatus==='inProgress'}"
-                                                   class="fa fa-circle fa-pull-right fa-2x">
-                                                    <md-tooltip>{{job.jobStatus}}</md-tooltip>
-                                                </i></td>
+                                                <div class="subHeaderFont">
+                                                    <i class="fa fa-mobile fa-fw">&nbsp;{{job.mobileNo}}</i></div>
+                                            </div>
+                                        </td>
+                                        <td style="width: 15%;padding-right: 10px;">
+                                            <i ng-class="{'orange':job.jobStatus==='assigned','red':job.jobStatus==='unassigned','green':job.jobStatus==='inProgress'}"
+                                               class="fa fa-circle fa-pull-right fa-2x">
+                                                <md-tooltip style="text-transform:capitalize;">{{job.jobStatus.toLowerCase()}}</md-tooltip>
+                                            </i></td>
 
-                                        </tr>
-                                        <tr style="background-color: #6D8D83">
-                                            <td></td>
-                                            <td colspan="2">
-                                                <div collapse="!job.showDetails">
-                                                    <!-- <h4 class="off-white"><b class="headerFont">Job ID:</b></h4>
-                                                     <h5 class="white"><b class="subHeaderFont">{{job.jobId}}</b></h5>-->
-                                                    <div class="form-inline">
-                                                        <table style="width:100%">
-                                                            <tr>
-                                                                <td style="width:75%"><h4 class="off-white"><b class="headerFont">Job
-                                                                    Description</b></h4></td>
-                                                                <td style="width:25%"><input type="checkbox" ng-model="job.urgentFlag"  ng-true-value="1"  ng-false-value="0" >Priority
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <h5 class="white"><b class="subHeaderFont">{{job.issues}}</b>
-                                                                    </h5>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
+                                    </tr>
+                                    <tr style="background-color: #6D8D83">
+                                        <td></td>
+                                        <td colspan="2">
+                                            <div collapse="!job.showDetails">
+                                                <!-- <h4 class="off-white"><b class="headerFont">Job ID:</b></h4>
+                                                 <h5 class="white"><b class="subHeaderFont">{{job.jobId}}</b></h5>-->
+                                                <div class="form-inline">
+                                                    <table style="width:100%">
+                                                        <tr>
+                                                            <td style="width:75%"><h4 class="off-white"><b
+                                                                    class="headerFont">Job
+                                                                Description</b></h4></td>
+                                                            <td style="width:25%"><input type="checkbox"
+                                                                                         ng-model="job.urgentFlag"
+                                                                                         ng-true-value="1"
+                                                                                         ng-false-value="0">Priority
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <h5 class="white"><b class="subHeaderFont">{{job.issues}}</b>
+                                                                </h5>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
                                                                      <span class="off-white"
                                                                            ng-show="!!job.plumbers.length"><strong
                                                                              class="headerFont">Assigned
                                                                          Plumber(s)</strong></span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <md-chips ng-show="job.status !== 'inProgress'"
-                                                                              ng-model="job.plumbers"
-                                                                              readonly="readonly">
-                                                                        <md-chip-template>
-                                                                            <strong class="subHeaderFont">{{$chip.name}}</strong>
-                                                                        </md-chip-template>
-                                                                    </md-chips>
-                                                                    <md-chips ng-show="job.status === 'inProgress'"
-                                                                              ng-model="job.plumbers" readonly="true">
-                                                                        <md-chip-template>
-                                                                            <strong class="subHeaderFont">{{$chip.name}}</strong>
-                                                                        </md-chip-template>
-                                                                    </md-chips>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <md-chips ng-show="job.status !== 'inProgress'"
+                                                                          ng-model="job.plumbers"
+                                                                          readonly="readonly">
+                                                                    <md-chip-template>
+                                                                        <strong class="subHeaderFont">{{$chip.name}}</strong>
+                                                                    </md-chip-template>
+                                                                </md-chips>
+                                                                <md-chips ng-show="job.status === 'inProgress'"
+                                                                          ng-model="job.plumbers" readonly="true">
+                                                                    <md-chip-template>
+                                                                        <strong class="subHeaderFont">{{$chip.name}}</strong>
+                                                                    </md-chip-template>
+                                                                </md-chips>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr ng-class="{'greenBackground':job.selected}" collapse="!job.showDetails">
-                                            <td colspan="3">
-                                                <button class="btn greenBackground" style="width:100%;color: white"
-                                                        ng-click="assignJob(job)" type="button">
-                                                    Save
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-class="{'greenBackground':job.selected}" collapse="!job.showDetails">
+                                        <td colspan="3">
+                                            <button class="btn greenBackground" style="width:100%;color: white"
+                                                    ng-click="assignJob(job)" type="button">
+                                                Save
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
 
-                                    <md-divider ng-if="!$last"></md-divider>
-                                </md-list-item>
-                            </md-list>
-                        </md-content>
+                                <md-divider ng-if="!$last"></md-divider>
+                            </md-list-item>
+                        </md-list>
                     </div>
                     <!--<div class="row">
                         <div class="col-md-4 font-color" ng-model="pending">Pending: {{pending.length}}</div>
@@ -141,10 +143,10 @@
                         <div class="col-md-3">
                             <button ng-click="order('jobCount')" class="btn btn-link">
                                 <i ng-show="!reverse" class="fa fa-sort-numeric-asc">
-                                    <md-tooltip>Sort by Job Count</md-tooltip>
+                                    <md-tooltip>Sort by Job Count : 1-9</md-tooltip>
                                 </i>
                                 <i ng-show="reverse" class="fa fa-sort-numeric-desc">
-                                    <md-tooltip>Sort by Job Count</md-tooltip>
+                                    <md-tooltip>Sort by Job Count : 9-1</md-tooltip>
                                 </i>
                             </button>
                         </div>
