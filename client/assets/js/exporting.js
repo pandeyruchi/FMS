@@ -80,13 +80,13 @@
           onclick: function() {
             this.print()
           }
-        }, {
-          separator: !0
-        }, {
-          textKey: "downloadPNG",
-          onclick: function() {
-            this.exportChart()
-          }
+        //}, {
+        //  separator: !0
+        //}, {
+          //textKey: "downloadPNG",
+          //onclick: function() {
+          //  this.exportChart()
+          //}
         }, {
           textKey: "downloadJPEG",
           onclick: function() {
@@ -101,13 +101,13 @@
               type: "application/pdf"
             })
           }
-        }, {
-          textKey: "downloadSVG",
-          onclick: function() {
-            this.exportChart({
-              type: "image/svg+xml"
-            })
-          }
+        //}, {
+        //  textKey: "downloadSVG",
+        //  onclick: function() {
+        //    this.exportChart({
+        //      type: "image/svg+xml"
+        //    })
+        //  }
         }]
       }
     }

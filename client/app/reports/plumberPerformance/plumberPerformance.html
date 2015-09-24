@@ -2,29 +2,22 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2 col-sm-12 sidebar_top_margin">
-      <li class="list-group-item" ng-click="plumberChange(one.id, one.name)" ng-model="one">{{one.name}}
-        <span style="position:relative;display:inline-block;float:right">
-          <i class="fa fa-star fa-2x text-right" style="color:#00c129;"></i>
-          <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">1</span>
-        </span>
-      </li>
-      <li class="list-group-item" ng-click="plumberChange(two.id, two.name)" ng-model="two">{{two.name}}
-        <span style="position:relative;display:inline-block;float:right">
-          <i class="fa fa-star fa-2x text-right" style="color:  #7fcc88"></i>
-          <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">2</span>
-        </span>
-      </li>
-      <li class="list-group-item" ng-click="plumberChange(three.id, three.name)" ng-model="three">{{three.name}}
-        <span style="position:relative;display:inline-block;float:right">
-          <i class="fa fa-star fa-2x text-right" style="color:  #b6d6b7"></i>
-          <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">3</span>
-        </span>
-      </li>
-      <li class="list-group-item " ng-click="plumberChange(plumber.id, plumber.name)" ng-repeat="plumber in plumberNames">{{plumber.name}}</li>
+    <div class="col-md-3 col-sm-12">
+
+      <div class="max-height">
+        <li id="plumberListli" class="list-group-item" ng-class="{active: plumber.selected }" ng-click="plumberChange(plumber)"  ng-repeat="plumber in plumbers | sortByRank : plumber.rank">
+          <img check-image ng-src="{{plumber.photoUrl}}" class="md-avatar"
+               alt="image"/>
+          {{plumber.name}} {{plumber.lastName}}
+           <span ng-show="!!plumber.rank" style="position:relative;display:inline-block;float:right">
+            <i class="fa fa-star fa-2x text-right" style="color:#00c129;"></i>
+            <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">{{plumber.rank}}</span>
+          </span>
+        </li>
+      </div>
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-9">
       <div class="row">
         <div class="col-sm-12">
           <section>
@@ -51,5 +44,3 @@
     </div>
   </div>
 </div>
-<style> @media(min-width:768px){.sidebar_top_margin{margin-top:41px;}
-}</style>

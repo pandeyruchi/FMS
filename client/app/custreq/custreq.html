@@ -37,7 +37,8 @@
 
                 </div>
 
-                <div class="form-group" ng-show="form.contact.$valid" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
+                <div class="form-group" ng-show="form.contact.$valid"
+                     ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
                                             'has-error': form.firstname.$invalid && form.firstname.$dirty }">
                     <label style="color:#9999A9"><h5>Name</h5></label>
                     <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control"
