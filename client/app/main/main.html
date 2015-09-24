@@ -16,14 +16,16 @@
 
                     <div class="form-group">
                         <select style="width: auto" class="form-control1" name="type" ng-model="duration"
-                                ng-change="changedValueDurationPending(duration)">
+                                ng-change="changedValueDurationPending(duration)" analytics-on="click"
+                                analytics-category="SelectDuration" analytics-event="SelectDuration"
+                                analytics-label="Select Duration">
                             <option ng-repeat="duration in durationList">{{duration}}</option>
                         </select>
                     </div>
-                        <div ng-class="{'toggle-visibility-show':!pendingLoaded,'toggle-visibility-hidden':!!pendingLoaded || pendingList.length > 0}"
-                             class="loader pendingSpinner">
-                            <i class="fa fa-circle-o-notch fa-spin fa-2x pull-right"></i></div>
-                        <br/>
+                    <div ng-class="{'toggle-visibility-show':!pendingLoaded,'toggle-visibility-hidden':!!pendingLoaded || pendingList.length > 0}"
+                         class="loader pendingSpinner">
+                        <i class="fa fa-circle-o-notch fa-spin fa-2x pull-right"></i></div>
+                    <br/>
 
                 </div>
                 <md-content class="customerBg max-height" max-height-dashboard>
@@ -63,12 +65,14 @@
                 </div>
                 <br/>
 
-<div>
-                <select style="width: auto" class="form-control2" name="type2" ng-model="duration2"
-                        ng-change="changedValueDurationAssigned(duration2)">
-                    <option ng-repeat="duration in durationList">{{duration}}</option>
-                </select>
-</div>
+                <div>
+                    <select style="width: auto" class="form-control2" name="type2" ng-model="duration2"
+                            ng-change="changedValueDurationAssigned(duration2)" analytics-on="click"
+                            analytics-category="SelectDuration" analytics-event="SelectDuration"
+                            analytics-label="Select Duration">
+                        <option ng-repeat="duration in durationList">{{duration}}</option>
+                    </select>
+                </div>
                 <div ng-class="{'toggle-visibility-show':!assignedLoaded,'toggle-visibility-hidden':!!assignedLoaded && assignedList.length > 0}"
                      class="loader assignedSpinner">
                     <i class="fa fa-circle-o-notch fa-spin fa-2x"></i></div>
@@ -113,12 +117,15 @@
                     </div>
                 </div>
                 <br/>
-            <div>
-                <select style="width: auto" class="form-control3" name="type" ng-model="duration3"
-                        ng-change="changedValueDurationCompleted(duration3)">
-                    <option ng-repeat="duration3 in durationList">{{duration3}}</option>
-                </select>
-        </div>
+
+                <div>
+                    <select style="width: auto" class="form-control3" name="type" ng-model="duration3"
+                            ng-change="changedValueDurationCompleted(duration3)" analytics-on="click"
+                            analytics-category="SelectDuration" analytics-event="SelectDuration"
+                            analytics-label="Select Duration">
+                        <option ng-repeat="duration3 in durationList">{{duration3}}</option>
+                    </select>
+                </div>
                 <div ng-class="{'toggle-visibility-show':!completeLoaded,'toggle-visibility-hidden':!!completeLoaded && completedList.length > 0}"
                      class="loader completeSpinner">
                     <i class="fa fa-circle-o-notch fa-spin fa-2x"></i></div>

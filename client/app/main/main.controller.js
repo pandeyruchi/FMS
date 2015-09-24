@@ -1,7 +1,9 @@
 /**
  * Created by synerzip on 29/7/15.
  */
-angular.module('pune').controller('mainCtrl', function ($scope, $http, $location, host,ngProgressFactory) {
+angular.module('pune').controller('mainCtrl', function ($scope, $http, $location, host,ngProgressFactory,$analytics) {
+    $analytics.pageTrack('/main');
+
     $scope.progressbar = ngProgressFactory.createInstance();
     $scope.progressbar.setHeight('4px');
     $scope.progressbar.setColor('#0274ff');
