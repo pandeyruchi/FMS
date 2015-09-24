@@ -6,9 +6,11 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
     $scope.progressbar.setHeight('4px');
     $scope.progressbar.setColor('#0274ff');
     // Variable declarations
+
     $scope.completedList = [];
     $scope.pendingList = [];
     $scope.assignedList = [];
+
     $scope.durationList = ['Last Three Days','Last Week','Last Month', 'Last Quarter','Last Six Month', 'Last Year', 'All Time'];
     var dur = {};
     var status = "";
@@ -25,6 +27,8 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             $scope.textRequired = false;
         }
     }
+
+$scope.sameHeight = window.innerHeight;
 
     // Function gets called when user selects a duration from drop down(pending)
     $scope.changedValueDurationPending=function(duration){
@@ -51,6 +55,7 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             duration = "1Y";
         }
         sendDuration(duration,status);
+
     }
 
     // Function gets called when user selects a duration from drop down(assigned)
@@ -78,6 +83,8 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             duration2 = "1Y";
         }
         sendDuration(duration2,status);
+
+
     }
 
     // Function gets called when user selects a duration from drop down(completed)
@@ -105,6 +112,8 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             duration3 = "1Y";
         }
         sendDuration(duration3,status);
+
+
     }
 
 
@@ -127,6 +136,8 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
         if(status=="pending"){
             $scope.pendingList = [];
         }
+
+
         dur.duration = duration;
         var res = $http.post(host + '/api/assignUnassignDateWiseJobList',dur);
         res.success(function (result) {
@@ -152,6 +163,15 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
                 alert(data.Message);
             }
             else {
+                if(status == "completed"){
+                    $scope.completeLoaded = true;
+                }
+                if(status=="assigned"){
+                    $scope.assignedLoaded =true;
+                }
+                if(status=="pending"){
+                    $scope.pendingLoaded = true;
+                }
                 //$scope.progressbar.complete();
                 /* alert("There is a problem!\nPlease search again!");*/
             }
@@ -160,6 +180,7 @@ angular.module('pune').controller('mainCtrl', function ($scope, $http, $location
             // $scope.progressbar.complete();
             console.log(err);
         });
+
         $scope.progressbar.complete();
     }
 });

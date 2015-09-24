@@ -1,8 +1,8 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
 
 <div class="container-fluid">
-    <div class="row" style="margin-top: -18px">
-        <div class="col-md-4" style="background-color: #f9f9f9">
+    <div class="row" style="margin-top: -18px" set-height>
+        <div class="col-sm-4">
             <!--<nav class="navbar navbar-default navbar-static-top" style="padding-left: 10px;margin-top: -20px"
                  ng-controller="NavbarCtrl">
                 <div class="navbar-header">
@@ -11,12 +11,12 @@
             </nav>-->
             <h4>Register a new call</h4>
             <md-divider></md-divider>
-            <br/>
+
             <form class="form" name="form" ng-submit="signup()" novalidate>
 
-                <div class="form-group" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
+                <div class="form-group push-down-1" ng-class="{ 'has-success': form.contact.$valid && form.contact.$dirty,
                                             'has-error': form.contact.$invalid && form.contact.$dirty }">
-                    <label style="color:#9999A9"><h5>Contact Number</h5></label>
+                    <span class="text-muted">Contact Number</span>
 
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">+91</span>
@@ -39,7 +39,7 @@
 
                 <div class="form-group" ng-show="form.contact.$valid" ng-class="{'has-success': form.firstname.$valid && form.firstname.$dirty,
                                             'has-error': form.firstname.$invalid && form.firstname.$dirty }">
-                    <label style="color:#9999A9"><h5>Name</h5></label>
+                    <span class="text-muted">Name</span>
                     <input type="text" name="firstname" ng-blur="visitedFirstName = true" class="form-control"
                            ng-model="customer.customerName" required>
 
@@ -58,16 +58,16 @@
                     <table style="width: 100%;">
                         <tr>
                             <td class="text-left">
-                                <label style="color:#9999A9" ng-show="showAddAddress || !jobs || jobs.length ===0"><h5>Enter Address</h5></label>
-                                <label style="color:#9999A9" ng-show="jobs.length > 0 && !showAddAddress" class="text-left"><h5>Select
-                                    Address</h5></label>
+                                <span class="text-muted" ng-show="showAddAddress || !jobs || jobs.length ===0">Enter Address</span>
+                                <span class="text-muted" style="color:#9999A9" ng-show="jobs.length > 0 && !showAddAddress" class="text-left">Select
+                                    Address</span>
                             </td>
                             <td class="text-right">
                                 <a ng-show="jobs.length > 0" class="btn btn-link btn-sm"
                                    ng-click="showAddAddress=!showAddAddress">
-                                    <label ng-show="!showAddAddress">or Add New</label>
+                                    <span class="text-primary" ng-show="!showAddAddress">or Add New</span>
 
-                                    <label ng-show="showAddAddress">or Select</label>
+                                    <span class="text-primary" ng-show="showAddAddress">or Select</span>
                                 </a>
                             </td>
                         </tr>
@@ -83,7 +83,7 @@
                         Please enter address
                     </p>
 
-                    <md-list class="list-max-height" ng-show="!showAddAddress && jobs.length > 0">
+                    <md-list class="list-max-height registerCall" ng-show="!showAddAddress && jobs.length > 0">
                         <md-list-item ng-click="jobSelected(job)"  ng-class="{'addressSelected':isSelected(job)}" class="md-3-line md-list-item-job"
                                       ng-repeat="job in jobs">
                             <div class="md-list-item-text">
@@ -102,8 +102,8 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-8">
-            <div id="map" style="height:600px"></div>
+        <div class="col-sm-8 no-padding">
+            <div id="map" set-height></div>
         </div>
     </div>
 </div>
