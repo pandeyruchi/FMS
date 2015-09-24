@@ -10,9 +10,10 @@
         </div>
     </div>
     <br/><br/>
-        <select style="width: auto" class="form-control1" name="type" ng-model="duration" ng-click="changedValueDurationPending(duration)">
+        <select style="width: auto" class="form-control1" name="type" ng-model="duration" ng-click="changedValueDurationPending(duration)" analytics-on="click"
+                analytics-category="SelectDuration" analytics-event="SelectDuration"
+                analytics-label="Select Duration">
             <option ng-repeat="duration in durationList" >{{duration}}</option>
-            <!-- <option value="B">Option B</option>-->
         </select>
             <br/>
 
@@ -51,7 +52,9 @@
                 </div>
             </div>
             <br/><br/>
-            <select style="width: auto" class="form-control2" name="type2" ng-model="duration2" ng-click="changedValueDurationAssigned(duration2)">
+            <select style="width: auto" class="form-control2" name="type2" ng-model="duration2" ng-click="changedValueDurationAssigned(duration2)" analytics-on="click"
+                    analytics-category="SelectDuration" analytics-event="SelectDuration"
+                    analytics-label="Select Duration">
                 <option ng-repeat="duration in durationList" >{{duration}}</option>
             </select>
 
@@ -83,8 +86,6 @@
             </md-content>
         </div>
 
-
-
         <div class="col-sm-4 text-center same-height">
             <div class="dashboard-badge grey-badge">
                 <div class="dashboard-number">
@@ -94,14 +95,9 @@
                 </div>
             </div>
             <br/><br/>
-            <!--<div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">This Week
-                    <span class="caret"></span></button>
-                <ul class="dropdown-menu dashboard-dropdown ">
-                    <li ng-repeat="duration in durationList"><a ng-click="changedValueDurationCompleted(duration)">{{duration}}</a></li>
-                </ul>
-            </div>-->
-            <select style="width: auto" class="form-control3" name="type" ng-model="duration3" ng-click="changedValueDurationCompleted(duration3)">
+            <select style="width: auto" class="form-control3" name="type" ng-model="duration3" ng-click="changedValueDurationCompleted(duration3)" analytics-on="click"
+                    analytics-category="SelectDuration" analytics-event="SelectDuration"
+                    analytics-label="Select Duration">
                 <option ng-repeat="duration3 in durationList" >{{duration3}}</option>
             </select>
             <br/>
