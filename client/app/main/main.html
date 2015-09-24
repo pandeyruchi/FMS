@@ -6,17 +6,10 @@
         <div class="dashboard-number">
             {{pendingList.length}}</div>
         <div class="dashboard-label">
-            <b>pending</b>
+            <b>Pending</b>
         </div>
     </div>
     <br/><br/>
-    <!--<div class="dropdown">
-        <button  class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">This Week
-                    <span class="caret"></span></button>
-                <ul class="dropdown-menu dashboard-dropdown">
-                    <li  ng-repeat="duration in durationList"><a ng-click="changedValueDurationPending(duration)">{{duration}}</a></li>
-                </ul>
-            </div>-->
         <select style="width: auto" class="form-control1" name="type" ng-model="duration" ng-click="changedValueDurationPending(duration)">
             <option ng-repeat="duration in durationList" >{{duration}}</option>
             <!-- <option value="B">Option B</option>-->
@@ -33,9 +26,10 @@
                                     <span class="text-muted">  {{$index+1}} </span>
                                 </td>
                                 <td class="text-left">
-                                    <div class="md-list-item-text md-list-item-text">
+                                    <div class="md-list-item-text  md-list-item-text">
                                         <div class="headerFont text-muted">{{plumber.customerName}}</div>
-                                        <h6 class="subHeaderFont">{{plumber.address}}</h6>
+                                        <div class="subHeaderFont">{{plumber.address}}</div>
+
                                         <div class="subHeaderFont">
                                             <i class="fa fa-mobile fa-fw">&nbsp;{{plumber.mobileNo}}</i></div>
                                     </div>
@@ -53,19 +47,10 @@
                 <div class="dashboard-number">
                     {{assignedList.length}}</div>
                 <div class="dashboard-label">
-                    <b>assigned</b>
+                    <b>Assigned</b>
                 </div>
             </div>
             <br/><br/>
-           <!-- <div class="dropdown">
-                <button  class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">This Week
-                    <span class="caret"></span></button>
-                <ul class="dropdown-menu dashboard-dropdown">
-                    <li ng-repeat="duration in durationList"><a ng-click="changedValueDurationAssigned(duration)">{{duration}}</a></li>
-                </ul>
-            </div>-->
-
-
             <select style="width: auto" class="form-control2" name="type2" ng-model="duration2" ng-click="changedValueDurationAssigned(duration2)">
                 <option ng-repeat="duration in durationList" >{{duration}}</option>
             </select>
@@ -105,7 +90,7 @@
                 <div class="dashboard-number">
                     {{completedList.length}}</div>
                 <div class="dashboard-label">
-                    <b>completed</b>
+                    <b>Completed</b>
                 </div>
             </div>
             <br/><br/>
@@ -130,9 +115,9 @@
                                     <span class="text-muted">  {{$index+1}} </span>
                                 </td>
                                 <td class="text-left">
-                                    <div class="md-list-item-text  md-list-item-tex">
+                                    <div class="md-list-item-text  md-list-item-text">
                                         <div class="headerFont text-muted">{{plumber.customerName}}</div>
-                                        <h6 class="subHeaderFont">{{plumber.address}}</h6>
+                                        <div class="subHeaderFont">{{plumber.address}}</div>
 
                                         <div class="subHeaderFont">
                                             <i class="fa fa-mobile fa-fw">&nbsp;{{plumber.mobileNo}}</i></div>

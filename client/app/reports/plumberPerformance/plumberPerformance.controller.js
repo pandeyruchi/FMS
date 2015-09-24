@@ -1,194 +1,183 @@
-angular.module('pune').controller('plumberPerformanceCtrl', function($scope, $http, host, $location, ngProgressFactory) {
-  $scope.progressbar = ngProgressFactory.createInstance();
-  $scope.progressbar.setHeight('4px');
-  $scope.progressbar.setColor('#0274ff');
+angular.module('pune').controller('plumberPerformanceCtrl', function ($scope, $http, host, $location, ngProgressFactory) {
 
-  $scope.chartDisplay = false;
+    // To display progress bar
+    $scope.progressbar = ngProgressFactory.createInstance();
+    $scope.progressbar.setHeight('4px');
+    $scope.progressbar.setColor('#0274ff');
 
-  $scope.tab = "1";
-  $scope.plumberNames = [];
-  $scope.itemList = "";
-  $scope.topPlumbers = [];
-  var plumbers = [];
+    // Variable declartions
+    var id;
+    var plumberId = 0;
+    var duration = "1W";
+    $scope.chartDisplay = false;
+    $scope.tab = "1";
+    $scope.itemList = "";
+    $scope.category = [];
+    $scope.seriesData = [];
 
-  $scope.one = {};
-  $scope.two = {};
-  $scope.three = {};
-
-  $scope.category = [];
-  $scope.seriesData = [];
-
-  var plumberId = 0;
-  var duration = "1W";
-
-  var chartConfig = {
-    options: {
-      chart: {
-        type: 'column'
-      },
-      events: {
-        redraw: function() {
-            alert ('The chart is being redrawn');
-        }
-      },
-      tooltip: {
-          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-              '<td style="padding:0"><b>{point.y}</b></td></tr>',
-          footerFormat: '</table>',
-          shared: true,
-          useHTML: true
-      },
-      plotOptions: {
-        series: {
-          pointPadding: 0.2,
-          borderWidth: 0,
-          stacking: ''
-        }
-      },
-    },
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Plumber Performance Report'
-    },
-    subtitle: {
-        text: ''
-    },
-    xAxis: {
-        categories: $scope.category,
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        tickInterval: 1,
+    // Options to display chart
+    var chartConfig = {
+        options: {
+            chart: {
+                type: 'column'
+            },
+            events: {
+                redraw: function () {
+                    alert('The chart is being redrawn');
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                series: {
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    stacking: ''
+                }
+            },
+        },
+        chart: {
+            type: 'column'
+        },
         title: {
-            text: 'Job(s) Comepleted'
+            text: 'Plumber Performance Report'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: $scope.category,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            tickInterval: 1,
+            title: {
+                text: 'Job(s) Comepleted'
+            }
+        },
+        loading: false,
+        series: [{
+            name: 'Completed Job Count',
+            data: $scope.seriesData
+        }]
+    };
+
+    // Get the data for plumber reports
+    var res = $http.get(host + '/api/PlumberPerformanceReport').success(function (result) {
+        $scope.progressbar.start();
+
+        chartConfig.loading = true;
+        $scope.plumbers = [];
+        var data = result;
+
+        if (data != null) {
+            data.forEach(function (elem) {
+                var plumber = {};
+                plumber.name = elem.firstName;
+                plumber.lastName = elem.lastName;
+                plumber.id = elem.userId;
+                plumber.photoUrl = elem.photoUrl;
+                plumber.rank = elem.rank;
+                if (plumber.rank === "1") {
+                    plumber.selected = true;
+                    $scope.selectedPlumber = plumber;
+                    $scope.selectedPlumber.selected = true;
+                }
+                $scope.plumbers.push(plumber);
+            });
         }
-    },
-    loading: false,
-    series: [{
-        name: 'Completed Job Count',
-        data: $scope.seriesData
-    }]
-  };
+        $scope.progressbar.complete();
+    });
 
-  $http.get(host + '/api/PlumberPerformanceReport').then(function(result) {
+    // Function gets called when user selects particular plumber
+    $scope.plumberChange = function (plumber) {
+        chartConfig.loading = true;
+        //chartConfig.subtitle.text = pName;
+        if ($scope.selectedPlumber === plumber) {
+            $scope.selectedPlumber.selected = !$scope.selectedPlumber.selected;
+            plumber.selected = !plumber.selected;
+
+        }
+        if ($scope.selectedPlumber !== plumber) {
+            if (!!$scope.selectedPlumber) {
+                $scope.selectedPlumber.selected = false;
+            }
+            plumber.selected = true;
+            $scope.selectedPlumber = plumber;
+        }
+
+        // Posting data to get the performance result
+        var res = $http.post(host + '/api/plumberWorkTimeReport', {"plumberId": plumber.id, "duration": duration});
+        id = plumber.id;
+       //console.log("1. plumberId : " + plumber.id + " Duration :" + duration);
+
+        $scope.seriesData.length = 0;
+        res.success(function (result) {
+            result.forEach(function (elem) {
+                $scope.category.push(elem.day);
+                $scope.seriesData.push(elem.count);
+                //console.log("1" + elem.day + " " + elem.count)
+            });
+            chartConfig.loading = false;
+        });
+        res.error(function (err) {
+            chartConfig.loading = false;
+        });
+    };
+
+    $scope.isSelected = function (checkTab) {
+        return $scope.tab === checkTab;
+    };
+
+    // Function gets called when user selects particular duration
+    $scope.selectTab = function (setTab) {
+        chartConfig.loading = true;
+        $scope.tab = setTab;
+        switch (setTab) {
+            case "1":
+                durationChange("1W");
+                break;
+            case "2":
+                durationChange("1M");
+                break;
+            case "3":
+                durationChange("3M");
+                break;
+            case "4":
+                durationChange("6M");
+                break;
+            case "5":
+                durationChange("1Y");
+                break;
+        }
+    };
+
+    // Function gets called when user changes the duration to send the duration
+    function durationChange(dId) {
+        duration = dId;
+        var res = $http.post(host + '/api/plumberWorkTimeReport', {"plumberId": id, "duration": dId});
+        //console.log("2. plumberId : " + id + " Duration :" + duration);
+
+        $scope.seriesData.length = 0;
+        res.success(function (result) {
+            result.forEach(function (elem) {
+                $scope.category.push(elem.day);
+                $scope.seriesData.push(elem.count)
+                console.log("2" + elem.day + " " + elem.count)
+            })
+            chartConfig.loading = false;
+        });
+
+        res.error(function (err) {
+            chartConfig.loading = false;
+        });
+    }
     $scope.chartConfig = chartConfig;
-    chartConfig.loading = true;
-    $scope.topPlumbers.length = 0;
-    $scope.progressbar.start();
-
-    $scope.one.id = result.data[result.data.length - 3].userId;
-    $scope.two.id = result.data[result.data.length - 2].userId;
-    $scope.three.id = result.data[result.data.length - 1].userId;
-
-    plumberId = $scope.one.id;
-    chartConfig.subtitle.text = result.data[result.data.length - 3].firstName;
-
-    $scope.one.name = result.data[result.data.length - 3].firstName;
-    $scope.two.name = result.data[result.data.length - 2].firstName;
-    $scope.three.name = result.data[result.data.length - 1].firstName;
-
-    var remainingPlumbers = result.data.slice(0, result.data.length - 3);
-
-    $scope.plumberNames.length = 0;
-    remainingPlumbers.forEach(function(elem){
-      var plumber = {};
-      plumber.name = elem.firstName;
-      plumber.id = elem.userId;
-
-      $scope.plumberNames.push(plumber);
-    });
-
-    $scope.progressbar.complete();
-    generateChart();
-  });
-
-  function generateChart() {
-    $http.post(host + '/api/plumberWorkTimeReport', {"plumberId" : plumberId, "duration" : duration}).then(function(result) {
-      result.data.forEach(function(elem) {
-        $scope.category.push(elem.day);
-        $scope.seriesData.push(elem.count)
-      })
-
-      chartConfig.loading = false;
-    });
-  }
-
-  $scope.reflow = function () {
-    $scope.$broadcast('highchartsng.reflow');
-  };
-
-  $scope.plumberChange = function(pId, pName) {
-    chartConfig.loading = true;
-    chartConfig.subtitle.text = pName;
-
-    plumberId = pId;
-    plumberName = pName;
-
-    var res = $http.post(host + '/api/plumberWorkTimeReport', {"plumberId" : pId, "duration" : duration});
-
-    $scope.seriesData.length = 0;
-    res.success(function(result) {
-      result.forEach(function(elem) {
-        $scope.category.push(elem.day);
-        $scope.seriesData.push(elem.count)
-      })
-
-      chartConfig.loading = false;
-    });
-
-    res.error(function(err) {
-      chartConfig.loading = false;
-    });
-  }
-
-  $scope.isSelected = function(checkTab) {
-    return $scope.tab === checkTab;
-  };
-
-  $scope.selectTab = function(setTab) {
-    chartConfig.loading = true;
-    $scope.tab = setTab;
-    switch (setTab) {
-      case "1":
-        durationChange("1W");
-        break;
-      case "2":
-        durationChange("1M");
-        break;
-      case "3":
-        durationChange("3M");
-        break;
-      case "4":
-        durationChange("6M");
-        break;
-      case "5":
-        durationChange("1Y");
-        break;
-      }
-  };
-
-  function durationChange(dId) {
-    duration = dId;
-
-    var res = $http.post(host + '/api/plumberWorkTimeReport', {"plumberId" : plumberId, "duration" : dId});
-
-    $scope.seriesData.length = 0;
-    res.success(function(result) {
-      result.forEach(function(elem) {
-        $scope.category.push(elem.day);
-        $scope.seriesData.push(elem.count)
-      })
-      chartConfig.loading = false;
-    });
-
-    res.error(function(err) {
-      chartConfig.loading = false;
-    });
-  }
-
-  $scope.chartConfig = chartConfig;
 });
