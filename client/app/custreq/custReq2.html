@@ -66,10 +66,14 @@
                     <p style="color:#9999A9"><input type="checkbox" class="pull-left" ng-model="newJob.urgentFlag" ng-true-value="1"
                            ng-false-value="0">&nbsp Mark as priority</p>
                     <button ng-show="showAddIssue"
-                            class="btn btn-success pull-right" ng-click="assignNewJob()"> Save & Assign
+                            class="btn btn-success pull-right" ng-click="assignNewJob()" analytics-on="click"
+                            analytics-category="AddRequest" analytics-event="AddRequest"
+                            analytics-label="Add Customer Information"> Save & Assign
                     </button>
                     <button ng-show="!showAddIssue"
-                            class="btn btn-success pull-right" ng-click="assignNewJob()"> Save & Assign
+                            class="btn btn-success pull-right" ng-click="assignNewJob()" analytics-on="click"
+                            analytics-category="AddRequest" analytics-event="AddRequest"
+                            analytics-label="Add Customer Information"> Save & Assign
                     </button>
                         <button style="margin-right: 5px" class="btn btn-danger pull-right" ng-click="cancel()"> Cancel
                         </button>
