@@ -89,6 +89,7 @@ angular.module('pune').controller('plumberPerformanceCtrl', function ($scope, $h
                     plumber.selected = true;
                     $scope.selectedPlumber = plumber;
                     $scope.selectedPlumber.selected = true;
+                    $scope.plumberChange(plumber);
                 }
                 $scope.plumbers.push(plumber);
             });
