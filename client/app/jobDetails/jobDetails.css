@@ -198,8 +198,8 @@ h6 {
 }
 
 .subHeaderFont {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 12px
+
+    font-size: 11px
 }
 
 .container-fluid-map {
@@ -219,10 +219,10 @@ h6 {
 }
 
 .badgeCustom {
-    background-color: #40310D;
-    border-radius: 15px;
+    background-color: #30250A !important;
+    border-radius: 15px !important;
 }
-
+.customerBg .md-list-item-text{padding:8px 0 !Important;}
 .font-color {
     color: #999999;
 }
@@ -235,26 +235,39 @@ h6 {
 }
 
 .lowerGreenBand {
-    background: #719288;
+    background-color: #719288;
     filter: alpha(opacity=10) progid : DXImageTransform . Microsoft . Alpha(opacity = 10);
+
 }
 .upperGreenBand, table, * {outline:none;
     outline-color: transparent;}
 
 .upperGreenBand {
-    background: #7F9D94;
+    background: rgba(110, 140, 128, 0.84);
+    color:white;
 
     /*
         background: rgba(255, 255, 255, 1);*/
     filter: alpha(opacity=10) progid : DXImageTransform . Microsoft . Alpha(opacity = 10);
 }
 
-.md-chips .md-chip {
-    border-radius: 0px;
+.md-chips .md-chip {height:20px !important;
+    border-radius: 20px !important;line-height:20px !important;
     background-color: #FFFFFF;
     color: #215545;
 }
+.md-chips .md-chip .md-chip-remove md-icon {
+    height: 13px !important;
+    width: 13px !important;
+    position: absolute;
+    top: 34% !important;
+left: 50% !important;}
 
+.bg-image{
+    background-image: url("/assets/images/gaussian_blur.png");
+    background-size:cover;
+    -webkit-background-size:cover;
+}
 
 
 .md-list-item-job {

@@ -1,26 +1,24 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
 
 <div class="container-fluid">
-  <div class="row" set-height>
+  <div class="row" set-height-reports>
 
-    <div class="col-md-3 col-sm-12">
+    <div class="col-sm-3">
       <div class="max-height" max-height-reports>
         <li id="plumberListli" class="list-group-item" ng-class="{active: plumber.selected }"  ng-click="generateChart(plumber)"  ng-repeat="plumber in plumbers | sortByRank : plumber.rank">
           <img check-image ng-src="{{plumber.photoUrl}}" class="md-avatar"
                alt="image"/>
           {{plumber.name}} {{plumber.lastName}}
-         <span ng-show="!!plumber.rank" style="position:relative;display:inline-block;float:right">
-          <i class="fa fa-star fa-2x text-right" style="color:#00c129;"></i>
-          <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">{{plumber.rank}}</span>
+         <span ng-show="!!plumber.rank" style="position:relative;display:inline-block;float:right"
+               class="badge push-down-105">{{plumber.rank}}</span>
         </span>
         </li>
       </div>
     </div>
 
-  <div class="col-md-9">
-
-  <div class="container" id="mains" style="position: absolute; width:100%;margin: 0 auto">
-    <div class="col-lg-12 col-sm-10" id="pie-chart">
+  <div class="col-sm-9">
+  <div class="row">
+    <div class="col-sm-12" id="pie-chart">
       <div class="panel panel-default">
         <div class="panel-body">
           <highchart class="span10" config="chartConfig"></highchart>

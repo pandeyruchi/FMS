@@ -35,8 +35,8 @@
                                         </td>
                                         <td style="width:75%">
                                             <div class="md-list-item-text">
-                                                <h3><strong class="headerFont">{{job.customerName}}</strong></h3>
-                                                <h6 class="subHeaderFont">{{job.address}}</h6>
+                                                <span><strong class="headerFont">{{job.customerName}}</strong></span><br/>
+                                                <span class="subHeaderFont">{{job.address}}</span>
 
                                                 <div class="subHeaderFont">
                                                     <i class="fa fa-mobile fa-fw">&nbsp;{{job.mobileNo}}</i></div>
@@ -51,7 +51,7 @@
                                             </i></td>
 
                                     </tr>
-                                    <tr style="background-color: #6D8D83">
+                                    <tr class="bg-image" style="background-color: #6D8D83;">
                                         <td></td>
                                         <td colspan="2">
                                             <div collapse="!job.showDetails">
@@ -60,27 +60,26 @@
                                                 <div class="form-inline">
                                                     <table style="width:100%">
                                                         <tr>
-                                                            <td style="width:75%"><h4 class="off-white"><b
-                                                                    class="headerFont">Job
-                                                                Description</b></h4></td>
-                                                            <td style="width:25%"><input type="checkbox"
+                                                            <td style="width:70%"><small class="off-white">Job
+                                                                Description</small></td>
+                                                            <td style="width:30%%">  <label class="off-white" style="font-weight:normal;"> <input type="checkbox"
                                                                                          ng-model="job.urgentFlag"
                                                                                          ng-true-value="1"
-                                                                                         ng-false-value="0">Priority
+                                                                                         ng-false-value="0" class="checkbox">
+                                                              Priority </label>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <h5 class="white"><b class="subHeaderFont">{{job.issues}}</b>
-                                                                </h5>
+                                                                <span class="white"><b class="subHeaderFont">{{job.issues}}</b>
+                                                                </span>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                     <span class="off-white"
-                                                                           ng-show="!!job.plumbers.length"><strong
-                                                                             class="headerFont">Assigned
-                                                                         Plumber(s)</strong></span>
+                                                            <td> <hr style="margin-top:4px;border:0;margin-bottom:0px ">
+                                                                     <small class="off-white"
+                                                                           ng-show="!!job.plumbers.length">Assigned
+                                                                         Plumber(s)</small>
                                                             </td>
                                                         </tr>
                                                         <tr>

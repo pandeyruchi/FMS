@@ -1,117 +1,115 @@
-angular.module('pune').controller('plumberAvailabilityCtrl', function($scope, $http, host, $interval, ngProgressFactory) {
-  $scope.progressbar = ngProgressFactory.createInstance();
-  $scope.progressbar.setHeight('4px');
-  $scope.progressbar.setColor('#0274ff');
+angular.module('pune').controller('plumberAvailabilityCtrl', function ($scope, $http, host, $interval, ngProgressFactory) {
 
-  var seriesData = [];
-  var drillDownData = [];
 
-  var availablePlumbers = [];
-  var unAvailablePlumbers = [];
+    var seriesData = [];
+    var drillDownData = [];
 
-  var chartConfig = {
-    title: {
-      text: 'Plumber Availability Report'
-    },
-    loading: false,
-    options: {
-      chart: {
-        type: 'pie',
-      },
-      legend: {
-        align: 'center',
-        x: -70,
-        verticalAlign: 'center',
-        y: 20,
-        floating: true,
-        borderColor: '#CCC',
-        borderWidth: 1,
-        shadow: false
-      },
-      tooltip: {
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name} ({point.y})</span>: <b>{point.z:.2f}%</b> of total<br/>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '{point.name} ({point.y})'
-          }
-        }
-      }
-    },
-    series: [{
-      name: 'Plumber Availability',
-      colorByPoint: true,
-      data: seriesData
-    }]
-  };
+    var availablePlumbers = [];
+    var unAvailablePlumbers = [];
 
-  $http.get(host + '/api/getAvailablePlumbers').then(function(result) {
-    $scope.progressbar.start();
-    chartConfig.loading = true;
+    var chartConfig = {
+        title: {
+            text: 'Plumber Availability Report'
+        },
+        loading: false,
+        options: {
+            chart: {
+                type: 'pie',
+            },
+            legend: {
+                align: 'center',
+                x: -70,
+                verticalAlign: 'center',
+                y: 20,
+                floating: true,
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name} ({point.y})</span>: <b>{point.z:.2f}%</b> of total<br/>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name} ({point.y})'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Plumber Availability',
+            colorByPoint: true,
+            data: seriesData
+        }]
+    };
 
-    result.data.forEach(function(elem) {
-      availablePlumbers.push(elem);
-    })
+    $http.get(host + '/api/getAvailablePlumbers').then(function (result) {
 
-    $http.get(host + '/api/getUnavailablePlumbers').then(function (result) {
-      result.data.forEach(function(elem) {
-        unAvailablePlumbers.push(elem);
-      })
+        chartConfig.loading = true;
 
-      $scope.progressbar.complete();
-      generateChart();
-    });
-  });
+        result.data.forEach(function (elem) {
+            availablePlumbers.push(elem);
+        })
 
-  function generateChart(){
-    var avail = {};
-    var availDetails = {};
-    var unavailDetails = {};
+        $http.get(host + '/api/getUnavailablePlumbers').then(function (result) {
+            result.data.forEach(function (elem) {
+                unAvailablePlumbers.push(elem);
+            })
 
-    avail.name = "Available Plumbers";
-    avail.visible = true;
-    avail.color = "#006400";
-    avail.y = availablePlumbers.length;
-    avail.z = (availablePlumbers.length * 100) / (availablePlumbers.length + unAvailablePlumbers.length)
 
-    var availData = [];
-    availablePlumbers.forEach(function(elem) {
-      availData.push([elem.firstName + " " + elem.lastName + " (" + elem.mobileNo + ") ", 100/availablePlumbers.length])
+            generateChart();
+        });
     });
 
-    availDetails.id = "Available";
-    availDetails.name = "Available Plumbers";
-    availDetails.data = availData;
+    function generateChart() {
+        var avail = {};
+        var availDetails = {};
+        var unavailDetails = {};
 
-    var unAvail = {};
-    unAvail.name = "Unavailable Plumbers";
-    unAvail.visible = true;
-    unAvail.color = "#FF8C00";
-    unAvail.y = unAvailablePlumbers.length;
-    unAvail.z = (unAvailablePlumbers.length * 100) / (availablePlumbers.length + unAvailablePlumbers.length)
+        avail.name = "Available Plumbers";
+        avail.visible = true;
+        avail.color = "#006400";
+        avail.y = availablePlumbers.length;
+        avail.z = (availablePlumbers.length * 100) / (availablePlumbers.length + unAvailablePlumbers.length)
 
-    var unavailData = [];
-    unAvailablePlumbers.forEach(function(elem) {
-      unavailData.push([elem.firstName + " " + elem.lastName + " (" + elem.mobileNo + ") ", 0])
-    });
+        var availData = [];
+        availablePlumbers.forEach(function (elem) {
+            availData.push([elem.firstName + " " + elem.lastName + " (" + elem.mobileNo + ") ", 100 / availablePlumbers.length])
+        });
 
-    unavailDetails.id = "Unavailable";
-    unavailDetails.name = "Unavailable Plumbers";
-    unavailDetails.data = unavailData;
+        availDetails.id = "Available";
+        availDetails.name = "Available Plumbers";
+        availDetails.data = availData;
 
-    seriesData.push(avail);
-    seriesData.push(unAvail);
+        var unAvail = {};
+        unAvail.name = "Unavailable Plumbers";
+        unAvail.visible = true;
+        unAvail.color = "#FF8C00";
+        unAvail.y = unAvailablePlumbers.length;
+        unAvail.z = (unAvailablePlumbers.length * 100) / (availablePlumbers.length + unAvailablePlumbers.length)
 
-    drillDownData.push(availDetails);
-    drillDownData.push(unavailDetails);
+        var unavailData = [];
+        unAvailablePlumbers.forEach(function (elem) {
+            unavailData.push([elem.firstName + " " + elem.lastName + " (" + elem.mobileNo + ") ", 0])
+        });
 
-    chartConfig.loading = false;
-  }
+        unavailDetails.id = "Unavailable";
+        unavailDetails.name = "Unavailable Plumbers";
+        unavailDetails.data = unavailData;
 
-  $scope.chartConfig = chartConfig;
+        seriesData.push(avail);
+        seriesData.push(unAvail);
+
+        drillDownData.push(availDetails);
+        drillDownData.push(unavailDetails);
+
+        chartConfig.loading = false;
+    }
+
+    $scope.chartConfig = chartConfig;
 });

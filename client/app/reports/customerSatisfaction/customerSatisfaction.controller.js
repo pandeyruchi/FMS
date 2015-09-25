@@ -3,11 +3,6 @@ angular.module('pune').controller('customerSatisfactionCtrl', function ($scope, 
     // Variable declarations
     $scope.pieData = [];
 
-    // To display progress bar
-    $scope.progressbar = ngProgressFactory.createInstance();
-    $scope.progressbar.setHeight('4px');
-    $scope.progressbar.setColor('#0274ff');
-
     // Options to display chart
     var chartConfig = {
         title: {
@@ -55,7 +50,6 @@ angular.module('pune').controller('customerSatisfactionCtrl', function ($scope, 
 
     // Get the data for plumber reports
     var res = $http.get(host + '/api/PlumberPerformanceReport').success(function (result) {
-        $scope.progressbar.start();
 
         chartConfig.loading = true;
         $scope.plumbers = [];
@@ -78,7 +72,7 @@ angular.module('pune').controller('customerSatisfactionCtrl', function ($scope, 
                 $scope.plumbers.push(plumber);
             });
         }
-        $scope.progressbar.complete();
+
     });
 
     // Function gets called to enerate the chart for selected plumber
