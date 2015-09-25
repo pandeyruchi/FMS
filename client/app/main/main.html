@@ -40,7 +40,7 @@
                                     <td class="text-left">
                                         <div class="md-list-item-text md-list-item-text">
                                             <div class="headerFont text-muted">{{plumber.customerName}}</div>
-                                            <h6 class="subHeaderFont">{{plumber.address}}</h6>
+                                            <span class="subHeaderFont">{{plumber.address}}</span>
 
                                             <div class="subHeaderFont">
                                                 <i class="fa fa-mobile fa-fw">&nbsp;{{plumber.mobileNo}}</i></div>
@@ -65,7 +65,7 @@
                 </div>
                 <br/>
 
-                <div>
+                <div class="form-group">
                     <select style="width: auto" class="form-control2" name="type2" ng-model="duration2"
                             ng-change="changedValueDurationAssigned(duration2)" analytics-on="click"
                             analytics-category="SelectDuration" analytics-event="SelectDuration"
@@ -118,7 +118,7 @@
                 </div>
                 <br/>
 
-                <div>
+                <div class="form-group">
                     <select style="width: auto" class="form-control3" name="type" ng-model="duration3"
                             ng-change="changedValueDurationCompleted(duration3)" analytics-on="click"
                             analytics-category="SelectDuration" analytics-event="SelectDuration"
@@ -142,7 +142,7 @@
                                     <td class="text-left">
                                         <div class="md-list-item-text  md-list-item-tex">
                                             <div class="headerFont text-muted">{{plumber.customerName}}</div>
-                                            <h6 class="subHeaderFont">{{plumber.address}}</h6>
+                                            <span class="subHeaderFont">{{plumber.address}}</span>
 
                                             <div class="subHeaderFont">
                                                 <i class="fa fa-mobile fa-fw">&nbsp;{{plumber.mobileNo}}</i></div>

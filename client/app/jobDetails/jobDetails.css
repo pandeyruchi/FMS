@@ -108,7 +108,12 @@ table {
 }
 
 .presence {
-    background-color: #a9a9a9;
+    background-image: url("/assets/images/disabled_bg.png");
+    background-size: contain;
+}
+
+md-list md-list-item button.md-button:not([disabled]):hover {
+    background-color: transparent !important;
 }
 
 .sortorder:after {
@@ -138,7 +143,7 @@ table {
 
 md-list-item:hover {
     cursor: pointer;
-    background-color: transparent;
+    /*background-color: transparent;*/
 }
 
 md-chips .md-chip {
@@ -233,9 +238,12 @@ h6 {
     background: #719288;
     filter: alpha(opacity=10) progid : DXImageTransform . Microsoft . Alpha(opacity = 10);
 }
+.upperGreenBand, table, * {outline:none;
+    outline-color: transparent;}
 
 .upperGreenBand {
     background: #7F9D94;
+
     /*
         background: rgba(255, 255, 255, 1);*/
     filter: alpha(opacity=10) progid : DXImageTransform . Microsoft . Alpha(opacity = 10);

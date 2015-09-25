@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="row">
-                        <br/>
 
-                        <div class="col-md-offset-1 col-md-9" style="padding-left: 0px;">
+
+                        <div class="col-md-offset-1 col-md-9 push-down-05" style="padding-left: 0px;">
                             <!--  <select ng-options="option.id as option.text for option in jobFilterOptions"
                                       ng-model="filter.jobFilter" class="btn btn-default">
                               </select>
@@ -127,11 +127,11 @@
                 </div>
                 <div class="col-md-6 plumberBg">
                     <div class="row">
-                        <br/>
 
-                        <div class="col-md-9">
-                            <select ng-options="option.id as option.text for option in plumberFilterOptions"
-                                    ng-model="filter.plumberFilter" class="btn btn-default">
+
+                        <div class="col-md-9 push-down-05">
+                            <select style="border-radius: 4px" ng-options="option.id as option.text for option in plumberFilterOptions"
+                                    ng-model="filter.plumberFilter">
                             </select>
                             <button href="" ng-click="order('firstName')" style="padding-left: 0px"
                                     class="btn btn-link">
@@ -143,7 +143,7 @@
                                 </i>
                             </button>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 push-down-05">
                             <button ng-click="order('jobCount')" class="btn btn-link">
                                 <i ng-show="!reverse" class="fa fa-sort-numeric-asc">
                                     <md-tooltip>Sort by Job Count : 1-9</md-tooltip>
@@ -185,14 +185,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row" style="background-color: #F1F1F1">
+            <div class="row" style="background-color: #dadada; color:black; padding:0.5em 0 0.5em 0">
                 <div class="footer">
-                    <div class="col-md-2 font-color" ng-model="pending">Pending: {{pendingJobCount}}</div>
-                    <div class="col-md-2 font-color" ng-model="assigned">Assigned:{{assignedJobCount}}</div>
-                    <div class="col-md-2 font-color">Total:{{pendingJobCount+assignedJobCount}}</div>
-                    <div class="col-md-2 font-color" ng-model="avail">Available: {{avail.length}}</span></div>
-                    <div class="col-md-2 font-color" ng-model="unavail">Unavailable:{{unavail.length}}</div>
-                    <div class="col-md-2 font-color">Total:{{avail.length+unavail.length}}</div>
+                    <div class="col-md-2" ng-model="pending">Pending: {{pendingJobCount}}</div>
+                    <div class="col-md-2 " ng-model="assigned">Assigned:{{assignedJobCount}}</div>
+                    <div class="col-md-2">Total:{{pendingJobCount+assignedJobCount}}</div>
+                    <div class="col-md-2" ng-model="avail">Available: {{avail.length}}</span></div>
+                    <div class="col-md-2 " ng-model="unavail">Unavailable:{{unavail.length}}</div>
+                    <div class="col-md-2 ">Total:{{avail.length+unavail.length}}</div>
                 </div>
             </div>
         </div>

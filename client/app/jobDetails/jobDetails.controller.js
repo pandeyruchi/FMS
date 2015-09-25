@@ -172,6 +172,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         if (plumber.marker !== undefined) {
             plumber.marker.setMap(null);
         }
+
         plumber.marker = new google.maps.Marker({
             map: map,
             position: new google.maps.LatLng(plumber.latitude, plumber.longitude, plumber.plumberId),
@@ -323,7 +324,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
                     p.marker.setMap(null);
                 }
             }
-            $scope.plumbersMap[p.plumberId]=p;
+            $scope.plumbersMap[p.plumberId] = p;
         })
 
     }

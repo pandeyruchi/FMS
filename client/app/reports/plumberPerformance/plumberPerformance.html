@@ -1,25 +1,29 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
 
-<div class="container-fluid">
+<div class="container-fluid" set-height-reports>
   <div class="row">
-    <div class="col-md-3 col-sm-12">
+    <div class="col-md-3  col-sm-12">
 
-      <div class="max-height">
+      <div class="max-height" max-height-reports>
+        <ul class="list-group">
         <li id="plumberListli" class="list-group-item" ng-class="{active: plumber.selected }" ng-click="plumberChange(plumber)"  ng-repeat="plumber in plumbers | sortByRank : plumber.rank">
           <img check-image ng-src="{{plumber.photoUrl}}" class="md-avatar"
                alt="image"/>
           {{plumber.name}} {{plumber.lastName}}
-           <span ng-show="!!plumber.rank" style="position:relative;display:inline-block;float:right">
-            <i class="fa fa-star fa-2x text-right" style="color:#00c129;"></i>
-            <span style="position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">{{plumber.rank}}</span>
-          </span>
+          <!-- <span ng-show="!!plumber.rank" style="position:relative;display:inline-block;float:right">-->
+             <span ng-show="!!plumber.rank" style="position:relative;display:inline-block;float:right"
+                   class="badge push-down-105">{{plumber.rank}}</span>
+           <!-- <i class="fa fa-star fa-2x text-right" style="color:#00c129;"></i>
+            <span style="[3999position:absolute; font-size:0.8em;color:#000e03;top:6px;left:11px;font-weight: bold;">{{plumber.rank}}</span>
+          </span>-->
         </li>
+        </ul>
       </div>
     </div>
 
     <div class="col-md-9">
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="padding-top:5px; padding-bottom:5px">
           <section>
             <ul class="nav nav-pills navbar-right">
               <li ng-class="{active:isSelected('1')}"> <a ng-href ng-click="selectTab('1')"> 1 Week </a> </li>
@@ -31,16 +35,17 @@
           </section>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12"></div>
+
+
         <div class="row">
           <div class="col-sm-12">
             <div class="panel panel-default" >
-              <highchart class="span10" config="chartConfig"></highchart>
+              <div class="panel-body">
+              <highchart class="span10" config="chartConfig"></highchart></div>
             </div>
           </div>
         </div>
-      </div>
+
     </div>
   </div>
 </div>
