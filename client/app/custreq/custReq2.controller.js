@@ -22,8 +22,8 @@ angular.module('pune').controller('custReq2Ctrl', function ($scope, $state, $htt
     $scope.newJob.longitude = $scope.job.longitude;
     $scope.newJob.latitude = $scope.job.latitude;
     $scope.newJob.city = $scope.job.city;
-    if (!!$scope.job.urgentFlag) {
-        $scope.newJob.urgentFlag = $scope.job.urgentFlag.toString();
+    if (!!$scope.urgentFlag) {
+        $scope.newJob.urgentFlag = $scope.urgentFlag.toString();
     }
     else {
         $scope.newJob.urgentFlag = "0";
@@ -90,6 +90,15 @@ angular.module('pune').controller('custReq2Ctrl', function ($scope, $state, $htt
         createMarker($scope.job)
 
     }
+
+    $scope.$on('$viewContentLoaded', function() {
+        createNewMap(18.518920, 73.860736)
+    });
+
+    google.maps.event.addDomListener(window, 'load', createNewMap(18.518920, 73.860736));
+    google.maps.event.addDomListener(window, "resize", function () {
+        google.maps.event.trigger($scope.map, "resize");
+    });
 
 
     $scope.user = {};
