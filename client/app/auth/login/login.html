@@ -1,18 +1,19 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container-fluid">
+
+<div class="container-fluid login-page-bg" set-login-height>
     <div class="row" id="mains">
-        <div class="col-md-4 col-md-offset-4 login-form2">
+        <div class="col-md-4 push-down-2 col-md-offset-4 login-form2">
+            <h2 style="color:white; text-align:center;">Pune Plumbers</h2>
             <form class="form" name="form" ng-submit="login(user)" novalidate>
-            <div class="panel" >
-                <div class="panel-body">
-                <h4 style="color:#008855">Login </h4>
+            <div class="panel push-down-2" style="background-color:rgba(255,255,255,0.9);" >
+                <div class="panel-body " >
+
 
 
                 <div class="form-group" ng-class="{ 'has-success': form.user.$valid && form.user.$dirty,
                                             'has-error': form.user.$invalid && form.user.$dirty }">
                     <label> Username </label>
-                    <input type="text" name="user" class="form-control" ng-blur="visited = true" ng-model="user.userName" required>
+                    <input type="text" name="user" class="form-control"  ng-blur="visited = true" ng-model="user.userName" required>
 
                     <p class="help-block" ng-show="form.user.$error.required && form.user.$dirty && visited">
                         Please enter username
@@ -31,7 +32,7 @@
 
                 <div class="form-group">
 
-                    <button class="btn btn-primary" type="submit"
+                    <button class="btn btn-block btn-success" type="submit"
                             ng-disabled="form.user.$dirty && form.user.$invalid ||
                             form.password.$dirty && form.password.$invalid" class="btn btn-primary"
                             analytics-on="click" analytics-category="Login" analytics-event="Login" analytics-label="Does Login">Login

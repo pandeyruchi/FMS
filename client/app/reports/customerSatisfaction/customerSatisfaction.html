@@ -1,10 +1,10 @@
 <div ng-include="'components/navbar/navbar2.html'"></div>
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="row" set-height>
 
     <div class="col-md-3 col-sm-12">
-      <div class="max-height">
+      <div class="max-height" max-height-reports>
         <li id="plumberListli" class="list-group-item" ng-class="{active: plumber.selected }"  ng-click="generateChart(plumber)"  ng-repeat="plumber in plumbers | sortByRank : plumber.rank">
           <img check-image ng-src="{{plumber.photoUrl}}" class="md-avatar"
                alt="image"/>
