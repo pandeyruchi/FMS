@@ -5,12 +5,8 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
     // Variable Declarations
     var marker;
     var infoWindow = new google.maps.InfoWindow();
-    var newCenter = {};
     $scope.jobs = {};
-    $scope.plumbers = [];
-    $scope.jobsArray = [];
-
-
+    $scope.plumbersMap = {};
 
     $scope.filter = {
         jobFilter: 'all',
@@ -39,33 +35,22 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
         $scope.predicate = predicate;
     };
-// This method creates map with default lat and lng.
+// This method creates map with default lat and lng.;
+    var map;
+
     function createNewMap(lat, long) {
         var mapOptions = {
             zoom: 12,
             center: new google.maps.LatLng(lat, long),
             mapTypeId: google.maps.MapTypeId.RoadMap
         };
-        $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
     }
 
-///This function calculates centre location based on customer address
-    function getCentre() {
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({"address": $scope.address}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-                var location = results[0].geometry.location;
-                newCenter.lat = location.lat();
-                newCenter.long = location.lng();
-                createNewMap(newCenter.lat, newCenter.long);
-                $scope.error = "";
-            }
-            else {
-                $scope.error = "Oops! address not found";
-
-            }
-        });
-    }
+    $scope.$on('$viewContentLoaded', function () {
+        createNewMap(18.518920, 73.860736);
+        google.maps.event.trigger(map, 'resize');
+    });
 
     var hash;
 
@@ -75,8 +60,10 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
             $scope.jobs = {};
             var data = result[0].list;
             hash = result[0].hash;
-            $scope.jobsArray = data;
-            updateJobsMap(data)
+
+            updateJobsMap(data);
+            $scope.loaded = true;
+
         });
         res.error(function (err) {
             console.log(err);
@@ -93,7 +80,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
                 var data = result[0].list;
                 hash = result[0].hash;
                 $scope.jobsArray = data;
-                updateJobsMap(data)
+                updateJobsMap(data);
             }
         });
         res.error(function (err) {
@@ -135,7 +122,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
                     }
                 }
             });
-            if(!!$scope.jobs[$stateParams.jobId]){
+            if (!!$scope.jobs[$stateParams.jobId]) {
                 $scope.customerSelected($scope.jobs[$stateParams.jobId]);
             }
             updateCount();
@@ -150,17 +137,29 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
     function getPlumberDetails() {
         var res = $http.get(host + '/api/getAllPlumbersDetail').success(function (result) {
             //console.log(result.data);
-            $scope.plumbers = [];
             var data = result;
-            $scope.plumbersList = data;
-            $scope.avail = $filter('plumber')($scope.plumbersList, $scope.filter.availFilter);
-            $scope.unavail = $filter('plumber')($scope.plumbersList, $scope.filter.unAvailFilter);
             if (data != null) {
-                data.forEach(function (info) {
-                    $scope.sortType = info.firstName;
-                    $scope.plumbers.push(info);
+
+                data.forEach(function (plumber) {
+                    if (!$scope.plumbersMap[plumber.plumberId]) {
+                        $scope.plumbersMap[plumber.plumberId] = plumber;
+                    } else {
+                        var temp = $scope.plumbersMap[plumber.plumberId];
+                        temp.latitude = plumber.latitude;
+                        temp.longitude = plumber.longitude;
+                        temp.status = plumber.status;
+                        temp.available = plumber.available;
+                        temp.jobCount = plumber.jobCount;
+                        if (!!temp.selected && !!temp.marker) {
+                            temp.marker.setMap(null);
+                            createMarkerPlumber(temp);
+                        }
+                    }
                 });
+                $scope.plumbers = _.values($scope.plumbersMap);
             }
+            $scope.avail = $filter('plumber')($scope.plumbers, $scope.filter.availFilter);
+            $scope.unavail = $filter('plumber')($scope.plumbers, $scope.filter.unAvailFilter);
         });
         res.error(function (err) {
             console.log(err);
@@ -174,7 +173,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
             plumber.marker.setMap(null);
         }
         plumber.marker = new google.maps.Marker({
-            map: $scope.map,
+            map: map,
             position: new google.maps.LatLng(plumber.latitude, plumber.longitude, plumber.plumberId),
             icon: 'https://maps.google.com/mapfiles/kml/shapes/man.png',
             title: plumber.firstName + " " + plumber.lastName,
@@ -184,7 +183,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
 
         google.maps.event.addListener(plumber.marker, 'click', function () {
             infoWindow.setContent('<h5>' + plumber.marker.title + '</h5>');
-            infoWindow.open($scope.map, plumber.marker);
+            infoWindow.open(map, plumber.marker);
         });
 
     };
@@ -195,7 +194,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
             marker.setMap(null);
         }
         marker = new google.maps.Marker({
-            map: $scope.map,
+            map: map,
             position: new google.maps.LatLng(info.latitude, info.longitude, info.jobId),
             icon: 'http://maps.google.com/mapfiles/ms/icons/green.png',
             title: info.customerName,
@@ -205,7 +204,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         marker.map.setCenter(marker.getPosition());
         google.maps.event.addListener(marker, 'click', function () {
             infoWindow.setContent('<h5>' + marker.title + '</h5>');
-            infoWindow.open($scope.map, marker);
+            infoWindow.open(map, marker);
         });
 
     };
@@ -216,16 +215,28 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         var plumbersToDelete = _.difference(job.plumbersOriginal, job.plumbers);
         var defer = $q.defer();
         var promises = [];
-        if(plumbersToAdd.length==0 && plumbersToDelete.length==0){
-            var res = $http.post(host + '/api/jobRequestUpdation', {jobId: job.jobId, plumberId: job.plumberId, urgentFlag:job.urgentFlag.toString()});
+        if (plumbersToAdd.length == 0 && plumbersToDelete.length == 0) {
+            var res = $http.post(host + '/api/jobRequestUpdation', {
+                jobId: job.jobId,
+                plumberId: job.plumberId,
+                urgentFlag: job.urgentFlag.toString()
+            });
             promises.push(res);
         }
         plumbersToAdd.forEach(function (plumber) {
-            var res = $http.post(host + '/api/jobRequestUpdation', {jobId: job.jobId, plumberId: plumber.id, urgentFlag:job.urgentFlag.toString()});
+            var res = $http.post(host + '/api/jobRequestUpdation', {
+                jobId: job.jobId,
+                plumberId: plumber.id,
+                urgentFlag: job.urgentFlag.toString()
+            });
             promises.push(res);
         });
         plumbersToDelete.forEach(function (plumber) {
-            var res = $http.post(host + '/api/deleteJob', {jobId: job.jobId, plumberId: plumber.id,urgentFlag:job.urgentFlag.toString()});
+            var res = $http.post(host + '/api/deleteJob', {
+                jobId: job.jobId,
+                plumberId: plumber.id,
+                urgentFlag: job.urgentFlag.toString()
+            });
             promises.push(res);
         });
 
@@ -245,11 +256,6 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
         google.maps.event.trigger(selectedMarker, 'click');
     };
 
-
-// This function is used to redirect to main page on "OK"
-    $scope.redirect_main = function () {
-        $location.url("/main");
-    };
 
     $scope.plumberClick = function (plumber) {
 
@@ -309,6 +315,7 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
             if (plumbers.indexOf(p.plumberId) > -1) {
                 p.selected = true;
                 createMarkerPlumber(p);
+
             }
             else {
                 p.selected = false;
@@ -316,7 +323,9 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
                     p.marker.setMap(null);
                 }
             }
+            $scope.plumbersMap[p.plumberId]=p;
         })
+
     }
 
     $scope.$watch('selectedJob.plumbers', function (newVal, oldVal) {
@@ -324,6 +333,8 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
             highlightAssignedPlumbers();
         }
     }, true);
+
+
     function updateCount() {
         $scope.pendingJobCount = _.filter($scope.jobs, function (job) {
             return job.jobStatus === 'unassigned';
@@ -334,13 +345,16 @@ angular.module('pune').controller('jobDetailsCtrl', function ($scope, $http, $lo
 
     }
 
-    // Function calls
-    createNewMap(18.518920, 73.860736);
     getJobDetails();
     getPlumberDetails();
-    $interval(function () {
+
+    var loop = $interval(function () {
         updateJobDetails();
         getPlumberDetails();
     }, 10000);
+
+    $scope.$on('$destroy', function () {
+        $interval.cancel(loop);
+    });
 
 });

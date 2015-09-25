@@ -84,7 +84,7 @@ angular.module('pune').controller('custreqCtrl', function ($scope, $http, $locat
         $state.go("customerRequest", {job: JSON.stringify(job), contact: $scope.user.contact});
     };
 
-    createNewMap(18.518920, 73.860736);
+
 
     function createNewMap(lat, long) {
         //checkExistingPlumbers();
@@ -97,6 +97,14 @@ angular.module('pune').controller('custreqCtrl', function ($scope, $http, $locat
 
     }
 
+    $scope.$on('$viewContentLoaded', function() {
+        createNewMap(18.518920, 73.860736)
+    });
+
+    google.maps.event.addDomListener(window, 'load', createNewMap(18.518920, 73.860736));
+    google.maps.event.addDomListener(window, "resize", function () {
+        google.maps.event.trigger($scope.map, "resize");
+    });
     function createMarker(info) {
         if (marker !== undefined) {
             marker.setMap(null);
@@ -140,5 +148,5 @@ angular.module('pune').controller('custreqCtrl', function ($scope, $http, $locat
         })
     }
 
-
+    createNewMap(18.518920, 73.860736);
 });
