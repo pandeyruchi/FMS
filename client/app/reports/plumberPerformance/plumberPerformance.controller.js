@@ -1,10 +1,4 @@
 angular.module('pune').controller('plumberPerformanceCtrl', function ($scope, $http, host, $location, ngProgressFactory) {
-
-    // To display progress bar
-    $scope.progressbar = ngProgressFactory.createInstance();
-    $scope.progressbar.setHeight('4px');
-    $scope.progressbar.setColor('#0274ff');
-
     // Variable declartions
     var id;
     var plumberId = 0;
@@ -71,7 +65,7 @@ angular.module('pune').controller('plumberPerformanceCtrl', function ($scope, $h
 
     // Get the data for plumber reports
     var res = $http.get(host + '/api/PlumberPerformanceReport').success(function (result) {
-        $scope.progressbar.start();
+
 
         chartConfig.loading = true;
         $scope.plumbers = [];
@@ -89,11 +83,12 @@ angular.module('pune').controller('plumberPerformanceCtrl', function ($scope, $h
                     plumber.selected = true;
                     $scope.selectedPlumber = plumber;
                     $scope.selectedPlumber.selected = true;
+                    $scope.plumberChange(plumber);
                 }
                 $scope.plumbers.push(plumber);
             });
         }
-        $scope.progressbar.complete();
+
     });
 
     // Function gets called when user selects particular plumber
