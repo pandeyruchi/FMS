@@ -10,4 +10,4 @@ var app = angular.module('pune', [
 
     $locationProvider.html5Mode(true);
 });
-app.constant('host',"http://52.26.19.0:3600");
+app.constant('host',"http://52.89.3.21:3600");
